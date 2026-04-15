@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.ContentManagementModule.Application.Dtos.ContentVersion;
-using QuickCode.DemoCms.ContentManagementModule.Domain.Entities;
+using ContentVersionEntity = QuickCode.DemoCms.ContentManagementModule.Domain.Entities.ContentVersion;
 using QuickCode.DemoCms.ContentManagementModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.ContentManagementModule.Application.Mappings
 {
     public static class ContentVersionMappings
     {
-        public static List<ContentVersionDto> ToDto(this IEnumerable<ContentVersion> model)
+        public static List<ContentVersionDto> ToDto(this IEnumerable<ContentVersionEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static ContentVersionDto ToDto(this ContentVersion model)
+        public static ContentVersionDto ToDto(this ContentVersionEntity model)
         {
             return new ContentVersionDto
             {
@@ -39,9 +39,9 @@ namespace QuickCode.DemoCms.ContentManagementModule.Application.Mappings
             };
         }
 
-        public static ContentVersion ToEntity(this ContentVersionDto model)
+        public static ContentVersionEntity ToEntity(this ContentVersionDto model)
         {
-            return new ContentVersion
+            return new ContentVersionEntity
             {
                 Id = model.Id,
                 ContentTypeKind = model.ContentTypeKind,

@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.SiteManagementModule.Application.Dtos.Site;
-using QuickCode.DemoCms.SiteManagementModule.Domain.Entities;
+using SiteEntity = QuickCode.DemoCms.SiteManagementModule.Domain.Entities.Site;
 using QuickCode.DemoCms.SiteManagementModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.SiteManagementModule.Application.Mappings
 {
     public static class SiteMappings
     {
-        public static List<SiteDto> ToDto(this IEnumerable<Site> model)
+        public static List<SiteDto> ToDto(this IEnumerable<SiteEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static SiteDto ToDto(this Site model)
+        public static SiteDto ToDto(this SiteEntity model)
         {
             return new SiteDto
             {
@@ -37,9 +37,9 @@ namespace QuickCode.DemoCms.SiteManagementModule.Application.Mappings
             };
         }
 
-        public static Site ToEntity(this SiteDto model)
+        public static SiteEntity ToEntity(this SiteDto model)
         {
-            return new Site
+            return new SiteEntity
             {
                 Id = model.Id,
                 Name = model.Name,

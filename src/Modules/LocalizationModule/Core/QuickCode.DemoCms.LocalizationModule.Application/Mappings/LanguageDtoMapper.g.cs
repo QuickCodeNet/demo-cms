@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.LocalizationModule.Application.Dtos.Language;
-using QuickCode.DemoCms.LocalizationModule.Domain.Entities;
+using LanguageEntity = QuickCode.DemoCms.LocalizationModule.Domain.Entities.Language;
 using QuickCode.DemoCms.LocalizationModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.LocalizationModule.Application.Mappings
 {
     public static class LanguageMappings
     {
-        public static List<LanguageDto> ToDto(this IEnumerable<Language> model)
+        public static List<LanguageDto> ToDto(this IEnumerable<LanguageEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static LanguageDto ToDto(this Language model)
+        public static LanguageDto ToDto(this LanguageEntity model)
         {
             return new LanguageDto
             {
@@ -36,9 +36,9 @@ namespace QuickCode.DemoCms.LocalizationModule.Application.Mappings
             };
         }
 
-        public static Language ToEntity(this LanguageDto model)
+        public static LanguageEntity ToEntity(this LanguageDto model)
         {
-            return new Language
+            return new LanguageEntity
             {
                 Id = model.Id,
                 Code = model.Code,

@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.IdentityModule.Application.Dtos.TopicWorkflow;
-using QuickCode.DemoCms.IdentityModule.Domain.Entities;
+using TopicWorkflowEntity = QuickCode.DemoCms.IdentityModule.Domain.Entities.TopicWorkflow;
 using QuickCode.DemoCms.IdentityModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.IdentityModule.Application.Mappings
 {
     public static class TopicWorkflowMappings
     {
-        public static List<TopicWorkflowDto> ToDto(this IEnumerable<TopicWorkflow> model)
+        public static List<TopicWorkflowDto> ToDto(this IEnumerable<TopicWorkflowEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static TopicWorkflowDto ToDto(this TopicWorkflow model)
+        public static TopicWorkflowDto ToDto(this TopicWorkflowEntity model)
         {
             return new TopicWorkflowDto
             {
@@ -34,9 +34,9 @@ namespace QuickCode.DemoCms.IdentityModule.Application.Mappings
             };
         }
 
-        public static TopicWorkflow ToEntity(this TopicWorkflowDto model)
+        public static TopicWorkflowEntity ToEntity(this TopicWorkflowDto model)
         {
-            return new TopicWorkflow
+            return new TopicWorkflowEntity
             {
                 Id = model.Id,
                 KafkaEventsTopicName = model.KafkaEventsTopicName,

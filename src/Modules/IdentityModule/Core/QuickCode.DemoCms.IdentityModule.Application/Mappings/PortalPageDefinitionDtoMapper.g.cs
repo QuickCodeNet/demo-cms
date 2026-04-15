@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.IdentityModule.Application.Dtos.PortalPageDefinition;
-using QuickCode.DemoCms.IdentityModule.Domain.Entities;
+using PortalPageDefinitionEntity = QuickCode.DemoCms.IdentityModule.Domain.Entities.PortalPageDefinition;
 using QuickCode.DemoCms.IdentityModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.IdentityModule.Application.Mappings
 {
     public static class PortalPageDefinitionMappings
     {
-        public static List<PortalPageDefinitionDto> ToDto(this IEnumerable<PortalPageDefinition> model)
+        public static List<PortalPageDefinitionDto> ToDto(this IEnumerable<PortalPageDefinitionEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static PortalPageDefinitionDto ToDto(this PortalPageDefinition model)
+        public static PortalPageDefinitionDto ToDto(this PortalPageDefinitionEntity model)
         {
             return new PortalPageDefinitionDto
             {
@@ -36,9 +36,9 @@ namespace QuickCode.DemoCms.IdentityModule.Application.Mappings
             };
         }
 
-        public static PortalPageDefinition ToEntity(this PortalPageDefinitionDto model)
+        public static PortalPageDefinitionEntity ToEntity(this PortalPageDefinitionDto model)
         {
-            return new PortalPageDefinition
+            return new PortalPageDefinitionEntity
             {
                 Key = model.Key,
                 ModuleName = model.ModuleName,

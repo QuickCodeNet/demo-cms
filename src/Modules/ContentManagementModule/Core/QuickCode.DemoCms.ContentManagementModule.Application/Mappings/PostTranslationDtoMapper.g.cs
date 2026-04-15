@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.ContentManagementModule.Application.Dtos.PostTranslation;
-using QuickCode.DemoCms.ContentManagementModule.Domain.Entities;
+using PostTranslationEntity = QuickCode.DemoCms.ContentManagementModule.Domain.Entities.PostTranslation;
 using QuickCode.DemoCms.ContentManagementModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.ContentManagementModule.Application.Mappings
 {
     public static class PostTranslationMappings
     {
-        public static List<PostTranslationDto> ToDto(this IEnumerable<PostTranslation> model)
+        public static List<PostTranslationDto> ToDto(this IEnumerable<PostTranslationEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static PostTranslationDto ToDto(this PostTranslation model)
+        public static PostTranslationDto ToDto(this PostTranslationEntity model)
         {
             return new PostTranslationDto
             {
@@ -38,9 +38,9 @@ namespace QuickCode.DemoCms.ContentManagementModule.Application.Mappings
             };
         }
 
-        public static PostTranslation ToEntity(this PostTranslationDto model)
+        public static PostTranslationEntity ToEntity(this PostTranslationDto model)
         {
-            return new PostTranslation
+            return new PostTranslationEntity
             {
                 Id = model.Id,
                 PostId = model.PostId,

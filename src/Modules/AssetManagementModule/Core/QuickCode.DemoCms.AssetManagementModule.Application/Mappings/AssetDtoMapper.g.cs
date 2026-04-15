@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.AssetManagementModule.Application.Dtos.Asset;
-using QuickCode.DemoCms.AssetManagementModule.Domain.Entities;
+using AssetEntity = QuickCode.DemoCms.AssetManagementModule.Domain.Entities.Asset;
 using QuickCode.DemoCms.AssetManagementModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.AssetManagementModule.Application.Mappings
 {
     public static class AssetMappings
     {
-        public static List<AssetDto> ToDto(this IEnumerable<Asset> model)
+        public static List<AssetDto> ToDto(this IEnumerable<AssetEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static AssetDto ToDto(this Asset model)
+        public static AssetDto ToDto(this AssetEntity model)
         {
             return new AssetDto
             {
@@ -40,9 +40,9 @@ namespace QuickCode.DemoCms.AssetManagementModule.Application.Mappings
             };
         }
 
-        public static Asset ToEntity(this AssetDto model)
+        public static AssetEntity ToEntity(this AssetDto model)
         {
-            return new Asset
+            return new AssetEntity
             {
                 Id = model.Id,
                 FolderId = model.FolderId,

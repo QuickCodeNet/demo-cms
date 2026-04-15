@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.SiteManagementModule.Application.Dtos.Template;
-using QuickCode.DemoCms.SiteManagementModule.Domain.Entities;
+using TemplateEntity = QuickCode.DemoCms.SiteManagementModule.Domain.Entities.Template;
 using QuickCode.DemoCms.SiteManagementModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.SiteManagementModule.Application.Mappings
 {
     public static class TemplateMappings
     {
-        public static List<TemplateDto> ToDto(this IEnumerable<Template> model)
+        public static List<TemplateDto> ToDto(this IEnumerable<TemplateEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static TemplateDto ToDto(this Template model)
+        public static TemplateDto ToDto(this TemplateEntity model)
         {
             return new TemplateDto
             {
@@ -37,9 +37,9 @@ namespace QuickCode.DemoCms.SiteManagementModule.Application.Mappings
             };
         }
 
-        public static Template ToEntity(this TemplateDto model)
+        public static TemplateEntity ToEntity(this TemplateDto model)
         {
-            return new Template
+            return new TemplateEntity
             {
                 Id = model.Id,
                 ThemeId = model.ThemeId,

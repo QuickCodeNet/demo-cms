@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.IdentityModule.Application.Dtos.ApiMethodAccessGrant;
-using QuickCode.DemoCms.IdentityModule.Domain.Entities;
+using ApiMethodAccessGrantEntity = QuickCode.DemoCms.IdentityModule.Domain.Entities.ApiMethodAccessGrant;
 using QuickCode.DemoCms.IdentityModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.IdentityModule.Application.Mappings
 {
     public static class ApiMethodAccessGrantMappings
     {
-        public static List<ApiMethodAccessGrantDto> ToDto(this IEnumerable<ApiMethodAccessGrant> model)
+        public static List<ApiMethodAccessGrantDto> ToDto(this IEnumerable<ApiMethodAccessGrantEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static ApiMethodAccessGrantDto ToDto(this ApiMethodAccessGrant model)
+        public static ApiMethodAccessGrantDto ToDto(this ApiMethodAccessGrantEntity model)
         {
             return new ApiMethodAccessGrantDto
             {
@@ -35,9 +35,9 @@ namespace QuickCode.DemoCms.IdentityModule.Application.Mappings
             };
         }
 
-        public static ApiMethodAccessGrant ToEntity(this ApiMethodAccessGrantDto model)
+        public static ApiMethodAccessGrantEntity ToEntity(this ApiMethodAccessGrantDto model)
         {
-            return new ApiMethodAccessGrant
+            return new ApiMethodAccessGrantEntity
             {
                 PermissionGroupName = model.PermissionGroupName,
                 ApiMethodDefinitionKey = model.ApiMethodDefinitionKey,

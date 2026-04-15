@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.ContentManagementModule.Application.Dtos.ContentType;
-using QuickCode.DemoCms.ContentManagementModule.Domain.Entities;
+using ContentTypeEntity = QuickCode.DemoCms.ContentManagementModule.Domain.Entities.ContentType;
 using QuickCode.DemoCms.ContentManagementModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.ContentManagementModule.Application.Mappings
 {
     public static class ContentTypeMappings
     {
-        public static List<ContentTypeDto> ToDto(this IEnumerable<ContentType> model)
+        public static List<ContentTypeDto> ToDto(this IEnumerable<ContentTypeEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static ContentTypeDto ToDto(this ContentType model)
+        public static ContentTypeDto ToDto(this ContentTypeEntity model)
         {
             return new ContentTypeDto
             {
@@ -37,9 +37,9 @@ namespace QuickCode.DemoCms.ContentManagementModule.Application.Mappings
             };
         }
 
-        public static ContentType ToEntity(this ContentTypeDto model)
+        public static ContentTypeEntity ToEntity(this ContentTypeDto model)
         {
-            return new ContentType
+            return new ContentTypeEntity
             {
                 Id = model.Id,
                 Name = model.Name,

@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.LocalizationModule.Application.Dtos.Namespace;
-using QuickCode.DemoCms.LocalizationModule.Domain.Entities;
+using NamespaceEntity = QuickCode.DemoCms.LocalizationModule.Domain.Entities.Namespace;
 using QuickCode.DemoCms.LocalizationModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.LocalizationModule.Application.Mappings
 {
     public static class NamespaceMappings
     {
-        public static List<NamespaceDto> ToDto(this IEnumerable<Namespace> model)
+        public static List<NamespaceDto> ToDto(this IEnumerable<NamespaceEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static NamespaceDto ToDto(this Namespace model)
+        public static NamespaceDto ToDto(this NamespaceEntity model)
         {
             return new NamespaceDto
             {
@@ -35,9 +35,9 @@ namespace QuickCode.DemoCms.LocalizationModule.Application.Mappings
             };
         }
 
-        public static Namespace ToEntity(this NamespaceDto model)
+        public static NamespaceEntity ToEntity(this NamespaceDto model)
         {
-            return new Namespace
+            return new NamespaceEntity
             {
                 Id = model.Id,
                 Name = model.Name,

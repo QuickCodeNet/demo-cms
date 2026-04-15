@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.IdentityModule.Application.Dtos.ApiMethodDefinition;
-using QuickCode.DemoCms.IdentityModule.Domain.Entities;
+using ApiMethodDefinitionEntity = QuickCode.DemoCms.IdentityModule.Domain.Entities.ApiMethodDefinition;
 using QuickCode.DemoCms.IdentityModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.IdentityModule.Application.Mappings
 {
     public static class ApiMethodDefinitionMappings
     {
-        public static List<ApiMethodDefinitionDto> ToDto(this IEnumerable<ApiMethodDefinition> model)
+        public static List<ApiMethodDefinitionDto> ToDto(this IEnumerable<ApiMethodDefinitionEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static ApiMethodDefinitionDto ToDto(this ApiMethodDefinition model)
+        public static ApiMethodDefinitionDto ToDto(this ApiMethodDefinitionEntity model)
         {
             return new ApiMethodDefinitionDto
             {
@@ -38,9 +38,9 @@ namespace QuickCode.DemoCms.IdentityModule.Application.Mappings
             };
         }
 
-        public static ApiMethodDefinition ToEntity(this ApiMethodDefinitionDto model)
+        public static ApiMethodDefinitionEntity ToEntity(this ApiMethodDefinitionDto model)
         {
-            return new ApiMethodDefinition
+            return new ApiMethodDefinitionEntity
             {
                 Key = model.Key,
                 ModuleName = model.ModuleName,

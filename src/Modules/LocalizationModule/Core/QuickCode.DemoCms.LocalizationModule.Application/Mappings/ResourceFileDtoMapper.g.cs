@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.LocalizationModule.Application.Dtos.ResourceFile;
-using QuickCode.DemoCms.LocalizationModule.Domain.Entities;
+using ResourceFileEntity = QuickCode.DemoCms.LocalizationModule.Domain.Entities.ResourceFile;
 using QuickCode.DemoCms.LocalizationModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.LocalizationModule.Application.Mappings
 {
     public static class ResourceFileMappings
     {
-        public static List<ResourceFileDto> ToDto(this IEnumerable<ResourceFile> model)
+        public static List<ResourceFileDto> ToDto(this IEnumerable<ResourceFileEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static ResourceFileDto ToDto(this ResourceFile model)
+        public static ResourceFileDto ToDto(this ResourceFileEntity model)
         {
             return new ResourceFileDto
             {
@@ -39,9 +39,9 @@ namespace QuickCode.DemoCms.LocalizationModule.Application.Mappings
             };
         }
 
-        public static ResourceFile ToEntity(this ResourceFileDto model)
+        public static ResourceFileEntity ToEntity(this ResourceFileDto model)
         {
-            return new ResourceFile
+            return new ResourceFileEntity
             {
                 Id = model.Id,
                 Filename = model.Filename,

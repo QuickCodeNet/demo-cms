@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.AssetManagementModule.Application.Dtos.AssetRendition;
-using QuickCode.DemoCms.AssetManagementModule.Domain.Entities;
+using AssetRenditionEntity = QuickCode.DemoCms.AssetManagementModule.Domain.Entities.AssetRendition;
 using QuickCode.DemoCms.AssetManagementModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.AssetManagementModule.Application.Mappings
 {
     public static class AssetRenditionMappings
     {
-        public static List<AssetRenditionDto> ToDto(this IEnumerable<AssetRendition> model)
+        public static List<AssetRenditionDto> ToDto(this IEnumerable<AssetRenditionEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static AssetRenditionDto ToDto(this AssetRendition model)
+        public static AssetRenditionDto ToDto(this AssetRenditionEntity model)
         {
             return new AssetRenditionDto
             {
@@ -39,9 +39,9 @@ namespace QuickCode.DemoCms.AssetManagementModule.Application.Mappings
             };
         }
 
-        public static AssetRendition ToEntity(this AssetRenditionDto model)
+        public static AssetRenditionEntity ToEntity(this AssetRenditionDto model)
         {
-            return new AssetRendition
+            return new AssetRenditionEntity
             {
                 Id = model.Id,
                 OriginalAssetId = model.OriginalAssetId,

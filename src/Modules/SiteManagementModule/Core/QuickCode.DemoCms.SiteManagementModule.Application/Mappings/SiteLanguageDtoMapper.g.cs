@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.SiteManagementModule.Application.Dtos.SiteLanguage;
-using QuickCode.DemoCms.SiteManagementModule.Domain.Entities;
+using SiteLanguageEntity = QuickCode.DemoCms.SiteManagementModule.Domain.Entities.SiteLanguage;
 using QuickCode.DemoCms.SiteManagementModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.SiteManagementModule.Application.Mappings
 {
     public static class SiteLanguageMappings
     {
-        public static List<SiteLanguageDto> ToDto(this IEnumerable<SiteLanguage> model)
+        public static List<SiteLanguageDto> ToDto(this IEnumerable<SiteLanguageEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static SiteLanguageDto ToDto(this SiteLanguage model)
+        public static SiteLanguageDto ToDto(this SiteLanguageEntity model)
         {
             return new SiteLanguageDto
             {
@@ -34,9 +34,9 @@ namespace QuickCode.DemoCms.SiteManagementModule.Application.Mappings
             };
         }
 
-        public static SiteLanguage ToEntity(this SiteLanguageDto model)
+        public static SiteLanguageEntity ToEntity(this SiteLanguageDto model)
         {
-            return new SiteLanguage
+            return new SiteLanguageEntity
             {
                 SiteId = model.SiteId,
                 LanguageId = model.LanguageId,

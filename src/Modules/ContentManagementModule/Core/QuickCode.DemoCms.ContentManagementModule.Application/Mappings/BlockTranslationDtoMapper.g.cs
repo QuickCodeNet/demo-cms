@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.ContentManagementModule.Application.Dtos.BlockTranslation;
-using QuickCode.DemoCms.ContentManagementModule.Domain.Entities;
+using BlockTranslationEntity = QuickCode.DemoCms.ContentManagementModule.Domain.Entities.BlockTranslation;
 using QuickCode.DemoCms.ContentManagementModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.ContentManagementModule.Application.Mappings
 {
     public static class BlockTranslationMappings
     {
-        public static List<BlockTranslationDto> ToDto(this IEnumerable<BlockTranslation> model)
+        public static List<BlockTranslationDto> ToDto(this IEnumerable<BlockTranslationEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static BlockTranslationDto ToDto(this BlockTranslation model)
+        public static BlockTranslationDto ToDto(this BlockTranslationEntity model)
         {
             return new BlockTranslationDto
             {
@@ -35,9 +35,9 @@ namespace QuickCode.DemoCms.ContentManagementModule.Application.Mappings
             };
         }
 
-        public static BlockTranslation ToEntity(this BlockTranslationDto model)
+        public static BlockTranslationEntity ToEntity(this BlockTranslationDto model)
         {
-            return new BlockTranslation
+            return new BlockTranslationEntity
             {
                 Id = model.Id,
                 BlockId = model.BlockId,

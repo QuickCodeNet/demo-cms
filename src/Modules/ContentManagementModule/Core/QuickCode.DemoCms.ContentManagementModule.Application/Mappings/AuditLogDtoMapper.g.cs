@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.ContentManagementModule.Application.Dtos.AuditLog;
-using QuickCode.DemoCms.ContentManagementModule.Domain.Entities;
+using AuditLogEntity = QuickCode.DemoCms.ContentManagementModule.Domain.Entities.AuditLog;
 using QuickCode.DemoCms.ContentManagementModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.ContentManagementModule.Application.Mappings
 {
     public static class AuditLogMappings
     {
-        public static List<AuditLogDto> ToDto(this IEnumerable<AuditLog> model)
+        public static List<AuditLogDto> ToDto(this IEnumerable<AuditLogEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static AuditLogDto ToDto(this AuditLog model)
+        public static AuditLogDto ToDto(this AuditLogEntity model)
         {
             return new AuditLogDto
             {
@@ -50,9 +50,9 @@ namespace QuickCode.DemoCms.ContentManagementModule.Application.Mappings
             };
         }
 
-        public static AuditLog ToEntity(this AuditLogDto model)
+        public static AuditLogEntity ToEntity(this AuditLogDto model)
         {
-            return new AuditLog
+            return new AuditLogEntity
             {
                 Id = model.Id.Equals(Guid.Empty) ? Guid.CreateVersion7() : model.Id,
                 EntityName = model.EntityName,

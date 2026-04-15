@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.IdentityModule.Application.Dtos.TableComboboxSetting;
-using QuickCode.DemoCms.IdentityModule.Domain.Entities;
+using TableComboboxSettingEntity = QuickCode.DemoCms.IdentityModule.Domain.Entities.TableComboboxSetting;
 using QuickCode.DemoCms.IdentityModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.IdentityModule.Application.Mappings
 {
     public static class TableComboboxSettingMappings
     {
-        public static List<TableComboboxSettingDto> ToDto(this IEnumerable<TableComboboxSetting> model)
+        public static List<TableComboboxSettingDto> ToDto(this IEnumerable<TableComboboxSettingEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static TableComboboxSettingDto ToDto(this TableComboboxSetting model)
+        public static TableComboboxSettingDto ToDto(this TableComboboxSettingEntity model)
         {
             return new TableComboboxSettingDto
             {
@@ -35,9 +35,9 @@ namespace QuickCode.DemoCms.IdentityModule.Application.Mappings
             };
         }
 
-        public static TableComboboxSetting ToEntity(this TableComboboxSettingDto model)
+        public static TableComboboxSettingEntity ToEntity(this TableComboboxSettingDto model)
         {
-            return new TableComboboxSetting
+            return new TableComboboxSettingEntity
             {
                 TableName = model.TableName,
                 IdColumn = model.IdColumn,

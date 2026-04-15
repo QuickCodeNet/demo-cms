@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.AssetManagementModule.Application.Dtos.StorageProvider;
-using QuickCode.DemoCms.AssetManagementModule.Domain.Entities;
+using StorageProviderEntity = QuickCode.DemoCms.AssetManagementModule.Domain.Entities.StorageProvider;
 using QuickCode.DemoCms.AssetManagementModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.AssetManagementModule.Application.Mappings
 {
     public static class StorageProviderMappings
     {
-        public static List<StorageProviderDto> ToDto(this IEnumerable<StorageProvider> model)
+        public static List<StorageProviderDto> ToDto(this IEnumerable<StorageProviderEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static StorageProviderDto ToDto(this StorageProvider model)
+        public static StorageProviderDto ToDto(this StorageProviderEntity model)
         {
             return new StorageProviderDto
             {
@@ -37,9 +37,9 @@ namespace QuickCode.DemoCms.AssetManagementModule.Application.Mappings
             };
         }
 
-        public static StorageProvider ToEntity(this StorageProviderDto model)
+        public static StorageProviderEntity ToEntity(this StorageProviderDto model)
         {
-            return new StorageProvider
+            return new StorageProviderEntity
             {
                 Id = model.Id,
                 Name = model.Name,

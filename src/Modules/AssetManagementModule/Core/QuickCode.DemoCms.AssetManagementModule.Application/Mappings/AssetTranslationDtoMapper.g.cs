@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.AssetManagementModule.Application.Dtos.AssetTranslation;
-using QuickCode.DemoCms.AssetManagementModule.Domain.Entities;
+using AssetTranslationEntity = QuickCode.DemoCms.AssetManagementModule.Domain.Entities.AssetTranslation;
 using QuickCode.DemoCms.AssetManagementModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.AssetManagementModule.Application.Mappings
 {
     public static class AssetTranslationMappings
     {
-        public static List<AssetTranslationDto> ToDto(this IEnumerable<AssetTranslation> model)
+        public static List<AssetTranslationDto> ToDto(this IEnumerable<AssetTranslationEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static AssetTranslationDto ToDto(this AssetTranslation model)
+        public static AssetTranslationDto ToDto(this AssetTranslationEntity model)
         {
             return new AssetTranslationDto
             {
@@ -37,9 +37,9 @@ namespace QuickCode.DemoCms.AssetManagementModule.Application.Mappings
             };
         }
 
-        public static AssetTranslation ToEntity(this AssetTranslationDto model)
+        public static AssetTranslationEntity ToEntity(this AssetTranslationDto model)
         {
-            return new AssetTranslation
+            return new AssetTranslationEntity
             {
                 Id = model.Id,
                 AssetId = model.AssetId,

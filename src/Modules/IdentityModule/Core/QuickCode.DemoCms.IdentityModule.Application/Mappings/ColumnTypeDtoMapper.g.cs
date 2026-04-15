@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.IdentityModule.Application.Dtos.ColumnType;
-using QuickCode.DemoCms.IdentityModule.Domain.Entities;
+using ColumnTypeEntity = QuickCode.DemoCms.IdentityModule.Domain.Entities.ColumnType;
 using QuickCode.DemoCms.IdentityModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.IdentityModule.Application.Mappings
 {
     public static class ColumnTypeMappings
     {
-        public static List<ColumnTypeDto> ToDto(this IEnumerable<ColumnType> model)
+        public static List<ColumnTypeDto> ToDto(this IEnumerable<ColumnTypeEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static ColumnTypeDto ToDto(this ColumnType model)
+        public static ColumnTypeDto ToDto(this ColumnTypeEntity model)
         {
             return new ColumnTypeDto
             {
@@ -36,9 +36,9 @@ namespace QuickCode.DemoCms.IdentityModule.Application.Mappings
             };
         }
 
-        public static ColumnType ToEntity(this ColumnTypeDto model)
+        public static ColumnTypeEntity ToEntity(this ColumnTypeDto model)
         {
-            return new ColumnType
+            return new ColumnTypeEntity
             {
                 Id = model.Id,
                 TypeName = model.TypeName,

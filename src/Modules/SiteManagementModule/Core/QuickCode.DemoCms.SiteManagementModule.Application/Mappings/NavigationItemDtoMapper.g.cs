@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.SiteManagementModule.Application.Dtos.NavigationItem;
-using QuickCode.DemoCms.SiteManagementModule.Domain.Entities;
+using NavigationItemEntity = QuickCode.DemoCms.SiteManagementModule.Domain.Entities.NavigationItem;
 using QuickCode.DemoCms.SiteManagementModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.SiteManagementModule.Application.Mappings
 {
     public static class NavigationItemMappings
     {
-        public static List<NavigationItemDto> ToDto(this IEnumerable<NavigationItem> model)
+        public static List<NavigationItemDto> ToDto(this IEnumerable<NavigationItemEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static NavigationItemDto ToDto(this NavigationItem model)
+        public static NavigationItemDto ToDto(this NavigationItemEntity model)
         {
             return new NavigationItemDto
             {
@@ -40,9 +40,9 @@ namespace QuickCode.DemoCms.SiteManagementModule.Application.Mappings
             };
         }
 
-        public static NavigationItem ToEntity(this NavigationItemDto model)
+        public static NavigationItemEntity ToEntity(this NavigationItemDto model)
         {
-            return new NavigationItem
+            return new NavigationItemEntity
             {
                 Id = model.Id,
                 MenuId = model.MenuId,

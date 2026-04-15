@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.IdentityModule.Application.Dtos.PermissionGroup;
-using QuickCode.DemoCms.IdentityModule.Domain.Entities;
+using PermissionGroupEntity = QuickCode.DemoCms.IdentityModule.Domain.Entities.PermissionGroup;
 using QuickCode.DemoCms.IdentityModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.IdentityModule.Application.Mappings
 {
     public static class PermissionGroupMappings
     {
-        public static List<PermissionGroupDto> ToDto(this IEnumerable<PermissionGroup> model)
+        public static List<PermissionGroupDto> ToDto(this IEnumerable<PermissionGroupEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static PermissionGroupDto ToDto(this PermissionGroup model)
+        public static PermissionGroupDto ToDto(this PermissionGroupEntity model)
         {
             return new PermissionGroupDto
             {
@@ -33,9 +33,9 @@ namespace QuickCode.DemoCms.IdentityModule.Application.Mappings
             };
         }
 
-        public static PermissionGroup ToEntity(this PermissionGroupDto model)
+        public static PermissionGroupEntity ToEntity(this PermissionGroupDto model)
         {
-            return new PermissionGroup
+            return new PermissionGroupEntity
             {
                 Name = model.Name,
                 Description = model.Description

@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.IdentityModule.Application.Dtos.AspNetRoleClaim;
-using QuickCode.DemoCms.IdentityModule.Domain.Entities;
+using AspNetRoleClaimEntity = QuickCode.DemoCms.IdentityModule.Domain.Entities.AspNetRoleClaim;
 using QuickCode.DemoCms.IdentityModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.IdentityModule.Application.Mappings
 {
     public static class AspNetRoleClaimMappings
     {
-        public static List<AspNetRoleClaimDto> ToDto(this IEnumerable<AspNetRoleClaim> model)
+        public static List<AspNetRoleClaimDto> ToDto(this IEnumerable<AspNetRoleClaimEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static AspNetRoleClaimDto ToDto(this AspNetRoleClaim model)
+        public static AspNetRoleClaimDto ToDto(this AspNetRoleClaimEntity model)
         {
             return new AspNetRoleClaimDto
             {
@@ -35,9 +35,9 @@ namespace QuickCode.DemoCms.IdentityModule.Application.Mappings
             };
         }
 
-        public static AspNetRoleClaim ToEntity(this AspNetRoleClaimDto model)
+        public static AspNetRoleClaimEntity ToEntity(this AspNetRoleClaimDto model)
         {
-            return new AspNetRoleClaim
+            return new AspNetRoleClaimEntity
             {
                 Id = model.Id,
                 RoleId = model.RoleId,

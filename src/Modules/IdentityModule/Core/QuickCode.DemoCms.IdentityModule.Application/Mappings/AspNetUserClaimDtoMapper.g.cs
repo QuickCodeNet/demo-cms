@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.IdentityModule.Application.Dtos.AspNetUserClaim;
-using QuickCode.DemoCms.IdentityModule.Domain.Entities;
+using AspNetUserClaimEntity = QuickCode.DemoCms.IdentityModule.Domain.Entities.AspNetUserClaim;
 using QuickCode.DemoCms.IdentityModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.IdentityModule.Application.Mappings
 {
     public static class AspNetUserClaimMappings
     {
-        public static List<AspNetUserClaimDto> ToDto(this IEnumerable<AspNetUserClaim> model)
+        public static List<AspNetUserClaimDto> ToDto(this IEnumerable<AspNetUserClaimEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static AspNetUserClaimDto ToDto(this AspNetUserClaim model)
+        public static AspNetUserClaimDto ToDto(this AspNetUserClaimEntity model)
         {
             return new AspNetUserClaimDto
             {
@@ -35,9 +35,9 @@ namespace QuickCode.DemoCms.IdentityModule.Application.Mappings
             };
         }
 
-        public static AspNetUserClaim ToEntity(this AspNetUserClaimDto model)
+        public static AspNetUserClaimEntity ToEntity(this AspNetUserClaimDto model)
         {
-            return new AspNetUserClaim
+            return new AspNetUserClaimEntity
             {
                 Id = model.Id,
                 UserId = model.UserId,

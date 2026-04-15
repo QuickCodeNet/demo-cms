@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.IdentityModule.Application.Dtos.Module;
-using QuickCode.DemoCms.IdentityModule.Domain.Entities;
+using ModuleEntity = QuickCode.DemoCms.IdentityModule.Domain.Entities.Module;
 using QuickCode.DemoCms.IdentityModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.IdentityModule.Application.Mappings
 {
     public static class ModuleMappings
     {
-        public static List<ModuleDto> ToDto(this IEnumerable<Module> model)
+        public static List<ModuleDto> ToDto(this IEnumerable<ModuleEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static ModuleDto ToDto(this Module model)
+        public static ModuleDto ToDto(this ModuleEntity model)
         {
             return new ModuleDto
             {
@@ -33,9 +33,9 @@ namespace QuickCode.DemoCms.IdentityModule.Application.Mappings
             };
         }
 
-        public static Module ToEntity(this ModuleDto model)
+        public static ModuleEntity ToEntity(this ModuleDto model)
         {
-            return new Module
+            return new ModuleEntity
             {
                 Name = model.Name,
                 Description = model.Description

@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.IdentityModule.Application.Dtos.AspNetUserLogin;
-using QuickCode.DemoCms.IdentityModule.Domain.Entities;
+using AspNetUserLoginEntity = QuickCode.DemoCms.IdentityModule.Domain.Entities.AspNetUserLogin;
 using QuickCode.DemoCms.IdentityModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.IdentityModule.Application.Mappings
 {
     public static class AspNetUserLoginMappings
     {
-        public static List<AspNetUserLoginDto> ToDto(this IEnumerable<AspNetUserLogin> model)
+        public static List<AspNetUserLoginDto> ToDto(this IEnumerable<AspNetUserLoginEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static AspNetUserLoginDto ToDto(this AspNetUserLogin model)
+        public static AspNetUserLoginDto ToDto(this AspNetUserLoginEntity model)
         {
             return new AspNetUserLoginDto
             {
@@ -35,9 +35,9 @@ namespace QuickCode.DemoCms.IdentityModule.Application.Mappings
             };
         }
 
-        public static AspNetUserLogin ToEntity(this AspNetUserLoginDto model)
+        public static AspNetUserLoginEntity ToEntity(this AspNetUserLoginDto model)
         {
-            return new AspNetUserLogin
+            return new AspNetUserLoginEntity
             {
                 LoginProvider = model.LoginProvider,
                 ProviderKey = model.ProviderKey,

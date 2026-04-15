@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.ContentManagementModule.Application.Dtos.Page;
-using QuickCode.DemoCms.ContentManagementModule.Domain.Entities;
+using PageEntity = QuickCode.DemoCms.ContentManagementModule.Domain.Entities.Page;
 using QuickCode.DemoCms.ContentManagementModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.ContentManagementModule.Application.Mappings
 {
     public static class PageMappings
     {
-        public static List<PageDto> ToDto(this IEnumerable<Page> model)
+        public static List<PageDto> ToDto(this IEnumerable<PageEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static PageDto ToDto(this Page model)
+        public static PageDto ToDto(this PageEntity model)
         {
             return new PageDto
             {
@@ -38,9 +38,9 @@ namespace QuickCode.DemoCms.ContentManagementModule.Application.Mappings
             };
         }
 
-        public static Page ToEntity(this PageDto model)
+        public static PageEntity ToEntity(this PageDto model)
         {
-            return new Page
+            return new PageEntity
             {
                 Id = model.Id,
                 ContentTypeId = model.ContentTypeId,

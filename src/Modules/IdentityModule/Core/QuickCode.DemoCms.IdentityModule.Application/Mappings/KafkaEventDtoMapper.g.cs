@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.IdentityModule.Application.Dtos.KafkaEvent;
-using QuickCode.DemoCms.IdentityModule.Domain.Entities;
+using KafkaEventEntity = QuickCode.DemoCms.IdentityModule.Domain.Entities.KafkaEvent;
 using QuickCode.DemoCms.IdentityModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.IdentityModule.Application.Mappings
 {
     public static class KafkaEventMappings
     {
-        public static List<KafkaEventDto> ToDto(this IEnumerable<KafkaEvent> model)
+        public static List<KafkaEventDto> ToDto(this IEnumerable<KafkaEventEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static KafkaEventDto ToDto(this KafkaEvent model)
+        public static KafkaEventDto ToDto(this KafkaEventEntity model)
         {
             return new KafkaEventDto
             {
@@ -34,9 +34,9 @@ namespace QuickCode.DemoCms.IdentityModule.Application.Mappings
             };
         }
 
-        public static KafkaEvent ToEntity(this KafkaEventDto model)
+        public static KafkaEventEntity ToEntity(this KafkaEventDto model)
         {
-            return new KafkaEvent
+            return new KafkaEventEntity
             {
                 TopicName = model.TopicName,
                 ApiMethodDefinitionKey = model.ApiMethodDefinitionKey,

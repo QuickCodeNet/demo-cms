@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.LocalizationModule.Application.Dtos.TranslationValue;
-using QuickCode.DemoCms.LocalizationModule.Domain.Entities;
+using TranslationValueEntity = QuickCode.DemoCms.LocalizationModule.Domain.Entities.TranslationValue;
 using QuickCode.DemoCms.LocalizationModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.LocalizationModule.Application.Mappings
 {
     public static class TranslationValueMappings
     {
-        public static List<TranslationValueDto> ToDto(this IEnumerable<TranslationValue> model)
+        public static List<TranslationValueDto> ToDto(this IEnumerable<TranslationValueEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static TranslationValueDto ToDto(this TranslationValue model)
+        public static TranslationValueDto ToDto(this TranslationValueEntity model)
         {
             return new TranslationValueDto
             {
@@ -36,9 +36,9 @@ namespace QuickCode.DemoCms.LocalizationModule.Application.Mappings
             };
         }
 
-        public static TranslationValue ToEntity(this TranslationValueDto model)
+        public static TranslationValueEntity ToEntity(this TranslationValueDto model)
         {
-            return new TranslationValue
+            return new TranslationValueEntity
             {
                 Id = model.Id,
                 KeyId = model.KeyId,

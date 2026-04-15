@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.IdentityModule.Application.Dtos.PortalPageAccessGrant;
-using QuickCode.DemoCms.IdentityModule.Domain.Entities;
+using PortalPageAccessGrantEntity = QuickCode.DemoCms.IdentityModule.Domain.Entities.PortalPageAccessGrant;
 using QuickCode.DemoCms.IdentityModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.IdentityModule.Application.Mappings
 {
     public static class PortalPageAccessGrantMappings
     {
-        public static List<PortalPageAccessGrantDto> ToDto(this IEnumerable<PortalPageAccessGrant> model)
+        public static List<PortalPageAccessGrantDto> ToDto(this IEnumerable<PortalPageAccessGrantEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static PortalPageAccessGrantDto ToDto(this PortalPageAccessGrant model)
+        public static PortalPageAccessGrantDto ToDto(this PortalPageAccessGrantEntity model)
         {
             return new PortalPageAccessGrantDto
             {
@@ -36,9 +36,9 @@ namespace QuickCode.DemoCms.IdentityModule.Application.Mappings
             };
         }
 
-        public static PortalPageAccessGrant ToEntity(this PortalPageAccessGrantDto model)
+        public static PortalPageAccessGrantEntity ToEntity(this PortalPageAccessGrantDto model)
         {
-            return new PortalPageAccessGrant
+            return new PortalPageAccessGrantEntity
             {
                 PermissionGroupName = model.PermissionGroupName,
                 PortalPageDefinitionKey = model.PortalPageDefinitionKey,

@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.IdentityModule.Application.Dtos.RefreshToken;
-using QuickCode.DemoCms.IdentityModule.Domain.Entities;
+using RefreshTokenEntity = QuickCode.DemoCms.IdentityModule.Domain.Entities.RefreshToken;
 using QuickCode.DemoCms.IdentityModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.IdentityModule.Application.Mappings
 {
     public static class RefreshTokenMappings
     {
-        public static List<RefreshTokenDto> ToDto(this IEnumerable<RefreshToken> model)
+        public static List<RefreshTokenDto> ToDto(this IEnumerable<RefreshTokenEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static RefreshTokenDto ToDto(this RefreshToken model)
+        public static RefreshTokenDto ToDto(this RefreshTokenEntity model)
         {
             return new RefreshTokenDto
             {
@@ -37,9 +37,9 @@ namespace QuickCode.DemoCms.IdentityModule.Application.Mappings
             };
         }
 
-        public static RefreshToken ToEntity(this RefreshTokenDto model)
+        public static RefreshTokenEntity ToEntity(this RefreshTokenDto model)
         {
-            return new RefreshToken
+            return new RefreshTokenEntity
             {
                 Id = model.Id,
                 UserId = model.UserId,

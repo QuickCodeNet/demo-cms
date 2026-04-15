@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.ContentManagementModule.Application.Dtos.Tag;
-using QuickCode.DemoCms.ContentManagementModule.Domain.Entities;
+using TagEntity = QuickCode.DemoCms.ContentManagementModule.Domain.Entities.Tag;
 using QuickCode.DemoCms.ContentManagementModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.ContentManagementModule.Application.Mappings
 {
     public static class TagMappings
     {
-        public static List<TagDto> ToDto(this IEnumerable<Tag> model)
+        public static List<TagDto> ToDto(this IEnumerable<TagEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static TagDto ToDto(this Tag model)
+        public static TagDto ToDto(this TagEntity model)
         {
             return new TagDto
             {
@@ -34,9 +34,9 @@ namespace QuickCode.DemoCms.ContentManagementModule.Application.Mappings
             };
         }
 
-        public static Tag ToEntity(this TagDto model)
+        public static TagEntity ToEntity(this TagDto model)
         {
-            return new Tag
+            return new TagEntity
             {
                 Id = model.Id,
                 Name = model.Name,

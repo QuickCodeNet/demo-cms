@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.AssetManagementModule.Application.Dtos.AssetMetadatum;
-using QuickCode.DemoCms.AssetManagementModule.Domain.Entities;
+using AssetMetadatumEntity = QuickCode.DemoCms.AssetManagementModule.Domain.Entities.AssetMetadatum;
 using QuickCode.DemoCms.AssetManagementModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.AssetManagementModule.Application.Mappings
 {
     public static class AssetMetadatumMappings
     {
-        public static List<AssetMetadatumDto> ToDto(this IEnumerable<AssetMetadatum> model)
+        public static List<AssetMetadatumDto> ToDto(this IEnumerable<AssetMetadatumEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static AssetMetadatumDto ToDto(this AssetMetadatum model)
+        public static AssetMetadatumDto ToDto(this AssetMetadatumEntity model)
         {
             return new AssetMetadatumDto
             {
@@ -35,9 +35,9 @@ namespace QuickCode.DemoCms.AssetManagementModule.Application.Mappings
             };
         }
 
-        public static AssetMetadatum ToEntity(this AssetMetadatumDto model)
+        public static AssetMetadatumEntity ToEntity(this AssetMetadatumDto model)
         {
-            return new AssetMetadatum
+            return new AssetMetadatumEntity
             {
                 Id = model.Id,
                 AssetId = model.AssetId,

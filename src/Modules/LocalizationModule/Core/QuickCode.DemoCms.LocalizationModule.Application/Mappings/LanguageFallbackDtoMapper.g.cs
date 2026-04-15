@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.LocalizationModule.Application.Dtos.LanguageFallback;
-using QuickCode.DemoCms.LocalizationModule.Domain.Entities;
+using LanguageFallbackEntity = QuickCode.DemoCms.LocalizationModule.Domain.Entities.LanguageFallback;
 using QuickCode.DemoCms.LocalizationModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.LocalizationModule.Application.Mappings
 {
     public static class LanguageFallbackMappings
     {
-        public static List<LanguageFallbackDto> ToDto(this IEnumerable<LanguageFallback> model)
+        public static List<LanguageFallbackDto> ToDto(this IEnumerable<LanguageFallbackEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static LanguageFallbackDto ToDto(this LanguageFallback model)
+        public static LanguageFallbackDto ToDto(this LanguageFallbackEntity model)
         {
             return new LanguageFallbackDto
             {
@@ -34,9 +34,9 @@ namespace QuickCode.DemoCms.LocalizationModule.Application.Mappings
             };
         }
 
-        public static LanguageFallback ToEntity(this LanguageFallbackDto model)
+        public static LanguageFallbackEntity ToEntity(this LanguageFallbackDto model)
         {
-            return new LanguageFallback
+            return new LanguageFallbackEntity
             {
                 LanguageId = model.LanguageId,
                 FallbackLanguageId = model.FallbackLanguageId,

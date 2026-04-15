@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.ContentManagementModule.Application.Dtos.PageTranslation;
-using QuickCode.DemoCms.ContentManagementModule.Domain.Entities;
+using PageTranslationEntity = QuickCode.DemoCms.ContentManagementModule.Domain.Entities.PageTranslation;
 using QuickCode.DemoCms.ContentManagementModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.ContentManagementModule.Application.Mappings
 {
     public static class PageTranslationMappings
     {
-        public static List<PageTranslationDto> ToDto(this IEnumerable<PageTranslation> model)
+        public static List<PageTranslationDto> ToDto(this IEnumerable<PageTranslationEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static PageTranslationDto ToDto(this PageTranslation model)
+        public static PageTranslationDto ToDto(this PageTranslationEntity model)
         {
             return new PageTranslationDto
             {
@@ -39,9 +39,9 @@ namespace QuickCode.DemoCms.ContentManagementModule.Application.Mappings
             };
         }
 
-        public static PageTranslation ToEntity(this PageTranslationDto model)
+        public static PageTranslationEntity ToEntity(this PageTranslationDto model)
         {
-            return new PageTranslation
+            return new PageTranslationEntity
             {
                 Id = model.Id,
                 PageId = model.PageId,

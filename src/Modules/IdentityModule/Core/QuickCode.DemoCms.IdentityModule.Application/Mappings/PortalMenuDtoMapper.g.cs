@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.IdentityModule.Application.Dtos.PortalMenu;
-using QuickCode.DemoCms.IdentityModule.Domain.Entities;
+using PortalMenuEntity = QuickCode.DemoCms.IdentityModule.Domain.Entities.PortalMenu;
 using QuickCode.DemoCms.IdentityModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.IdentityModule.Application.Mappings
 {
     public static class PortalMenuMappings
     {
-        public static List<PortalMenuDto> ToDto(this IEnumerable<PortalMenu> model)
+        public static List<PortalMenuDto> ToDto(this IEnumerable<PortalMenuEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static PortalMenuDto ToDto(this PortalMenu model)
+        public static PortalMenuDto ToDto(this PortalMenuEntity model)
         {
             return new PortalMenuDto
             {
@@ -38,9 +38,9 @@ namespace QuickCode.DemoCms.IdentityModule.Application.Mappings
             };
         }
 
-        public static PortalMenu ToEntity(this PortalMenuDto model)
+        public static PortalMenuEntity ToEntity(this PortalMenuDto model)
         {
-            return new PortalMenu
+            return new PortalMenuEntity
             {
                 Key = model.Key,
                 Name = model.Name,

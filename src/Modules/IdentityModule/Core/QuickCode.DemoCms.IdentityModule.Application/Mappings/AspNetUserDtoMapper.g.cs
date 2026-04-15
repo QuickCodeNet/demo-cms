@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.IdentityModule.Application.Dtos.AspNetUser;
-using QuickCode.DemoCms.IdentityModule.Domain.Entities;
+using AspNetUserEntity = QuickCode.DemoCms.IdentityModule.Domain.Entities.AspNetUser;
 using QuickCode.DemoCms.IdentityModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.IdentityModule.Application.Mappings
 {
     public static class AspNetUserMappings
     {
-        public static List<AspNetUserDto> ToDto(this IEnumerable<AspNetUser> model)
+        public static List<AspNetUserDto> ToDto(this IEnumerable<AspNetUserEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static AspNetUserDto ToDto(this AspNetUser model)
+        public static AspNetUserDto ToDto(this AspNetUserEntity model)
         {
             return new AspNetUserDto
             {
@@ -49,9 +49,9 @@ namespace QuickCode.DemoCms.IdentityModule.Application.Mappings
             };
         }
 
-        public static AspNetUser ToEntity(this AspNetUserDto model)
+        public static AspNetUserEntity ToEntity(this AspNetUserDto model)
         {
-            return new AspNetUser
+            return new AspNetUserEntity
             {
                 Id = model.Id,
                 FirstName = model.FirstName,
