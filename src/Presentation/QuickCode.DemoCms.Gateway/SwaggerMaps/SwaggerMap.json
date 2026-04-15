@@ -1,0 +1,37 @@
+{
+  "identity-module-api": {
+    "Endpoint": "/swagger/identity-module-api/v1/swagger.json",
+    "Spec": "/swagger/v1/swagger.json",
+    "PathOptions": {
+      "/api": "/api"
+    }
+  },
+  "asset-management-module-api": {
+    "Endpoint": "/swagger/asset-management-module-api/v1/swagger.json",
+    "Spec": "/swagger/v1/swagger.json",
+    "PathOptions": {
+      "/api": "/api"
+    }
+  },
+  "content-management-module-api": {
+    "Endpoint": "/swagger/content-management-module-api/v1/swagger.json",
+    "Spec": "/swagger/v1/swagger.json",
+    "PathOptions": {
+      "/api": "/api"
+    }
+  },
+  "localization-module-api": {
+    "Endpoint": "/swagger/localization-module-api/v1/swagger.json",
+    "Spec": "/swagger/v1/swagger.json",
+    "PathOptions": {
+      "/api": "/api"
+    }
+  },
+  "site-management-module-api": {
+    "Endpoint": "/swagger/site-management-module-api/v1/swagger.json",
+    "Spec": "/swagger/v1/swagger.json",
+    "PathOptions": {
+      "/api": "/api"
+    }
+  }
+}

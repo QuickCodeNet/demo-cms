@@ -1,0 +1,4 @@
+﻿UPDATE [PAGES] 
+	SET [STATUS] = 'PENDING_REVIEW' 
+WHERE [IsDeleted] = 0 
+	AND [ID] = @PRM_PAGE_ID

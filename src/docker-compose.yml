@@ -1,0 +1,130 @@
+services:
+  demo-cms-pg-data:
+    container_name: "demo-cms-pg-data"
+    image: postgres:18
+
+  demo-cms-sql-data:
+    container_name: "demo-cms-sql-data"
+    image: mcr.microsoft.com/mssql/server:2025-latest
+    
+  demo-cms-mysql-data:
+    container_name: "demo-cms-mysql-data"
+    image: mysql:8.3
+
+  demo-cms-elasticsearch:
+    container_name: demo-cms-elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
+
+  demo-cms-kibana:
+    container_name: demo-cms-kibana
+    image: docker.elastic.co/kibana/kibana:8.11.0
+
+  quickcode-demo-cms-gateway-api:
+    container_name: "quickcode-demo-cms-gateway-api"
+    image: ${DOCKER_REGISTRY-}quickcode-demo-cms-gateway-api
+    build:
+      context: .
+      dockerfile: Presentation/QuickCode.DemoCms.Gateway/Dockerfile
+
+  quickcode-demo-cms-identity-module-api:
+    container_name: "quickcode-demo-cms-identity-module-api"
+    image: ${DOCKER_REGISTRY-}quickcode-demo-cms-identity-module-api
+    build:
+      context: . 
+      dockerfile: Modules/IdentityModule/Presentation/QuickCode.DemoCms.IdentityModule.Api/Dockerfile
+    depends_on:
+      - demo-cms-sql-data
+      - demo-cms-pg-data
+      
+
+  quickcode-demo-cms-asset-management-module-api:
+    container_name: "quickcode-demo-cms-asset-management-module-api"
+    image: ${DOCKER_REGISTRY-}quickcode-demo-cms-asset-management-module-api
+    build:
+      context: . 
+      dockerfile: Modules/AssetManagementModule/Presentation/QuickCode.DemoCms.AssetManagementModule.Api/Dockerfile
+    depends_on:
+      - demo-cms-sql-data
+      - demo-cms-pg-data
+      
+
+  quickcode-demo-cms-content-management-module-api:
+    container_name: "quickcode-demo-cms-content-management-module-api"
+    image: ${DOCKER_REGISTRY-}quickcode-demo-cms-content-management-module-api
+    build:
+      context: . 
+      dockerfile: Modules/ContentManagementModule/Presentation/QuickCode.DemoCms.ContentManagementModule.Api/Dockerfile
+    depends_on:
+      - demo-cms-sql-data
+      - demo-cms-pg-data
+      
+
+  quickcode-demo-cms-localization-module-api:
+    container_name: "quickcode-demo-cms-localization-module-api"
+    image: ${DOCKER_REGISTRY-}quickcode-demo-cms-localization-module-api
+    build:
+      context: . 
+      dockerfile: Modules/LocalizationModule/Presentation/QuickCode.DemoCms.LocalizationModule.Api/Dockerfile
+    depends_on:
+      - demo-cms-sql-data
+      - demo-cms-pg-data
+      
+
+  quickcode-demo-cms-site-management-module-api:
+    container_name: "quickcode-demo-cms-site-management-module-api"
+    image: ${DOCKER_REGISTRY-}quickcode-demo-cms-site-management-module-api
+    build:
+      context: . 
+      dockerfile: Modules/SiteManagementModule/Presentation/QuickCode.DemoCms.SiteManagementModule.Api/Dockerfile
+    depends_on:
+      - demo-cms-sql-data
+      - demo-cms-pg-data
+      
+
+#[-WEB-]
+  
+  demo-cms-zookeeper:
+    image: confluentinc/cp-zookeeper:7.5.0
+    container_name: demo-cms-zookeeper
+    ports:
+      - "${ZOOKEEPER_PORT:-2181}:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  demo-cms-kafka:
+    image: confluentinc/cp-kafka:7.5.0
+    container_name: demo-cms-kafka
+    depends_on:
+      - demo-cms-zookeeper
+    ports:
+      - "${KAFKA_PORT:-9092}:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: demo-cms-zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://demo-cms-kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  demo-cms-kafdrop:
+    image: obsidiandynamics/kafdrop:latest
+    container_name: demo-cms-kafdrop
+    ports:
+      - "${KAFDROP_PORT:-9000}:9000"
+    depends_on:
+      - demo-cms-kafka
+    environment:
+      KAFKA_BROKERCONNECT: demo-cms-kafka:9092
+        
+  quickcode-demo-cms-portal:
+    container_name: "quickcode-demo-cms-portal"
+    image: ${DOCKER_REGISTRY-}quickcode-demo-cms-portal
+    build:
+      context: .
+      dockerfile: Presentation/QuickCode.DemoCms.Portal/Dockerfile
+      
+  quickcode-demo-cms-event-listener-service:
+    container_name: "quickcode-demo-cms-event-listener-service"
+    image: ${DOCKER_REGISTRY-}quickcode-demo-cms-event-listener-service
+    build:
+      context: .
+      dockerfile: Services/QuickCode.DemoCms.EventListenerService/Dockerfile

@@ -1,0 +1,4495 @@
+{
+  "info": {
+    "name": "QuickCode - DemoCms - ContentManagementModule Api (1.0.0.0)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "v1"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/auth/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"demo@quickcode.net\",\r\n  \"password\": \"String1!\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var json = pm.response.json();",
+                  "var token = json.accessToken;",
+                  "var refreshToken = json.refreshToken;",
+                  "const isEnvSelected = pm.environment.name && pm.environment.name !== \"no_env\";",
+                  "if (isEnvSelected) {",
+                  "    pm.environment.set(\"access_token\", token);",
+                  "    pm.environment.set(\"refresh_token\", refreshToken);",
+                  "} else {",
+                  "    pm.collectionVariables.set(\"access_token\", token);",
+                  "    pm.collectionVariables.set(\"refresh_token\", refreshToken);",
+                  "}",
+                  "console.log(`Selected Environment: ${pm.environment.name || \"none\"}`);"
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const fallback_env = \"local\";",
+              "const default_base_url = \"http://localhost:6060\";",
+              "",
+              "const isEnvSelected = pm.environment.name && pm.environment.name !== \"no_env\";",
+              "",
+              "let env;",
+              "let base_url;",
+              "",
+              "env = pm.variables.get(\"active_env\") || fallback_env;",
+              "",
+              "if (isEnvSelected) {",
+              "    env = pm.environment.get(\"active_env\");",
+              "",
+              "    if (!env) {",
+              "        env = pm.variables.get(\"active_env\") || fallback_env;",
+              "        pm.environment.set(\"active_env\", env);",
+              "    }",
+              "}",
+              "",
+              "base_url = pm.variables.get(`base_url_${env}`) || default_base_url;",
+              "pm.variables.set(\"base_url\", base_url);",
+              "",
+              "console.log(`Selected Environment: ${pm.environment.name || \"none\"}`);",
+              "console.log(`Resolved active_env: ${env}`);",
+              "console.log(`Resolved base_url: ${base_url}`);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "AuditLogs",
+      "item": [
+        {
+          "name": "AuditLogsList",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/audit-logs",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "audit-logs"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "AuditLogsInsert",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/audit-logs",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "audit-logs"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":\"string\",\"entityName\":\"string\",\"entityId\":\"string\",\"action\":\"string\",\"userId\":\"string\",\"userName\":\"string\",\"userGroup\":\"string\",\"timestamp\":\"string\",\"oldValues\":\"string\",\"newValues\":\"string\",\"changedColumns\":\"string\",\"isChanged\":true,\"changeSummary\":\"string\",\"ipAddress\":\"string\",\"userAgent\":\"string\",\"correlationId\":\"string\",\"isSuccess\":true,\"errorMessage\":\"string\",\"hash\":\"string\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "AuditLogsCount",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/audit-logs/count",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "audit-logs",
+                "count"
+              ]
+            }
+          }
+        },
+        {
+          "name": "AuditLogsGetItem",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/audit-logs/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "audit-logs",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "AuditLogsUpdate",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/audit-logs/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "audit-logs",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":\"string\",\"entityName\":\"string\",\"entityId\":\"string\",\"action\":\"string\",\"userId\":\"string\",\"userName\":\"string\",\"userGroup\":\"string\",\"timestamp\":\"string\",\"oldValues\":\"string\",\"newValues\":\"string\",\"changedColumns\":\"string\",\"isChanged\":true,\"changeSummary\":\"string\",\"ipAddress\":\"string\",\"userAgent\":\"string\",\"correlationId\":\"string\",\"isSuccess\":true,\"errorMessage\":\"string\",\"hash\":\"string\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "AuditLogsDelete",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/audit-logs/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "audit-logs",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const fallback_env = \"local\";",
+              "const default_base_url = \"http://localhost:6060\";",
+              "",
+              "const isEnvSelected = pm.environment.name && pm.environment.name !== \"no_env\";",
+              "",
+              "let env;",
+              "let base_url;",
+              "",
+              "env = pm.variables.get(\"active_env\") || fallback_env;",
+              "",
+              "if (isEnvSelected) {",
+              "    env = pm.environment.get(\"active_env\");",
+              "",
+              "    if (!env) {",
+              "        env = pm.variables.get(\"active_env\") || fallback_env;",
+              "        pm.environment.set(\"active_env\", env);",
+              "    }",
+              "}",
+              "",
+              "base_url = pm.variables.get(`base_url_${env}`) || default_base_url;",
+              "pm.variables.set(\"base_url\", base_url);",
+              "",
+              "console.log(`Selected Environment: ${pm.environment.name || \"none\"}`);",
+              "console.log(`Resolved active_env: ${env}`);",
+              "console.log(`Resolved base_url: ${base_url}`);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "BlockTranslations",
+      "item": [
+        {
+          "name": "BlockTranslationsList",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/block-translations",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "block-translations"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "BlockTranslationsInsert",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/block-translations",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "block-translations"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"blockId\":123,\"languageCode\":\"string\",\"content\":\"string\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "BlockTranslationsCount",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/block-translations/count",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "block-translations",
+                "count"
+              ]
+            }
+          }
+        },
+        {
+          "name": "BlockTranslationsGetItem",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/block-translations/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "block-translations",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "BlockTranslationsUpdate",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/block-translations/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "block-translations",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"blockId\":123,\"languageCode\":\"string\",\"content\":\"string\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "BlockTranslationsDelete",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/block-translations/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "block-translations",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "BlockTranslationsGetByBlockId",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/block-translations/get-by-block-id/:blockTranslationBlockId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "block-translations",
+                "get-by-block-id",
+                ":blockTranslationBlockId"
+              ],
+              "variable": [
+                {
+                  "key": "blockTranslationBlockId",
+                  "value": ""
+                }
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "BlockTranslationsGetByBlockAndLanguage",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/block-translations/get-by-block-and-language/:blockTranslationBlockId/:blockTranslationLanguageCode",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "block-translations",
+                "get-by-block-and-language",
+                ":blockTranslationBlockId",
+                ":blockTranslationLanguageCode"
+              ],
+              "variable": [
+                {
+                  "key": "blockTranslationBlockId",
+                  "value": ""
+                },
+                {
+                  "key": "blockTranslationLanguageCode",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const fallback_env = \"local\";",
+              "const default_base_url = \"http://localhost:6060\";",
+              "",
+              "const isEnvSelected = pm.environment.name && pm.environment.name !== \"no_env\";",
+              "",
+              "let env;",
+              "let base_url;",
+              "",
+              "env = pm.variables.get(\"active_env\") || fallback_env;",
+              "",
+              "if (isEnvSelected) {",
+              "    env = pm.environment.get(\"active_env\");",
+              "",
+              "    if (!env) {",
+              "        env = pm.variables.get(\"active_env\") || fallback_env;",
+              "        pm.environment.set(\"active_env\", env);",
+              "    }",
+              "}",
+              "",
+              "base_url = pm.variables.get(`base_url_${env}`) || default_base_url;",
+              "pm.variables.set(\"base_url\", base_url);",
+              "",
+              "console.log(`Selected Environment: ${pm.environment.name || \"none\"}`);",
+              "console.log(`Resolved active_env: ${env}`);",
+              "console.log(`Resolved base_url: ${base_url}`);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "ContentBlocks",
+      "item": [
+        {
+          "name": "ContentBlocksList",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-blocks",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-blocks"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ContentBlocksInsert",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-blocks",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-blocks"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"contentTypeId\":123,\"key\":\"string\",\"description\":\"string\",\"isActive\":true}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "ContentBlocksCount",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-blocks/count",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-blocks",
+                "count"
+              ]
+            }
+          }
+        },
+        {
+          "name": "ContentBlocksGetItem",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-blocks/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-blocks",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ContentBlocksUpdate",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-blocks/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-blocks",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"contentTypeId\":123,\"key\":\"string\",\"description\":\"string\",\"isActive\":true}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "ContentBlocksDelete",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-blocks/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-blocks",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ContentBlocksGetActive",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-blocks/get-active/:contentBlockIsActive",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-blocks",
+                "get-active",
+                ":contentBlockIsActive"
+              ],
+              "variable": [
+                {
+                  "key": "contentBlockIsActive",
+                  "value": ""
+                }
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ContentBlocksGetByKey",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-blocks/get-by-key/:contentBlockKey/:contentBlockIsActive",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-blocks",
+                "get-by-key",
+                ":contentBlockKey",
+                ":contentBlockIsActive"
+              ],
+              "variable": [
+                {
+                  "key": "contentBlockKey",
+                  "value": ""
+                },
+                {
+                  "key": "contentBlockIsActive",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ContentBlocksSearchByKey",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-blocks/search-by-key/:contentBlockKey/:contentBlockIsActive",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-blocks",
+                "search-by-key",
+                ":contentBlockKey",
+                ":contentBlockIsActive"
+              ],
+              "variable": [
+                {
+                  "key": "contentBlockKey",
+                  "value": ""
+                },
+                {
+                  "key": "contentBlockIsActive",
+                  "value": ""
+                }
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ContentBlocksDeactivate",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-blocks/deactivate/:contentBlockId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-blocks",
+                "deactivate",
+                ":contentBlockId"
+              ],
+              "variable": [
+                {
+                  "key": "contentBlockId",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const fallback_env = \"local\";",
+              "const default_base_url = \"http://localhost:6060\";",
+              "",
+              "const isEnvSelected = pm.environment.name && pm.environment.name !== \"no_env\";",
+              "",
+              "let env;",
+              "let base_url;",
+              "",
+              "env = pm.variables.get(\"active_env\") || fallback_env;",
+              "",
+              "if (isEnvSelected) {",
+              "    env = pm.environment.get(\"active_env\");",
+              "",
+              "    if (!env) {",
+              "        env = pm.variables.get(\"active_env\") || fallback_env;",
+              "        pm.environment.set(\"active_env\", env);",
+              "    }",
+              "}",
+              "",
+              "base_url = pm.variables.get(`base_url_${env}`) || default_base_url;",
+              "pm.variables.set(\"base_url\", base_url);",
+              "",
+              "console.log(`Selected Environment: ${pm.environment.name || \"none\"}`);",
+              "console.log(`Resolved active_env: ${env}`);",
+              "console.log(`Resolved base_url: ${base_url}`);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "ContentTags",
+      "item": [
+        {
+          "name": "ContentTagsList",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-tags",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-tags"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ContentTagsInsert",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-tags",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-tags"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"contentTypeKind\":\"string\",\"contentId\":123,\"tagId\":123}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "ContentTagsCount",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-tags/count",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-tags",
+                "count"
+              ]
+            }
+          }
+        },
+        {
+          "name": "ContentTagsGetItem",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-tags/:contentTypeKind/:contentId/:tagId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-tags",
+                ":contentTypeKind",
+                ":contentId",
+                ":tagId"
+              ],
+              "variable": [
+                {
+                  "key": "contentTypeKind",
+                  "value": ""
+                },
+                {
+                  "key": "contentId",
+                  "value": ""
+                },
+                {
+                  "key": "tagId",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ContentTagsUpdate",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-tags/:contentTypeKind/:contentId/:tagId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-tags",
+                ":contentTypeKind",
+                ":contentId",
+                ":tagId"
+              ],
+              "variable": [
+                {
+                  "key": "contentTypeKind",
+                  "value": ""
+                },
+                {
+                  "key": "contentId",
+                  "value": ""
+                },
+                {
+                  "key": "tagId",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"contentTypeKind\":\"string\",\"contentId\":123,\"tagId\":123}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "ContentTagsDelete",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-tags/:contentTypeKind/:contentId/:tagId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-tags",
+                ":contentTypeKind",
+                ":contentId",
+                ":tagId"
+              ],
+              "variable": [
+                {
+                  "key": "contentTypeKind",
+                  "value": ""
+                },
+                {
+                  "key": "contentId",
+                  "value": ""
+                },
+                {
+                  "key": "tagId",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ContentTagsGetTagsForContent",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-tags/get-tags-for-content",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-tags",
+                "get-tags-for-content"
+              ],
+              "query": [
+                {
+                  "key": "contentTagContentTypeKind",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "contentTagContentId",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ContentTagsGetContentForTag",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-tags/get-content-for-tag",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-tags",
+                "get-content-for-tag"
+              ],
+              "query": [
+                {
+                  "key": "contentTagTagId",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ContentTagsRemoveTagFromContent",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-tags/remove-tag-from-content/:contentTagContentTypeKind/:contentTagContentId/:contentTagTagId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-tags",
+                "remove-tag-from-content",
+                ":contentTagContentTypeKind",
+                ":contentTagContentId",
+                ":contentTagTagId"
+              ],
+              "variable": [
+                {
+                  "key": "contentTagContentTypeKind",
+                  "value": ""
+                },
+                {
+                  "key": "contentTagContentId",
+                  "value": ""
+                },
+                {
+                  "key": "contentTagTagId",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ContentTagsRemoveAllTagsFromContent",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-tags/remove-all-tags-from-content/:contentTagContentTypeKind/:contentTagContentId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-tags",
+                "remove-all-tags-from-content",
+                ":contentTagContentTypeKind",
+                ":contentTagContentId"
+              ],
+              "variable": [
+                {
+                  "key": "contentTagContentTypeKind",
+                  "value": ""
+                },
+                {
+                  "key": "contentTagContentId",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const fallback_env = \"local\";",
+              "const default_base_url = \"http://localhost:6060\";",
+              "",
+              "const isEnvSelected = pm.environment.name && pm.environment.name !== \"no_env\";",
+              "",
+              "let env;",
+              "let base_url;",
+              "",
+              "env = pm.variables.get(\"active_env\") || fallback_env;",
+              "",
+              "if (isEnvSelected) {",
+              "    env = pm.environment.get(\"active_env\");",
+              "",
+              "    if (!env) {",
+              "        env = pm.variables.get(\"active_env\") || fallback_env;",
+              "        pm.environment.set(\"active_env\", env);",
+              "    }",
+              "}",
+              "",
+              "base_url = pm.variables.get(`base_url_${env}`) || default_base_url;",
+              "pm.variables.set(\"base_url\", base_url);",
+              "",
+              "console.log(`Selected Environment: ${pm.environment.name || \"none\"}`);",
+              "console.log(`Resolved active_env: ${env}`);",
+              "console.log(`Resolved base_url: ${base_url}`);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "ContentTypes",
+      "item": [
+        {
+          "name": "ContentTypesList",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-types",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-types"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ContentTypesInsert",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-types",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-types"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"name\":\"string\",\"apiKey\":\"string\",\"kind\":\"string\",\"description\":\"string\",\"isActive\":true}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "ContentTypesCount",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-types/count",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-types",
+                "count"
+              ]
+            }
+          }
+        },
+        {
+          "name": "ContentTypesGetItem",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-types/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-types",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ContentTypesUpdate",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-types/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-types",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"name\":\"string\",\"apiKey\":\"string\",\"kind\":\"string\",\"description\":\"string\",\"isActive\":true}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "ContentTypesDelete",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-types/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-types",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ContentTypesGetActive",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-types/get-active/:contentTypeIsActive",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-types",
+                "get-active",
+                ":contentTypeIsActive"
+              ],
+              "variable": [
+                {
+                  "key": "contentTypeIsActive",
+                  "value": ""
+                }
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ContentTypesGetByKind",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-types/get-by-kind/:contentTypeKind/:contentTypeIsActive",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-types",
+                "get-by-kind",
+                ":contentTypeKind",
+                ":contentTypeIsActive"
+              ],
+              "variable": [
+                {
+                  "key": "contentTypeKind",
+                  "value": ""
+                },
+                {
+                  "key": "contentTypeIsActive",
+                  "value": ""
+                }
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ContentTypesSearchByName",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-types/search-by-name/:contentTypeName/:contentTypeIsActive",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-types",
+                "search-by-name",
+                ":contentTypeName",
+                ":contentTypeIsActive"
+              ],
+              "variable": [
+                {
+                  "key": "contentTypeName",
+                  "value": ""
+                },
+                {
+                  "key": "contentTypeIsActive",
+                  "value": ""
+                }
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ContentTypesGetByApiKey",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-types/get-by-api-key/:contentTypeApiKey",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-types",
+                "get-by-api-key",
+                ":contentTypeApiKey"
+              ],
+              "variable": [
+                {
+                  "key": "contentTypeApiKey",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ContentTypesDeactivate",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-types/deactivate/:contentTypeId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-types",
+                "deactivate",
+                ":contentTypeId"
+              ],
+              "variable": [
+                {
+                  "key": "contentTypeId",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const fallback_env = \"local\";",
+              "const default_base_url = \"http://localhost:6060\";",
+              "",
+              "const isEnvSelected = pm.environment.name && pm.environment.name !== \"no_env\";",
+              "",
+              "let env;",
+              "let base_url;",
+              "",
+              "env = pm.variables.get(\"active_env\") || fallback_env;",
+              "",
+              "if (isEnvSelected) {",
+              "    env = pm.environment.get(\"active_env\");",
+              "",
+              "    if (!env) {",
+              "        env = pm.variables.get(\"active_env\") || fallback_env;",
+              "        pm.environment.set(\"active_env\", env);",
+              "    }",
+              "}",
+              "",
+              "base_url = pm.variables.get(`base_url_${env}`) || default_base_url;",
+              "pm.variables.set(\"base_url\", base_url);",
+              "",
+              "console.log(`Selected Environment: ${pm.environment.name || \"none\"}`);",
+              "console.log(`Resolved active_env: ${env}`);",
+              "console.log(`Resolved base_url: ${base_url}`);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "ContentVersions",
+      "item": [
+        {
+          "name": "ContentVersionsList",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-versions",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-versions"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ContentVersionsInsert",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-versions",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-versions"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"contentTypeKind\":\"string\",\"contentId\":123,\"translationId\":123,\"versionNumber\":123,\"contentSnapshot\":\"string\",\"createdByUserId\":123,\"createdDate\":\"string\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "ContentVersionsCount",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-versions/count",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-versions",
+                "count"
+              ]
+            }
+          }
+        },
+        {
+          "name": "ContentVersionsGetItem",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-versions/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-versions",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ContentVersionsUpdate",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-versions/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-versions",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"contentTypeKind\":\"string\",\"contentId\":123,\"translationId\":123,\"versionNumber\":123,\"contentSnapshot\":\"string\",\"createdByUserId\":123,\"createdDate\":\"string\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "ContentVersionsDelete",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-versions/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-versions",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ContentVersionsGetVersionsForContent",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-versions/get-versions-for-content/:contentVersionContentTypeKind/:contentVersionContentId/:contentVersionTranslationId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-versions",
+                "get-versions-for-content",
+                ":contentVersionContentTypeKind",
+                ":contentVersionContentId",
+                ":contentVersionTranslationId"
+              ],
+              "variable": [
+                {
+                  "key": "contentVersionContentTypeKind",
+                  "value": ""
+                },
+                {
+                  "key": "contentVersionContentId",
+                  "value": ""
+                },
+                {
+                  "key": "contentVersionTranslationId",
+                  "value": ""
+                }
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ContentVersionsGetSpecificVersion",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/content-versions/get-specific-version/:contentVersionId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "content-versions",
+                "get-specific-version",
+                ":contentVersionId"
+              ],
+              "variable": [
+                {
+                  "key": "contentVersionId",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const fallback_env = \"local\";",
+              "const default_base_url = \"http://localhost:6060\";",
+              "",
+              "const isEnvSelected = pm.environment.name && pm.environment.name !== \"no_env\";",
+              "",
+              "let env;",
+              "let base_url;",
+              "",
+              "env = pm.variables.get(\"active_env\") || fallback_env;",
+              "",
+              "if (isEnvSelected) {",
+              "    env = pm.environment.get(\"active_env\");",
+              "",
+              "    if (!env) {",
+              "        env = pm.variables.get(\"active_env\") || fallback_env;",
+              "        pm.environment.set(\"active_env\", env);",
+              "    }",
+              "}",
+              "",
+              "base_url = pm.variables.get(`base_url_${env}`) || default_base_url;",
+              "pm.variables.set(\"base_url\", base_url);",
+              "",
+              "console.log(`Selected Environment: ${pm.environment.name || \"none\"}`);",
+              "console.log(`Resolved active_env: ${env}`);",
+              "console.log(`Resolved base_url: ${base_url}`);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Pages",
+      "item": [
+        {
+          "name": "PagesList",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/pages",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "pages"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PagesInsert",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/pages",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "pages"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"contentTypeId\":123,\"parentPageId\":123,\"status\":\"string\",\"publishDate\":\"string\",\"createdDate\":\"string\",\"updatedDate\":\"string\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "PagesCount",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/pages/count",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "pages",
+                "count"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PagesGetItem",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/pages/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "pages",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PagesUpdate",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/pages/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "pages",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"contentTypeId\":123,\"parentPageId\":123,\"status\":\"string\",\"publishDate\":\"string\",\"createdDate\":\"string\",\"updatedDate\":\"string\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "PagesDelete",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/pages/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "pages",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PagesGetPublished",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/pages/get-published/:pageStatus",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "pages",
+                "get-published",
+                ":pageStatus"
+              ],
+              "variable": [
+                {
+                  "key": "pageStatus",
+                  "value": ""
+                }
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PagesGetDrafts",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/pages/get-drafts/:pageStatus",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "pages",
+                "get-drafts",
+                ":pageStatus"
+              ],
+              "variable": [
+                {
+                  "key": "pageStatus",
+                  "value": ""
+                }
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PagesGetPendingReview",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/pages/get-pending-review/:pageStatus",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "pages",
+                "get-pending-review",
+                ":pageStatus"
+              ],
+              "variable": [
+                {
+                  "key": "pageStatus",
+                  "value": ""
+                }
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PagesGetChildPages",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/pages/get-child-pages/:pageParentPageId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "pages",
+                "get-child-pages",
+                ":pageParentPageId"
+              ],
+              "variable": [
+                {
+                  "key": "pageParentPageId",
+                  "value": ""
+                }
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PagesPublish",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/pages/publish/:pageId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "pages",
+                "publish",
+                ":pageId"
+              ],
+              "variable": [
+                {
+                  "key": "pageId",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "PagesArchive",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/pages/archive/:pageId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "pages",
+                "archive",
+                ":pageId"
+              ],
+              "variable": [
+                {
+                  "key": "pageId",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "PagesRevertToDraft",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/pages/revert-to-draft/:pageId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "pages",
+                "revert-to-draft",
+                ":pageId"
+              ],
+              "variable": [
+                {
+                  "key": "pageId",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "PagesRequestReview",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/pages/request-review/:pageId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "pages",
+                "request-review",
+                ":pageId"
+              ],
+              "variable": [
+                {
+                  "key": "pageId",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const fallback_env = \"local\";",
+              "const default_base_url = \"http://localhost:6060\";",
+              "",
+              "const isEnvSelected = pm.environment.name && pm.environment.name !== \"no_env\";",
+              "",
+              "let env;",
+              "let base_url;",
+              "",
+              "env = pm.variables.get(\"active_env\") || fallback_env;",
+              "",
+              "if (isEnvSelected) {",
+              "    env = pm.environment.get(\"active_env\");",
+              "",
+              "    if (!env) {",
+              "        env = pm.variables.get(\"active_env\") || fallback_env;",
+              "        pm.environment.set(\"active_env\", env);",
+              "    }",
+              "}",
+              "",
+              "base_url = pm.variables.get(`base_url_${env}`) || default_base_url;",
+              "pm.variables.set(\"base_url\", base_url);",
+              "",
+              "console.log(`Selected Environment: ${pm.environment.name || \"none\"}`);",
+              "console.log(`Resolved active_env: ${env}`);",
+              "console.log(`Resolved base_url: ${base_url}`);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "PageTranslations",
+      "item": [
+        {
+          "name": "PageTranslationsList",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/page-translations",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "page-translations"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PageTranslationsInsert",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/page-translations",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "page-translations"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"pageId\":123,\"languageCode\":\"string\",\"title\":\"string\",\"slug\":\"string\",\"content\":\"string\",\"seoTitle\":\"string\",\"seoDescription\":\"string\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "PageTranslationsCount",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/page-translations/count",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "page-translations",
+                "count"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PageTranslationsGetItem",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/page-translations/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "page-translations",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PageTranslationsUpdate",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/page-translations/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "page-translations",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"pageId\":123,\"languageCode\":\"string\",\"title\":\"string\",\"slug\":\"string\",\"content\":\"string\",\"seoTitle\":\"string\",\"seoDescription\":\"string\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "PageTranslationsDelete",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/page-translations/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "page-translations",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PageTranslationsGetByPageId",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/page-translations/get-by-page-id/:pageTranslationPageId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "page-translations",
+                "get-by-page-id",
+                ":pageTranslationPageId"
+              ],
+              "variable": [
+                {
+                  "key": "pageTranslationPageId",
+                  "value": ""
+                }
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PageTranslationsGetByPageAndLanguage",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/page-translations/get-by-page-and-language/:pageTranslationPageId/:pageTranslationLanguageCode",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "page-translations",
+                "get-by-page-and-language",
+                ":pageTranslationPageId",
+                ":pageTranslationLanguageCode"
+              ],
+              "variable": [
+                {
+                  "key": "pageTranslationPageId",
+                  "value": ""
+                },
+                {
+                  "key": "pageTranslationLanguageCode",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PageTranslationsGetBySlugAndLanguage",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/page-translations/get-by-slug-and-language/:pageTranslationLanguageCode/:pageTranslationSlug",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "page-translations",
+                "get-by-slug-and-language",
+                ":pageTranslationLanguageCode",
+                ":pageTranslationSlug"
+              ],
+              "variable": [
+                {
+                  "key": "pageTranslationLanguageCode",
+                  "value": ""
+                },
+                {
+                  "key": "pageTranslationSlug",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PageTranslationsCheckSlugExists",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/page-translations/check-slug-exists/:pageTranslationLanguageCode/:pageTranslationSlug",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "page-translations",
+                "check-slug-exists",
+                ":pageTranslationLanguageCode",
+                ":pageTranslationSlug"
+              ],
+              "variable": [
+                {
+                  "key": "pageTranslationLanguageCode",
+                  "value": ""
+                },
+                {
+                  "key": "pageTranslationSlug",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const fallback_env = \"local\";",
+              "const default_base_url = \"http://localhost:6060\";",
+              "",
+              "const isEnvSelected = pm.environment.name && pm.environment.name !== \"no_env\";",
+              "",
+              "let env;",
+              "let base_url;",
+              "",
+              "env = pm.variables.get(\"active_env\") || fallback_env;",
+              "",
+              "if (isEnvSelected) {",
+              "    env = pm.environment.get(\"active_env\");",
+              "",
+              "    if (!env) {",
+              "        env = pm.variables.get(\"active_env\") || fallback_env;",
+              "        pm.environment.set(\"active_env\", env);",
+              "    }",
+              "}",
+              "",
+              "base_url = pm.variables.get(`base_url_${env}`) || default_base_url;",
+              "pm.variables.set(\"base_url\", base_url);",
+              "",
+              "console.log(`Selected Environment: ${pm.environment.name || \"none\"}`);",
+              "console.log(`Resolved active_env: ${env}`);",
+              "console.log(`Resolved base_url: ${base_url}`);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Posts",
+      "item": [
+        {
+          "name": "PostsList",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/posts",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "posts"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PostsInsert",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/posts",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "posts"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"contentTypeId\":123,\"authorId\":123,\"status\":\"string\",\"publishDate\":\"string\",\"createdDate\":\"string\",\"updatedDate\":\"string\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "PostsCount",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/posts/count",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "posts",
+                "count"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PostsGetItem",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/posts/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "posts",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PostsUpdate",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/posts/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "posts",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"contentTypeId\":123,\"authorId\":123,\"status\":\"string\",\"publishDate\":\"string\",\"createdDate\":\"string\",\"updatedDate\":\"string\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "PostsDelete",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/posts/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "posts",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PostsGetPublishedPosts",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/posts/get-published-posts",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "posts",
+                "get-published-posts"
+              ],
+              "query": [
+                {
+                  "key": "postStatus",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PostsGetPostsByAuthor",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/posts/get-posts-by-author",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "posts",
+                "get-posts-by-author"
+              ],
+              "query": [
+                {
+                  "key": "postAuthorId",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PostsGetRecentPosts",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/posts/get-recent-posts",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "posts",
+                "get-recent-posts"
+              ],
+              "query": [
+                {
+                  "key": "postStatus",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PostsPublish",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/posts/publish/:postId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "posts",
+                "publish",
+                ":postId"
+              ],
+              "variable": [
+                {
+                  "key": "postId",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "PostsArchive",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/posts/archive/:postId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "posts",
+                "archive",
+                ":postId"
+              ],
+              "variable": [
+                {
+                  "key": "postId",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "PostsRevertToDraft",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/posts/revert-to-draft/:postId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "posts",
+                "revert-to-draft",
+                ":postId"
+              ],
+              "variable": [
+                {
+                  "key": "postId",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const fallback_env = \"local\";",
+              "const default_base_url = \"http://localhost:6060\";",
+              "",
+              "const isEnvSelected = pm.environment.name && pm.environment.name !== \"no_env\";",
+              "",
+              "let env;",
+              "let base_url;",
+              "",
+              "env = pm.variables.get(\"active_env\") || fallback_env;",
+              "",
+              "if (isEnvSelected) {",
+              "    env = pm.environment.get(\"active_env\");",
+              "",
+              "    if (!env) {",
+              "        env = pm.variables.get(\"active_env\") || fallback_env;",
+              "        pm.environment.set(\"active_env\", env);",
+              "    }",
+              "}",
+              "",
+              "base_url = pm.variables.get(`base_url_${env}`) || default_base_url;",
+              "pm.variables.set(\"base_url\", base_url);",
+              "",
+              "console.log(`Selected Environment: ${pm.environment.name || \"none\"}`);",
+              "console.log(`Resolved active_env: ${env}`);",
+              "console.log(`Resolved base_url: ${base_url}`);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "PostTranslations",
+      "item": [
+        {
+          "name": "PostTranslationsList",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/post-translations",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "post-translations"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PostTranslationsInsert",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/post-translations",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "post-translations"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"postId\":123,\"languageCode\":\"string\",\"title\":\"string\",\"slug\":\"string\",\"excerpt\":\"string\",\"content\":\"string\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "PostTranslationsCount",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/post-translations/count",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "post-translations",
+                "count"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PostTranslationsGetItem",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/post-translations/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "post-translations",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PostTranslationsUpdate",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/post-translations/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "post-translations",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"postId\":123,\"languageCode\":\"string\",\"title\":\"string\",\"slug\":\"string\",\"excerpt\":\"string\",\"content\":\"string\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "PostTranslationsDelete",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/post-translations/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "post-translations",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PostTranslationsGetByPostId",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/post-translations/get-by-post-id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "post-translations",
+                "get-by-post-id"
+              ],
+              "query": [
+                {
+                  "key": "postTranslationPostId",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PostTranslationsGetByPostAndLanguage",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/post-translations/get-by-post-and-language",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "post-translations",
+                "get-by-post-and-language"
+              ],
+              "query": [
+                {
+                  "key": "postTranslationPostId",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "postTranslationLanguageCode",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "PostTranslationsSearchPublishedPosts",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/post-translations/search-published-posts",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "post-translations",
+                "search-published-posts"
+              ],
+              "query": [
+                {
+                  "key": "postsStatus",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "postTranslationsLanguageCode",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "postTranslationsTitle",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const fallback_env = \"local\";",
+              "const default_base_url = \"http://localhost:6060\";",
+              "",
+              "const isEnvSelected = pm.environment.name && pm.environment.name !== \"no_env\";",
+              "",
+              "let env;",
+              "let base_url;",
+              "",
+              "env = pm.variables.get(\"active_env\") || fallback_env;",
+              "",
+              "if (isEnvSelected) {",
+              "    env = pm.environment.get(\"active_env\");",
+              "",
+              "    if (!env) {",
+              "        env = pm.variables.get(\"active_env\") || fallback_env;",
+              "        pm.environment.set(\"active_env\", env);",
+              "    }",
+              "}",
+              "",
+              "base_url = pm.variables.get(`base_url_${env}`) || default_base_url;",
+              "pm.variables.set(\"base_url\", base_url);",
+              "",
+              "console.log(`Selected Environment: ${pm.environment.name || \"none\"}`);",
+              "console.log(`Resolved active_env: ${env}`);",
+              "console.log(`Resolved base_url: ${base_url}`);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tags",
+      "item": [
+        {
+          "name": "TagsList",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/tags",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "tags"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "TagsInsert",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/tags",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "tags"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"name\":\"string\",\"slug\":\"string\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "TagsCount",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/tags/count",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "tags",
+                "count"
+              ]
+            }
+          }
+        },
+        {
+          "name": "TagsGetItem",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/tags/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "tags",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "TagsUpdate",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/tags/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "tags",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"name\":\"string\",\"slug\":\"string\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "TagsDelete",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/tags/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "tags",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "TagsSearchByName",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/tags/search-by-name/:tagName",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "tags",
+                "search-by-name",
+                ":tagName"
+              ],
+              "variable": [
+                {
+                  "key": "tagName",
+                  "value": ""
+                }
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "TagsGetBySlug",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/content-management-module/tags/get-by-slug/:tagSlug",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "content-management-module",
+                "tags",
+                "get-by-slug",
+                ":tagSlug"
+              ],
+              "variable": [
+                {
+                  "key": "tagSlug",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const fallback_env = \"local\";",
+              "const default_base_url = \"http://localhost:6060\";",
+              "",
+              "const isEnvSelected = pm.environment.name && pm.environment.name !== \"no_env\";",
+              "",
+              "let env;",
+              "let base_url;",
+              "",
+              "env = pm.variables.get(\"active_env\") || fallback_env;",
+              "",
+              "if (isEnvSelected) {",
+              "    env = pm.environment.get(\"active_env\");",
+              "",
+              "    if (!env) {",
+              "        env = pm.variables.get(\"active_env\") || fallback_env;",
+              "        pm.environment.set(\"active_env\", env);",
+              "    }",
+              "}",
+              "",
+              "base_url = pm.variables.get(`base_url_${env}`) || default_base_url;",
+              "pm.variables.set(\"base_url\", base_url);",
+              "",
+              "console.log(`Selected Environment: ${pm.environment.name || \"none\"}`);",
+              "console.log(`Resolved active_env: ${env}`);",
+              "console.log(`Resolved base_url: ${base_url}`);"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:6060",
+      "type": "string"
+    },
+    {
+      "key": "base_url_docker",
+      "value": "http://localhost:6060",
+      "type": "string"
+    },
+    {
+      "key": "base_url_test",
+      "value": "http://localhost:6060",
+      "type": "string"
+    },
+    {
+      "key": "base_url_prod",
+      "value": "https://demo-cms-gateway-821209474183.europe-west1.run.app",
+      "type": "string"
+    },
+    {
+      "key": "base_url_cloudrun",
+      "value": "https://demo-cms-gateway.quickcode.net",
+      "type": "string"
+    },
+    {
+      "key": "active_env",
+      "value": "docker",
+      "type": "string"
+    },
+    {
+      "key": "projectName",
+      "value": "DemoCms",
+      "type": "string"
+    }
+  ]
+}

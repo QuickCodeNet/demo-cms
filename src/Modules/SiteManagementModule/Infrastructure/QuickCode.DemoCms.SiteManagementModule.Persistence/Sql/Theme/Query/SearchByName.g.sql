@@ -1,0 +1,6 @@
+﻿SELECT T.[ID], T.[NAME], T.[VERSION] 
+FROM [THEMES] T 
+WHERE T.[IsDeleted] = 0 
+	AND T.[NAME] LIKE '%' + @PRM_THEME_NAME + '%' 
+ORDER BY T.[ID] 
+OFFSET @StartIndex ROWS FETCH NEXT @PageSize ROWS ONLY 

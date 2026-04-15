@@ -1,0 +1,1094 @@
+﻿{
+"KafkaEvents": [
+  {
+    "ApiMethodDefinitionKey": "PostapiidentitymodulemodulesModulesController",
+    "TopicName": "demo-cms.identity_module.modules_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapiidentitymodulemodulesnameModulesController",
+    "TopicName": "demo-cms.identity_module.modules_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiidentitymodulemodulesnameModulesController",
+    "TopicName": "demo-cms.identity_module.modules_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiidentitymodulemodelsdeletemodelswithmodulenamemodelmodulenameModelsController",
+    "TopicName": "demo-cms.identity_module.models.delete_models_with_module_name_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiidentitymodulemodelsModelsController",
+    "TopicName": "demo-cms.identity_module.models_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapiidentitymodulemodelsnamemodulenameModelsController",
+    "TopicName": "demo-cms.identity_module.models_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiidentitymodulemodelsnamemodulenameModelsController",
+    "TopicName": "demo-cms.identity_module.models_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiidentitymodulepermissiongroupsPermissionGroupsController",
+    "TopicName": "demo-cms.identity_module.permission_groups_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapiidentitymodulepermissiongroupsnamePermissionGroupsController",
+    "TopicName": "demo-cms.identity_module.permission_groups_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiidentitymodulepermissiongroupsnamePermissionGroupsController",
+    "TopicName": "demo-cms.identity_module.permission_groups_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiidentitymoduleapimethoddefinitionsdeleteapimethoddefinitionswithmodulenameapimethoddefinitionmodulenameApiMethodDefinitionsController",
+    "TopicName": "demo-cms.identity_module.api_method_definitions.delete_api_method_definitions_with_module_name_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiidentitymoduleapimethoddefinitionsdeleteapimethoddefinitionswithmodelnameapimethoddefinitionmodelnameApiMethodDefinitionsController",
+    "TopicName": "demo-cms.identity_module.api_method_definitions.delete_api_method_definitions_with_model_name_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiidentitymoduleapimethoddefinitionsApiMethodDefinitionsController",
+    "TopicName": "demo-cms.identity_module.api_method_definitions_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapiidentitymoduleapimethoddefinitionskeyApiMethodDefinitionsController",
+    "TopicName": "demo-cms.identity_module.api_method_definitions_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiidentitymoduleapimethoddefinitionskeyApiMethodDefinitionsController",
+    "TopicName": "demo-cms.identity_module.api_method_definitions_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiidentitymoduleportalpagedefinitionsdeleteportalpagedefinitionswithmodulenameportalpagedefinitionmodulenamePortalPageDefinitionsController",
+    "TopicName": "demo-cms.identity_module.portal_page_definitions.delete_portal_page_definitions_with_module_name_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiidentitymoduleportalpagedefinitionsdeleteportalpagedefinitionswithmodelnameportalpagedefinitionmodelnamePortalPageDefinitionsController",
+    "TopicName": "demo-cms.identity_module.portal_page_definitions.delete_portal_page_definitions_with_model_name_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiidentitymoduleportalpagedefinitionsPortalPageDefinitionsController",
+    "TopicName": "demo-cms.identity_module.portal_page_definitions_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapiidentitymoduleportalpagedefinitionskeyPortalPageDefinitionsController",
+    "TopicName": "demo-cms.identity_module.portal_page_definitions_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiidentitymoduleportalpagedefinitionskeyPortalPageDefinitionsController",
+    "TopicName": "demo-cms.identity_module.portal_page_definitions_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiidentitymoduleapimethodaccessgrantsclearapimethodaccessgrantsApiMethodAccessGrantsController",
+    "TopicName": "demo-cms.identity_module.api_method_access_grants.clear_api_method_access_grants_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiidentitymoduleapimethodaccessgrantsApiMethodAccessGrantsController",
+    "TopicName": "demo-cms.identity_module.api_method_access_grants_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapiidentitymoduleapimethodaccessgrantspermissiongroupnameapimethoddefinitionkeyApiMethodAccessGrantsController",
+    "TopicName": "demo-cms.identity_module.api_method_access_grants_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiidentitymoduleapimethodaccessgrantspermissiongroupnameapimethoddefinitionkeyApiMethodAccessGrantsController",
+    "TopicName": "demo-cms.identity_module.api_method_access_grants_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiidentitymoduleportalpageaccessgrantsclearportalpageaccessgrantsPortalPageAccessGrantsController",
+    "TopicName": "demo-cms.identity_module.portal_page_access_grants.clear_portal_page_access_grants_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiidentitymoduleportalpageaccessgrantsPortalPageAccessGrantsController",
+    "TopicName": "demo-cms.identity_module.portal_page_access_grants_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapiidentitymoduleportalpageaccessgrantspermissiongroupnameportalpagedefinitionkeypageactionPortalPageAccessGrantsController",
+    "TopicName": "demo-cms.identity_module.portal_page_access_grants_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiidentitymoduleportalpageaccessgrantspermissiongroupnameportalpagedefinitionkeypageactionPortalPageAccessGrantsController",
+    "TopicName": "demo-cms.identity_module.portal_page_access_grants_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiidentitymoduleportalmenusdeleteportalmenuitemswithmodulenameportalmenukeyPortalMenusController",
+    "TopicName": "demo-cms.identity_module.portal_menus.delete_portal_menu_items_with_module_name_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiidentitymoduleportalmenusdeleteportalmenuitemswithmodelnameportalmenukeyportalmenunamePortalMenusController",
+    "TopicName": "demo-cms.identity_module.portal_menus.delete_portal_menu_items_with_model_name_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiidentitymoduleportalmenusPortalMenusController",
+    "TopicName": "demo-cms.identity_module.portal_menus_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapiidentitymoduleportalmenuskeyPortalMenusController",
+    "TopicName": "demo-cms.identity_module.portal_menus_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiidentitymoduleportalmenuskeyPortalMenusController",
+    "TopicName": "demo-cms.identity_module.portal_menus_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiidentitymodulecolumntypesColumnTypesController",
+    "TopicName": "demo-cms.identity_module.column_types_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapiidentitymodulecolumntypesidintColumnTypesController",
+    "TopicName": "demo-cms.identity_module.column_types_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiidentitymodulecolumntypesidintColumnTypesController",
+    "TopicName": "demo-cms.identity_module.column_types_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiidentitymoduletablecomboboxsettingsTableComboboxSettingsController",
+    "TopicName": "demo-cms.identity_module.table_combobox_settings_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapiidentitymoduletablecomboboxsettingstablenameTableComboboxSettingsController",
+    "TopicName": "demo-cms.identity_module.table_combobox_settings_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiidentitymoduletablecomboboxsettingstablenameTableComboboxSettingsController",
+    "TopicName": "demo-cms.identity_module.table_combobox_settings_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiidentitymodulekafkaeventscleankafkaeventswithmodulenameapimethoddefinitionsmodulenameKafkaEventsController",
+    "TopicName": "demo-cms.identity_module.kafka_events.clean_kafka_events_with_module_name_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiidentitymodulekafkaeventscleankafkaeventswithmodelnameapimethoddefinitionsmodelnameKafkaEventsController",
+    "TopicName": "demo-cms.identity_module.kafka_events.clean_kafka_events_with_model_name_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiidentitymodulekafkaeventsKafkaEventsController",
+    "TopicName": "demo-cms.identity_module.kafka_events_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapiidentitymodulekafkaeventstopicnameKafkaEventsController",
+    "TopicName": "demo-cms.identity_module.kafka_events_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiidentitymodulekafkaeventstopicnameKafkaEventsController",
+    "TopicName": "demo-cms.identity_module.kafka_events_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiidentitymoduletopicworkflowsTopicWorkflowsController",
+    "TopicName": "demo-cms.identity_module.topic_workflows_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapiidentitymoduletopicworkflowsidintTopicWorkflowsController",
+    "TopicName": "demo-cms.identity_module.topic_workflows_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiidentitymoduletopicworkflowsidintTopicWorkflowsController",
+    "TopicName": "demo-cms.identity_module.topic_workflows_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiidentitymoduleaspnetrolesAspNetRolesController",
+    "TopicName": "demo-cms.identity_module.asp_net_roles_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapiidentitymoduleaspnetrolesidAspNetRolesController",
+    "TopicName": "demo-cms.identity_module.asp_net_roles_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiidentitymoduleaspnetrolesidAspNetRolesController",
+    "TopicName": "demo-cms.identity_module.asp_net_roles_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiidentitymoduleaspnetusersAspNetUsersController",
+    "TopicName": "demo-cms.identity_module.asp_net_users_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapiidentitymoduleaspnetusersidAspNetUsersController",
+    "TopicName": "demo-cms.identity_module.asp_net_users_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiidentitymoduleaspnetusersidAspNetUsersController",
+    "TopicName": "demo-cms.identity_module.asp_net_users_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PatchapiidentitymodulerefreshtokensupdaterefreshtokensrefreshtokentokenRefreshTokensController",
+    "TopicName": "demo-cms.identity_module.refresh_tokens.update_refresh_tokens_patch",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiidentitymodulerefreshtokensRefreshTokensController",
+    "TopicName": "demo-cms.identity_module.refresh_tokens_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapiidentitymodulerefreshtokensidintRefreshTokensController",
+    "TopicName": "demo-cms.identity_module.refresh_tokens_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiidentitymodulerefreshtokensidintRefreshTokensController",
+    "TopicName": "demo-cms.identity_module.refresh_tokens_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiidentitymoduleaspnetroleclaimsAspNetRoleClaimsController",
+    "TopicName": "demo-cms.identity_module.asp_net_role_claims_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapiidentitymoduleaspnetroleclaimsidintAspNetRoleClaimsController",
+    "TopicName": "demo-cms.identity_module.asp_net_role_claims_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiidentitymoduleaspnetroleclaimsidintAspNetRoleClaimsController",
+    "TopicName": "demo-cms.identity_module.asp_net_role_claims_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiidentitymoduleaspnetuserclaimsAspNetUserClaimsController",
+    "TopicName": "demo-cms.identity_module.asp_net_user_claims_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapiidentitymoduleaspnetuserclaimsidintAspNetUserClaimsController",
+    "TopicName": "demo-cms.identity_module.asp_net_user_claims_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiidentitymoduleaspnetuserclaimsidintAspNetUserClaimsController",
+    "TopicName": "demo-cms.identity_module.asp_net_user_claims_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiidentitymoduleaspnetuserloginsAspNetUserLoginsController",
+    "TopicName": "demo-cms.identity_module.asp_net_user_logins_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapiidentitymoduleaspnetuserloginsloginproviderproviderkeyAspNetUserLoginsController",
+    "TopicName": "demo-cms.identity_module.asp_net_user_logins_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiidentitymoduleaspnetuserloginsloginproviderproviderkeyAspNetUserLoginsController",
+    "TopicName": "demo-cms.identity_module.asp_net_user_logins_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiidentitymoduleaspnetuserrolesAspNetUserRolesController",
+    "TopicName": "demo-cms.identity_module.asp_net_user_roles_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapiidentitymoduleaspnetuserrolesuseridroleidAspNetUserRolesController",
+    "TopicName": "demo-cms.identity_module.asp_net_user_roles_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiidentitymoduleaspnetuserrolesuseridroleidAspNetUserRolesController",
+    "TopicName": "demo-cms.identity_module.asp_net_user_roles_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiidentitymoduleaspnetusertokensAspNetUserTokensController",
+    "TopicName": "demo-cms.identity_module.asp_net_user_tokens_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapiidentitymoduleaspnetusertokensuseridAspNetUserTokensController",
+    "TopicName": "demo-cms.identity_module.asp_net_user_tokens_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiidentitymoduleaspnetusertokensuseridAspNetUserTokensController",
+    "TopicName": "demo-cms.identity_module.asp_net_user_tokens_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiidentitymoduleauditlogsAuditLogsController",
+    "TopicName": "demo-cms.identity_module.audit_logs_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapiidentitymoduleauditlogsidguidAuditLogsController",
+    "TopicName": "demo-cms.identity_module.audit_logs_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiidentitymoduleauditlogsidguidAuditLogsController",
+    "TopicName": "demo-cms.identity_module.audit_logs_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiassetmanagementmoduleassetfoldersAssetFoldersController",
+    "TopicName": "demo-cms.asset_management_module.asset_folders_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapiassetmanagementmoduleassetfoldersidintAssetFoldersController",
+    "TopicName": "demo-cms.asset_management_module.asset_folders_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiassetmanagementmoduleassetfoldersidintAssetFoldersController",
+    "TopicName": "demo-cms.asset_management_module.asset_folders_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiassetmanagementmoduleassetsAssetsController",
+    "TopicName": "demo-cms.asset_management_module.assets_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapiassetmanagementmoduleassetsidintAssetsController",
+    "TopicName": "demo-cms.asset_management_module.assets_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiassetmanagementmoduleassetsidintAssetsController",
+    "TopicName": "demo-cms.asset_management_module.assets_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiassetmanagementmoduleassettranslationsAssetTranslationsController",
+    "TopicName": "demo-cms.asset_management_module.asset_translations_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapiassetmanagementmoduleassettranslationsidintAssetTranslationsController",
+    "TopicName": "demo-cms.asset_management_module.asset_translations_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiassetmanagementmoduleassettranslationsidintAssetTranslationsController",
+    "TopicName": "demo-cms.asset_management_module.asset_translations_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PatchapiassetmanagementmoduleassetmetadataupdatemetadatavalueassetmetadatumassetidintassetmetadatumkeyAssetMetadataController",
+    "TopicName": "demo-cms.asset_management_module.asset_metadata.update_metadata_value_patch",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiassetmanagementmoduleassetmetadataAssetMetadataController",
+    "TopicName": "demo-cms.asset_management_module.asset_metadata_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapiassetmanagementmoduleassetmetadataidintAssetMetadataController",
+    "TopicName": "demo-cms.asset_management_module.asset_metadata_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiassetmanagementmoduleassetmetadataidintAssetMetadataController",
+    "TopicName": "demo-cms.asset_management_module.asset_metadata_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiassetmanagementmoduleassetrenditionsAssetRenditionsController",
+    "TopicName": "demo-cms.asset_management_module.asset_renditions_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapiassetmanagementmoduleassetrenditionsidintAssetRenditionsController",
+    "TopicName": "demo-cms.asset_management_module.asset_renditions_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiassetmanagementmoduleassetrenditionsidintAssetRenditionsController",
+    "TopicName": "demo-cms.asset_management_module.asset_renditions_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PatchapiassetmanagementmodulestorageproviderssetasdefaultstorageprovideridintStorageProvidersController",
+    "TopicName": "demo-cms.asset_management_module.storage_providers.set_as_default_patch",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PatchapiassetmanagementmodulestorageprovidersdeactivatestorageprovideridintStorageProvidersController",
+    "TopicName": "demo-cms.asset_management_module.storage_providers.deactivate_patch",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiassetmanagementmodulestorageprovidersStorageProvidersController",
+    "TopicName": "demo-cms.asset_management_module.storage_providers_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapiassetmanagementmodulestorageprovidersidintStorageProvidersController",
+    "TopicName": "demo-cms.asset_management_module.storage_providers_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiassetmanagementmodulestorageprovidersidintStorageProvidersController",
+    "TopicName": "demo-cms.asset_management_module.storage_providers_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiassetmanagementmoduleauditlogsAuditLogsController",
+    "TopicName": "demo-cms.asset_management_module.audit_logs_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapiassetmanagementmoduleauditlogsidguidAuditLogsController",
+    "TopicName": "demo-cms.asset_management_module.audit_logs_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapiassetmanagementmoduleauditlogsidguidAuditLogsController",
+    "TopicName": "demo-cms.asset_management_module.audit_logs_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PatchapicontentmanagementmodulecontenttypesdeactivatecontenttypeidintContentTypesController",
+    "TopicName": "demo-cms.content_management_module.content_types.deactivate_patch",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapicontentmanagementmodulecontenttypesContentTypesController",
+    "TopicName": "demo-cms.content_management_module.content_types_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapicontentmanagementmodulecontenttypesidintContentTypesController",
+    "TopicName": "demo-cms.content_management_module.content_types_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapicontentmanagementmodulecontenttypesidintContentTypesController",
+    "TopicName": "demo-cms.content_management_module.content_types_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PatchapicontentmanagementmodulepagespublishpageidintPagesController",
+    "TopicName": "demo-cms.content_management_module.pages.publish_patch",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PatchapicontentmanagementmodulepagesarchivepageidintPagesController",
+    "TopicName": "demo-cms.content_management_module.pages.archive_patch",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PatchapicontentmanagementmodulepagesreverttodraftpageidintPagesController",
+    "TopicName": "demo-cms.content_management_module.pages.revert_to_draft_patch",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PatchapicontentmanagementmodulepagesrequestreviewpageidintPagesController",
+    "TopicName": "demo-cms.content_management_module.pages.request_review_patch",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapicontentmanagementmodulepagesPagesController",
+    "TopicName": "demo-cms.content_management_module.pages_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapicontentmanagementmodulepagesidintPagesController",
+    "TopicName": "demo-cms.content_management_module.pages_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapicontentmanagementmodulepagesidintPagesController",
+    "TopicName": "demo-cms.content_management_module.pages_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapicontentmanagementmodulepagetranslationsPageTranslationsController",
+    "TopicName": "demo-cms.content_management_module.page_translations_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapicontentmanagementmodulepagetranslationsidintPageTranslationsController",
+    "TopicName": "demo-cms.content_management_module.page_translations_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapicontentmanagementmodulepagetranslationsidintPageTranslationsController",
+    "TopicName": "demo-cms.content_management_module.page_translations_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PatchapicontentmanagementmodulepostspublishpostidintPostsController",
+    "TopicName": "demo-cms.content_management_module.posts.publish_patch",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PatchapicontentmanagementmodulepostsarchivepostidintPostsController",
+    "TopicName": "demo-cms.content_management_module.posts.archive_patch",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PatchapicontentmanagementmodulepostsreverttodraftpostidintPostsController",
+    "TopicName": "demo-cms.content_management_module.posts.revert_to_draft_patch",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapicontentmanagementmodulepostsPostsController",
+    "TopicName": "demo-cms.content_management_module.posts_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapicontentmanagementmodulepostsidintPostsController",
+    "TopicName": "demo-cms.content_management_module.posts_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapicontentmanagementmodulepostsidintPostsController",
+    "TopicName": "demo-cms.content_management_module.posts_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapicontentmanagementmoduleposttranslationsPostTranslationsController",
+    "TopicName": "demo-cms.content_management_module.post_translations_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapicontentmanagementmoduleposttranslationsidintPostTranslationsController",
+    "TopicName": "demo-cms.content_management_module.post_translations_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapicontentmanagementmoduleposttranslationsidintPostTranslationsController",
+    "TopicName": "demo-cms.content_management_module.post_translations_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PatchapicontentmanagementmodulecontentblocksdeactivatecontentblockidintContentBlocksController",
+    "TopicName": "demo-cms.content_management_module.content_blocks.deactivate_patch",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapicontentmanagementmodulecontentblocksContentBlocksController",
+    "TopicName": "demo-cms.content_management_module.content_blocks_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapicontentmanagementmodulecontentblocksidintContentBlocksController",
+    "TopicName": "demo-cms.content_management_module.content_blocks_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapicontentmanagementmodulecontentblocksidintContentBlocksController",
+    "TopicName": "demo-cms.content_management_module.content_blocks_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapicontentmanagementmoduleblocktranslationsBlockTranslationsController",
+    "TopicName": "demo-cms.content_management_module.block_translations_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapicontentmanagementmoduleblocktranslationsidintBlockTranslationsController",
+    "TopicName": "demo-cms.content_management_module.block_translations_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapicontentmanagementmoduleblocktranslationsidintBlockTranslationsController",
+    "TopicName": "demo-cms.content_management_module.block_translations_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapicontentmanagementmodulecontentversionsContentVersionsController",
+    "TopicName": "demo-cms.content_management_module.content_versions_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapicontentmanagementmodulecontentversionsidintContentVersionsController",
+    "TopicName": "demo-cms.content_management_module.content_versions_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapicontentmanagementmodulecontentversionsidintContentVersionsController",
+    "TopicName": "demo-cms.content_management_module.content_versions_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapicontentmanagementmoduletagsTagsController",
+    "TopicName": "demo-cms.content_management_module.tags_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapicontentmanagementmoduletagsidintTagsController",
+    "TopicName": "demo-cms.content_management_module.tags_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapicontentmanagementmoduletagsidintTagsController",
+    "TopicName": "demo-cms.content_management_module.tags_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapicontentmanagementmodulecontenttagsremovetagfromcontentcontenttagcontenttypekindcontenttagcontentidintcontenttagtagidintContentTagsController",
+    "TopicName": "demo-cms.content_management_module.content_tags.remove_tag_from_content_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapicontentmanagementmodulecontenttagsremovealltagsfromcontentcontenttagcontenttypekindcontenttagcontentidintContentTagsController",
+    "TopicName": "demo-cms.content_management_module.content_tags.remove_all_tags_from_content_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapicontentmanagementmodulecontenttagsContentTagsController",
+    "TopicName": "demo-cms.content_management_module.content_tags_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapicontentmanagementmodulecontenttagscontenttypekindcontentidinttagidintContentTagsController",
+    "TopicName": "demo-cms.content_management_module.content_tags_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapicontentmanagementmodulecontenttagscontenttypekindcontentidinttagidintContentTagsController",
+    "TopicName": "demo-cms.content_management_module.content_tags_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapicontentmanagementmoduleauditlogsAuditLogsController",
+    "TopicName": "demo-cms.content_management_module.audit_logs_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapicontentmanagementmoduleauditlogsidguidAuditLogsController",
+    "TopicName": "demo-cms.content_management_module.audit_logs_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapicontentmanagementmoduleauditlogsidguidAuditLogsController",
+    "TopicName": "demo-cms.content_management_module.audit_logs_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PatchapilocalizationmodulelanguagessetdefaultlanguageidintLanguagesController",
+    "TopicName": "demo-cms.localization_module.languages.set_default_patch",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PatchapilocalizationmodulelanguagesdeactivatelanguageidintLanguagesController",
+    "TopicName": "demo-cms.localization_module.languages.deactivate_patch",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapilocalizationmodulelanguagesLanguagesController",
+    "TopicName": "demo-cms.localization_module.languages_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapilocalizationmodulelanguagesidintLanguagesController",
+    "TopicName": "demo-cms.localization_module.languages_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapilocalizationmodulelanguagesidintLanguagesController",
+    "TopicName": "demo-cms.localization_module.languages_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapilocalizationmodulelanguagefallbacksremovefallbacklanguagefallbacklanguageidintlanguagefallbackfallbacklanguageidintLanguageFallbacksController",
+    "TopicName": "demo-cms.localization_module.language_fallbacks.remove_fallback_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapilocalizationmodulelanguagefallbacksLanguageFallbacksController",
+    "TopicName": "demo-cms.localization_module.language_fallbacks_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapilocalizationmodulelanguagefallbackslanguageidintfallbacklanguageidintLanguageFallbacksController",
+    "TopicName": "demo-cms.localization_module.language_fallbacks_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapilocalizationmodulelanguagefallbackslanguageidintfallbacklanguageidintLanguageFallbacksController",
+    "TopicName": "demo-cms.localization_module.language_fallbacks_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapilocalizationmodulenamespacesNamespacesController",
+    "TopicName": "demo-cms.localization_module.namespaces_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapilocalizationmodulenamespacesidintNamespacesController",
+    "TopicName": "demo-cms.localization_module.namespaces_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapilocalizationmodulenamespacesidintNamespacesController",
+    "TopicName": "demo-cms.localization_module.namespaces_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapilocalizationmoduletranslationkeysTranslationKeysController",
+    "TopicName": "demo-cms.localization_module.translation_keys_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapilocalizationmoduletranslationkeysidintTranslationKeysController",
+    "TopicName": "demo-cms.localization_module.translation_keys_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapilocalizationmoduletranslationkeysidintTranslationKeysController",
+    "TopicName": "demo-cms.localization_module.translation_keys_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PatchapilocalizationmoduletranslationvaluesbulkupserttranslationvaluekeyidinttranslationvaluelanguageidintTranslationValuesController",
+    "TopicName": "demo-cms.localization_module.translation_values.bulk_upsert_patch",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapilocalizationmoduletranslationvaluesTranslationValuesController",
+    "TopicName": "demo-cms.localization_module.translation_values_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapilocalizationmoduletranslationvaluesidintTranslationValuesController",
+    "TopicName": "demo-cms.localization_module.translation_values_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapilocalizationmoduletranslationvaluesidintTranslationValuesController",
+    "TopicName": "demo-cms.localization_module.translation_values_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PatchapilocalizationmoduleresourcefilesmarkasprocessedresourcefileidintResourceFilesController",
+    "TopicName": "demo-cms.localization_module.resource_files.mark_as_processed_patch",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PatchapilocalizationmoduleresourcefilesmarkasfailedresourcefileidintResourceFilesController",
+    "TopicName": "demo-cms.localization_module.resource_files.mark_as_failed_patch",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapilocalizationmoduleresourcefilesResourceFilesController",
+    "TopicName": "demo-cms.localization_module.resource_files_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapilocalizationmoduleresourcefilesidintResourceFilesController",
+    "TopicName": "demo-cms.localization_module.resource_files_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapilocalizationmoduleresourcefilesidintResourceFilesController",
+    "TopicName": "demo-cms.localization_module.resource_files_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapilocalizationmoduleauditlogsAuditLogsController",
+    "TopicName": "demo-cms.localization_module.audit_logs_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapilocalizationmoduleauditlogsidguidAuditLogsController",
+    "TopicName": "demo-cms.localization_module.audit_logs_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapilocalizationmoduleauditlogsidguidAuditLogsController",
+    "TopicName": "demo-cms.localization_module.audit_logs_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PatchapisitemanagementmodulesitesdeactivatesiteidintSitesController",
+    "TopicName": "demo-cms.site_management_module.sites.deactivate_patch",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PatchapisitemanagementmodulesitesactivatesiteidintSitesController",
+    "TopicName": "demo-cms.site_management_module.sites.activate_patch",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PatchapisitemanagementmodulesiteschangethemesiteidintSitesController",
+    "TopicName": "demo-cms.site_management_module.sites.change_theme_patch",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapisitemanagementmodulesitesSitesController",
+    "TopicName": "demo-cms.site_management_module.sites_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapisitemanagementmodulesitesidintSitesController",
+    "TopicName": "demo-cms.site_management_module.sites_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapisitemanagementmodulesitesidintSitesController",
+    "TopicName": "demo-cms.site_management_module.sites_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PatchapisitemanagementmoduledomainssetasprimarydomainidintdomainsiteidintDomainsController",
+    "TopicName": "demo-cms.site_management_module.domains.set_as_primary_patch",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PatchapisitemanagementmoduledomainsdeactivatedomainidintDomainsController",
+    "TopicName": "demo-cms.site_management_module.domains.deactivate_patch",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapisitemanagementmoduledomainsDomainsController",
+    "TopicName": "demo-cms.site_management_module.domains_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapisitemanagementmoduledomainsidintDomainsController",
+    "TopicName": "demo-cms.site_management_module.domains_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapisitemanagementmoduledomainsidintDomainsController",
+    "TopicName": "demo-cms.site_management_module.domains_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PatchapisitemanagementmodulesitesettingsupdatevaluesitesettingsiteidintsitesettingkeySiteSettingsController",
+    "TopicName": "demo-cms.site_management_module.site_settings.update_value_patch",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapisitemanagementmodulesitesettingsSiteSettingsController",
+    "TopicName": "demo-cms.site_management_module.site_settings_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapisitemanagementmodulesitesettingsidintSiteSettingsController",
+    "TopicName": "demo-cms.site_management_module.site_settings_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapisitemanagementmodulesitesettingsidintSiteSettingsController",
+    "TopicName": "demo-cms.site_management_module.site_settings_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PatchapisitemanagementmodulesitelanguagesenablelanguagesitelanguagesiteidintsitelanguagelanguageidintSiteLanguagesController",
+    "TopicName": "demo-cms.site_management_module.site_languages.enable_language_patch",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PatchapisitemanagementmodulesitelanguagesdisablelanguagesitelanguagesiteidintsitelanguagelanguageidintSiteLanguagesController",
+    "TopicName": "demo-cms.site_management_module.site_languages.disable_language_patch",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapisitemanagementmodulesitelanguagesSiteLanguagesController",
+    "TopicName": "demo-cms.site_management_module.site_languages_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapisitemanagementmodulesitelanguagessiteidintlanguageidintSiteLanguagesController",
+    "TopicName": "demo-cms.site_management_module.site_languages_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapisitemanagementmodulesitelanguagessiteidintlanguageidintSiteLanguagesController",
+    "TopicName": "demo-cms.site_management_module.site_languages_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PatchapisitemanagementmodulethemesdeactivatethemeidintThemesController",
+    "TopicName": "demo-cms.site_management_module.themes.deactivate_patch",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapisitemanagementmodulethemesThemesController",
+    "TopicName": "demo-cms.site_management_module.themes_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapisitemanagementmodulethemesidintThemesController",
+    "TopicName": "demo-cms.site_management_module.themes_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapisitemanagementmodulethemesidintThemesController",
+    "TopicName": "demo-cms.site_management_module.themes_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapisitemanagementmoduletemplatesTemplatesController",
+    "TopicName": "demo-cms.site_management_module.templates_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapisitemanagementmoduletemplatesidintTemplatesController",
+    "TopicName": "demo-cms.site_management_module.templates_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapisitemanagementmoduletemplatesidintTemplatesController",
+    "TopicName": "demo-cms.site_management_module.templates_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapisitemanagementmodulenavigationmenusNavigationMenusController",
+    "TopicName": "demo-cms.site_management_module.navigation_menus_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapisitemanagementmodulenavigationmenusidintNavigationMenusController",
+    "TopicName": "demo-cms.site_management_module.navigation_menus_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapisitemanagementmodulenavigationmenusidintNavigationMenusController",
+    "TopicName": "demo-cms.site_management_module.navigation_menus_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PatchapisitemanagementmodulenavigationitemsupdatesortordernavigationitemidintNavigationItemsController",
+    "TopicName": "demo-cms.site_management_module.navigation_items.update_sort_order_patch",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapisitemanagementmodulenavigationitemsNavigationItemsController",
+    "TopicName": "demo-cms.site_management_module.navigation_items_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapisitemanagementmodulenavigationitemsidintNavigationItemsController",
+    "TopicName": "demo-cms.site_management_module.navigation_items_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapisitemanagementmodulenavigationitemsidintNavigationItemsController",
+    "TopicName": "demo-cms.site_management_module.navigation_items_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapisitemanagementmoduleauditlogsAuditLogsController",
+    "TopicName": "demo-cms.site_management_module.audit_logs_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PutapisitemanagementmoduleauditlogsidguidAuditLogsController",
+    "TopicName": "demo-cms.site_management_module.audit_logs_put",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "DeleteapisitemanagementmoduleauditlogsidguidAuditLogsController",
+    "TopicName": "demo-cms.site_management_module.audit_logs_delete",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiidentitymoduleportalpagedefinitionsupdateportalpagepermissionPortalPageDefinitionsController",
+    "TopicName": "demo-cms.identity_module.portal_page_definitions.update_portal_page_permission_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiidentitymoduleapimethoddefinitionsupdateapipermissionApiMethodDefinitionsController",
+    "TopicName": "demo-cms.identity_module.api_method_definitions.update_api_permission_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiauthregisterAuthenticationsController",
+    "TopicName": "demo-cms.auth.register_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiauthloginAuthenticationsController",
+    "TopicName": "demo-cms.auth.login_post",
+    "IsActive": true
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiauthvalidateAuthenticationsController",
+    "TopicName": "demo-cms.auth.validate_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiauthrefreshAuthenticationsController",
+    "TopicName": "demo-cms.auth.refresh_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiauthresendconfirmationemailAuthenticationsController",
+    "TopicName": "demo-cms.auth.resendconfirmationemail_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiauthforgotpasswordAuthenticationsController",
+    "TopicName": "demo-cms.auth.forgotpassword_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiauthresetpasswordAuthenticationsController",
+    "TopicName": "demo-cms.auth.resetpassword_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "Postapiauthmanageuser2faAuthenticationsController",
+    "TopicName": "demo-cms.auth.manage.user2fa_post",
+    "IsActive": false
+  },
+  {
+    "ApiMethodDefinitionKey": "PostapiauthmanageinfoAuthenticationsController",
+    "TopicName": "demo-cms.auth.manage.info_post",
+    "IsActive": false
+  }
+]
+}

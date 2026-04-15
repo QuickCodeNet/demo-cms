@@ -1,0 +1,2620 @@
+{
+  "info": {
+    "name": "QuickCode - DemoCms - LocalizationModule Api (1.0.0.0)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "v1"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/auth/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"demo@quickcode.net\",\r\n  \"password\": \"String1!\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var json = pm.response.json();",
+                  "var token = json.accessToken;",
+                  "var refreshToken = json.refreshToken;",
+                  "const isEnvSelected = pm.environment.name && pm.environment.name !== \"no_env\";",
+                  "if (isEnvSelected) {",
+                  "    pm.environment.set(\"access_token\", token);",
+                  "    pm.environment.set(\"refresh_token\", refreshToken);",
+                  "} else {",
+                  "    pm.collectionVariables.set(\"access_token\", token);",
+                  "    pm.collectionVariables.set(\"refresh_token\", refreshToken);",
+                  "}",
+                  "console.log(`Selected Environment: ${pm.environment.name || \"none\"}`);"
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const fallback_env = \"local\";",
+              "const default_base_url = \"http://localhost:6060\";",
+              "",
+              "const isEnvSelected = pm.environment.name && pm.environment.name !== \"no_env\";",
+              "",
+              "let env;",
+              "let base_url;",
+              "",
+              "env = pm.variables.get(\"active_env\") || fallback_env;",
+              "",
+              "if (isEnvSelected) {",
+              "    env = pm.environment.get(\"active_env\");",
+              "",
+              "    if (!env) {",
+              "        env = pm.variables.get(\"active_env\") || fallback_env;",
+              "        pm.environment.set(\"active_env\", env);",
+              "    }",
+              "}",
+              "",
+              "base_url = pm.variables.get(`base_url_${env}`) || default_base_url;",
+              "pm.variables.set(\"base_url\", base_url);",
+              "",
+              "console.log(`Selected Environment: ${pm.environment.name || \"none\"}`);",
+              "console.log(`Resolved active_env: ${env}`);",
+              "console.log(`Resolved base_url: ${base_url}`);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "AuditLogs",
+      "item": [
+        {
+          "name": "AuditLogsList",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/audit-logs",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "audit-logs"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "AuditLogsInsert",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/audit-logs",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "audit-logs"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":\"string\",\"entityName\":\"string\",\"entityId\":\"string\",\"action\":\"string\",\"userId\":\"string\",\"userName\":\"string\",\"userGroup\":\"string\",\"timestamp\":\"string\",\"oldValues\":\"string\",\"newValues\":\"string\",\"changedColumns\":\"string\",\"isChanged\":true,\"changeSummary\":\"string\",\"ipAddress\":\"string\",\"userAgent\":\"string\",\"correlationId\":\"string\",\"isSuccess\":true,\"errorMessage\":\"string\",\"hash\":\"string\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "AuditLogsCount",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/audit-logs/count",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "audit-logs",
+                "count"
+              ]
+            }
+          }
+        },
+        {
+          "name": "AuditLogsGetItem",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/audit-logs/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "audit-logs",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "AuditLogsUpdate",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/audit-logs/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "audit-logs",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":\"string\",\"entityName\":\"string\",\"entityId\":\"string\",\"action\":\"string\",\"userId\":\"string\",\"userName\":\"string\",\"userGroup\":\"string\",\"timestamp\":\"string\",\"oldValues\":\"string\",\"newValues\":\"string\",\"changedColumns\":\"string\",\"isChanged\":true,\"changeSummary\":\"string\",\"ipAddress\":\"string\",\"userAgent\":\"string\",\"correlationId\":\"string\",\"isSuccess\":true,\"errorMessage\":\"string\",\"hash\":\"string\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "AuditLogsDelete",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/audit-logs/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "audit-logs",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const fallback_env = \"local\";",
+              "const default_base_url = \"http://localhost:6060\";",
+              "",
+              "const isEnvSelected = pm.environment.name && pm.environment.name !== \"no_env\";",
+              "",
+              "let env;",
+              "let base_url;",
+              "",
+              "env = pm.variables.get(\"active_env\") || fallback_env;",
+              "",
+              "if (isEnvSelected) {",
+              "    env = pm.environment.get(\"active_env\");",
+              "",
+              "    if (!env) {",
+              "        env = pm.variables.get(\"active_env\") || fallback_env;",
+              "        pm.environment.set(\"active_env\", env);",
+              "    }",
+              "}",
+              "",
+              "base_url = pm.variables.get(`base_url_${env}`) || default_base_url;",
+              "pm.variables.set(\"base_url\", base_url);",
+              "",
+              "console.log(`Selected Environment: ${pm.environment.name || \"none\"}`);",
+              "console.log(`Resolved active_env: ${env}`);",
+              "console.log(`Resolved base_url: ${base_url}`);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "LanguageFallbacks",
+      "item": [
+        {
+          "name": "LanguageFallbacksList",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/language-fallbacks",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "language-fallbacks"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "LanguageFallbacksInsert",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/language-fallbacks",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "language-fallbacks"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"languageId\":123,\"fallbackLanguageId\":123,\"priority\":123}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "LanguageFallbacksCount",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/language-fallbacks/count",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "language-fallbacks",
+                "count"
+              ]
+            }
+          }
+        },
+        {
+          "name": "LanguageFallbacksGetItem",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/language-fallbacks/:languageId/:fallbackLanguageId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "language-fallbacks",
+                ":languageId",
+                ":fallbackLanguageId"
+              ],
+              "variable": [
+                {
+                  "key": "languageId",
+                  "value": ""
+                },
+                {
+                  "key": "fallbackLanguageId",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "LanguageFallbacksUpdate",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/language-fallbacks/:languageId/:fallbackLanguageId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "language-fallbacks",
+                ":languageId",
+                ":fallbackLanguageId"
+              ],
+              "variable": [
+                {
+                  "key": "languageId",
+                  "value": ""
+                },
+                {
+                  "key": "fallbackLanguageId",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"languageId\":123,\"fallbackLanguageId\":123,\"priority\":123}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "LanguageFallbacksDelete",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/language-fallbacks/:languageId/:fallbackLanguageId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "language-fallbacks",
+                ":languageId",
+                ":fallbackLanguageId"
+              ],
+              "variable": [
+                {
+                  "key": "languageId",
+                  "value": ""
+                },
+                {
+                  "key": "fallbackLanguageId",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "LanguageFallbacksGetFallbacksForLanguage",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/language-fallbacks/get-fallbacks-for-language/:languageFallbackLanguageId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "language-fallbacks",
+                "get-fallbacks-for-language",
+                ":languageFallbackLanguageId"
+              ],
+              "variable": [
+                {
+                  "key": "languageFallbackLanguageId",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "LanguageFallbacksRemoveFallback",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/language-fallbacks/remove-fallback/:languageFallbackLanguageId/:languageFallbackFallbackLanguageId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "language-fallbacks",
+                "remove-fallback",
+                ":languageFallbackLanguageId",
+                ":languageFallbackFallbackLanguageId"
+              ],
+              "variable": [
+                {
+                  "key": "languageFallbackLanguageId",
+                  "value": ""
+                },
+                {
+                  "key": "languageFallbackFallbackLanguageId",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const fallback_env = \"local\";",
+              "const default_base_url = \"http://localhost:6060\";",
+              "",
+              "const isEnvSelected = pm.environment.name && pm.environment.name !== \"no_env\";",
+              "",
+              "let env;",
+              "let base_url;",
+              "",
+              "env = pm.variables.get(\"active_env\") || fallback_env;",
+              "",
+              "if (isEnvSelected) {",
+              "    env = pm.environment.get(\"active_env\");",
+              "",
+              "    if (!env) {",
+              "        env = pm.variables.get(\"active_env\") || fallback_env;",
+              "        pm.environment.set(\"active_env\", env);",
+              "    }",
+              "}",
+              "",
+              "base_url = pm.variables.get(`base_url_${env}`) || default_base_url;",
+              "pm.variables.set(\"base_url\", base_url);",
+              "",
+              "console.log(`Selected Environment: ${pm.environment.name || \"none\"}`);",
+              "console.log(`Resolved active_env: ${env}`);",
+              "console.log(`Resolved base_url: ${base_url}`);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Languages",
+      "item": [
+        {
+          "name": "LanguagesList",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/languages",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "languages"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "LanguagesInsert",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/languages",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "languages"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"code\":\"string\",\"name\":\"string\",\"isDefault\":true,\"isActive\":true}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "LanguagesCount",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/languages/count",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "languages",
+                "count"
+              ]
+            }
+          }
+        },
+        {
+          "name": "LanguagesGetItem",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/languages/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "languages",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "LanguagesUpdate",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/languages/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "languages",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"code\":\"string\",\"name\":\"string\",\"isDefault\":true,\"isActive\":true}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "LanguagesDelete",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/languages/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "languages",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "LanguagesGetActive",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/languages/get-active/:languageIsActive",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "languages",
+                "get-active",
+                ":languageIsActive"
+              ],
+              "variable": [
+                {
+                  "key": "languageIsActive",
+                  "value": ""
+                }
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "LanguagesGetDefault",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/languages/get-default/:languageIsDefault/:languageIsActive",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "languages",
+                "get-default",
+                ":languageIsDefault",
+                ":languageIsActive"
+              ],
+              "variable": [
+                {
+                  "key": "languageIsDefault",
+                  "value": ""
+                },
+                {
+                  "key": "languageIsActive",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "LanguagesGetByCode",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/languages/get-by-code/:languageCode",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "languages",
+                "get-by-code",
+                ":languageCode"
+              ],
+              "variable": [
+                {
+                  "key": "languageCode",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "LanguagesSetDefault",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/languages/set-default/:languageId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "languages",
+                "set-default",
+                ":languageId"
+              ],
+              "variable": [
+                {
+                  "key": "languageId",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "LanguagesDeactivate",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/languages/deactivate/:languageId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "languages",
+                "deactivate",
+                ":languageId"
+              ],
+              "variable": [
+                {
+                  "key": "languageId",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const fallback_env = \"local\";",
+              "const default_base_url = \"http://localhost:6060\";",
+              "",
+              "const isEnvSelected = pm.environment.name && pm.environment.name !== \"no_env\";",
+              "",
+              "let env;",
+              "let base_url;",
+              "",
+              "env = pm.variables.get(\"active_env\") || fallback_env;",
+              "",
+              "if (isEnvSelected) {",
+              "    env = pm.environment.get(\"active_env\");",
+              "",
+              "    if (!env) {",
+              "        env = pm.variables.get(\"active_env\") || fallback_env;",
+              "        pm.environment.set(\"active_env\", env);",
+              "    }",
+              "}",
+              "",
+              "base_url = pm.variables.get(`base_url_${env}`) || default_base_url;",
+              "pm.variables.set(\"base_url\", base_url);",
+              "",
+              "console.log(`Selected Environment: ${pm.environment.name || \"none\"}`);",
+              "console.log(`Resolved active_env: ${env}`);",
+              "console.log(`Resolved base_url: ${base_url}`);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Namespaces",
+      "item": [
+        {
+          "name": "NamespacesList",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/namespaces",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "namespaces"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "NamespacesInsert",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/namespaces",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "namespaces"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"name\":\"string\",\"description\":\"string\",\"isActive\":true}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "NamespacesCount",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/namespaces/count",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "namespaces",
+                "count"
+              ]
+            }
+          }
+        },
+        {
+          "name": "NamespacesGetItem",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/namespaces/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "namespaces",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "NamespacesUpdate",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/namespaces/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "namespaces",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"name\":\"string\",\"description\":\"string\",\"isActive\":true}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "NamespacesDelete",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/namespaces/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "namespaces",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "NamespacesGetActive",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/namespaces/get-active/:namespaceIsActive",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "namespaces",
+                "get-active",
+                ":namespaceIsActive"
+              ],
+              "variable": [
+                {
+                  "key": "namespaceIsActive",
+                  "value": ""
+                }
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "NamespacesSearchByName",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/namespaces/search-by-name/:namespaceName",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "namespaces",
+                "search-by-name",
+                ":namespaceName"
+              ],
+              "variable": [
+                {
+                  "key": "namespaceName",
+                  "value": ""
+                }
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const fallback_env = \"local\";",
+              "const default_base_url = \"http://localhost:6060\";",
+              "",
+              "const isEnvSelected = pm.environment.name && pm.environment.name !== \"no_env\";",
+              "",
+              "let env;",
+              "let base_url;",
+              "",
+              "env = pm.variables.get(\"active_env\") || fallback_env;",
+              "",
+              "if (isEnvSelected) {",
+              "    env = pm.environment.get(\"active_env\");",
+              "",
+              "    if (!env) {",
+              "        env = pm.variables.get(\"active_env\") || fallback_env;",
+              "        pm.environment.set(\"active_env\", env);",
+              "    }",
+              "}",
+              "",
+              "base_url = pm.variables.get(`base_url_${env}`) || default_base_url;",
+              "pm.variables.set(\"base_url\", base_url);",
+              "",
+              "console.log(`Selected Environment: ${pm.environment.name || \"none\"}`);",
+              "console.log(`Resolved active_env: ${env}`);",
+              "console.log(`Resolved base_url: ${base_url}`);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "ResourceFiles",
+      "item": [
+        {
+          "name": "ResourceFilesList",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/resource-files",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "resource-files"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ResourceFilesInsert",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/resource-files",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "resource-files"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"filename\":\"string\",\"format\":\"string\",\"languageId\":123,\"uploadedByUserId\":123,\"uploadedDate\":\"string\",\"processedDate\":\"string\",\"status\":\"string\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "ResourceFilesCount",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/resource-files/count",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "resource-files",
+                "count"
+              ]
+            }
+          }
+        },
+        {
+          "name": "ResourceFilesGetItem",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/resource-files/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "resource-files",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ResourceFilesUpdate",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/resource-files/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "resource-files",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"filename\":\"string\",\"format\":\"string\",\"languageId\":123,\"uploadedByUserId\":123,\"uploadedDate\":\"string\",\"processedDate\":\"string\",\"status\":\"string\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "ResourceFilesDelete",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/resource-files/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "resource-files",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ResourceFilesGetPendingImports",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/resource-files/get-pending-imports/:resourceFileStatus",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "resource-files",
+                "get-pending-imports",
+                ":resourceFileStatus"
+              ],
+              "variable": [
+                {
+                  "key": "resourceFileStatus",
+                  "value": ""
+                }
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ResourceFilesGetImportHistory",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/resource-files/get-import-history/:resourceFileLanguageId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "resource-files",
+                "get-import-history",
+                ":resourceFileLanguageId"
+              ],
+              "variable": [
+                {
+                  "key": "resourceFileLanguageId",
+                  "value": ""
+                }
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ResourceFilesMarkAsProcessed",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/resource-files/mark-as-processed/:resourceFileId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "resource-files",
+                "mark-as-processed",
+                ":resourceFileId"
+              ],
+              "variable": [
+                {
+                  "key": "resourceFileId",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "ResourceFilesMarkAsFailed",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/resource-files/mark-as-failed/:resourceFileId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "resource-files",
+                "mark-as-failed",
+                ":resourceFileId"
+              ],
+              "variable": [
+                {
+                  "key": "resourceFileId",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const fallback_env = \"local\";",
+              "const default_base_url = \"http://localhost:6060\";",
+              "",
+              "const isEnvSelected = pm.environment.name && pm.environment.name !== \"no_env\";",
+              "",
+              "let env;",
+              "let base_url;",
+              "",
+              "env = pm.variables.get(\"active_env\") || fallback_env;",
+              "",
+              "if (isEnvSelected) {",
+              "    env = pm.environment.get(\"active_env\");",
+              "",
+              "    if (!env) {",
+              "        env = pm.variables.get(\"active_env\") || fallback_env;",
+              "        pm.environment.set(\"active_env\", env);",
+              "    }",
+              "}",
+              "",
+              "base_url = pm.variables.get(`base_url_${env}`) || default_base_url;",
+              "pm.variables.set(\"base_url\", base_url);",
+              "",
+              "console.log(`Selected Environment: ${pm.environment.name || \"none\"}`);",
+              "console.log(`Resolved active_env: ${env}`);",
+              "console.log(`Resolved base_url: ${base_url}`);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "TranslationKeys",
+      "item": [
+        {
+          "name": "TranslationKeysList",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/translation-keys",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "translation-keys"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "TranslationKeysInsert",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/translation-keys",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "translation-keys"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"namespaceId\":123,\"key\":\"string\",\"defaultValue\":\"string\",\"createdDate\":\"string\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "TranslationKeysCount",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/translation-keys/count",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "translation-keys",
+                "count"
+              ]
+            }
+          }
+        },
+        {
+          "name": "TranslationKeysGetItem",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/translation-keys/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "translation-keys",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "TranslationKeysUpdate",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/translation-keys/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "translation-keys",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"namespaceId\":123,\"key\":\"string\",\"defaultValue\":\"string\",\"createdDate\":\"string\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "TranslationKeysDelete",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/translation-keys/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "translation-keys",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "TranslationKeysGetByNamespace",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/translation-keys/get-by-namespace/:translationKeyNamespaceId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "translation-keys",
+                "get-by-namespace",
+                ":translationKeyNamespaceId"
+              ],
+              "variable": [
+                {
+                  "key": "translationKeyNamespaceId",
+                  "value": ""
+                }
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "TranslationKeysSearchByKey",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/translation-keys/search-by-key/:translationKeyKey",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "translation-keys",
+                "search-by-key",
+                ":translationKeyKey"
+              ],
+              "variable": [
+                {
+                  "key": "translationKeyKey",
+                  "value": ""
+                }
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "TranslationKeysGetUntranslatedKeysForLanguage",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/translation-keys/get-untranslated-keys-for-language/:translationKeyNamespaceId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "translation-keys",
+                "get-untranslated-keys-for-language",
+                ":translationKeyNamespaceId"
+              ],
+              "variable": [
+                {
+                  "key": "translationKeyNamespaceId",
+                  "value": ""
+                }
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const fallback_env = \"local\";",
+              "const default_base_url = \"http://localhost:6060\";",
+              "",
+              "const isEnvSelected = pm.environment.name && pm.environment.name !== \"no_env\";",
+              "",
+              "let env;",
+              "let base_url;",
+              "",
+              "env = pm.variables.get(\"active_env\") || fallback_env;",
+              "",
+              "if (isEnvSelected) {",
+              "    env = pm.environment.get(\"active_env\");",
+              "",
+              "    if (!env) {",
+              "        env = pm.variables.get(\"active_env\") || fallback_env;",
+              "        pm.environment.set(\"active_env\", env);",
+              "    }",
+              "}",
+              "",
+              "base_url = pm.variables.get(`base_url_${env}`) || default_base_url;",
+              "pm.variables.set(\"base_url\", base_url);",
+              "",
+              "console.log(`Selected Environment: ${pm.environment.name || \"none\"}`);",
+              "console.log(`Resolved active_env: ${env}`);",
+              "console.log(`Resolved base_url: ${base_url}`);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "TranslationValues",
+      "item": [
+        {
+          "name": "TranslationValuesList",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/translation-values",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "translation-values"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "TranslationValuesInsert",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/translation-values",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "translation-values"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"keyId\":123,\"languageId\":123,\"value\":\"string\",\"updatedDate\":\"string\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "TranslationValuesCount",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/translation-values/count",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "translation-values",
+                "count"
+              ]
+            }
+          }
+        },
+        {
+          "name": "TranslationValuesGetItem",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/translation-values/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "translation-values",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "TranslationValuesUpdate",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/translation-values/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "translation-values",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"keyId\":123,\"languageId\":123,\"value\":\"string\",\"updatedDate\":\"string\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "TranslationValuesDelete",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/translation-values/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "translation-values",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "TranslationValuesGetByKeyAndLanguage",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/translation-values/get-by-key-and-language/:translationValueKeyId/:translationValueLanguageId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "translation-values",
+                "get-by-key-and-language",
+                ":translationValueKeyId",
+                ":translationValueLanguageId"
+              ],
+              "variable": [
+                {
+                  "key": "translationValueKeyId",
+                  "value": ""
+                },
+                {
+                  "key": "translationValueLanguageId",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "TranslationValuesGetTranslationsForLanguageAndNamespace",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/translation-values/get-translations-for-language-and-namespace/:translationValuesLanguageId/:translationKeysNamespaceId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "translation-values",
+                "get-translations-for-language-and-namespace",
+                ":translationValuesLanguageId",
+                ":translationKeysNamespaceId"
+              ],
+              "variable": [
+                {
+                  "key": "translationValuesLanguageId",
+                  "value": ""
+                },
+                {
+                  "key": "translationKeysNamespaceId",
+                  "value": ""
+                }
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "TranslationValuesBulkUpsert",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/localization-module/translation-values/bulk-upsert/:translationValueKeyId/:translationValueLanguageId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "localization-module",
+                "translation-values",
+                "bulk-upsert",
+                ":translationValueKeyId",
+                ":translationValueLanguageId"
+              ],
+              "variable": [
+                {
+                  "key": "translationValueKeyId",
+                  "value": ""
+                },
+                {
+                  "key": "translationValueLanguageId",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"translationValueValue\":\"string\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const fallback_env = \"local\";",
+              "const default_base_url = \"http://localhost:6060\";",
+              "",
+              "const isEnvSelected = pm.environment.name && pm.environment.name !== \"no_env\";",
+              "",
+              "let env;",
+              "let base_url;",
+              "",
+              "env = pm.variables.get(\"active_env\") || fallback_env;",
+              "",
+              "if (isEnvSelected) {",
+              "    env = pm.environment.get(\"active_env\");",
+              "",
+              "    if (!env) {",
+              "        env = pm.variables.get(\"active_env\") || fallback_env;",
+              "        pm.environment.set(\"active_env\", env);",
+              "    }",
+              "}",
+              "",
+              "base_url = pm.variables.get(`base_url_${env}`) || default_base_url;",
+              "pm.variables.set(\"base_url\", base_url);",
+              "",
+              "console.log(`Selected Environment: ${pm.environment.name || \"none\"}`);",
+              "console.log(`Resolved active_env: ${env}`);",
+              "console.log(`Resolved base_url: ${base_url}`);"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:6060",
+      "type": "string"
+    },
+    {
+      "key": "base_url_docker",
+      "value": "http://localhost:6060",
+      "type": "string"
+    },
+    {
+      "key": "base_url_test",
+      "value": "http://localhost:6060",
+      "type": "string"
+    },
+    {
+      "key": "base_url_prod",
+      "value": "https://demo-cms-gateway-821209474183.europe-west1.run.app",
+      "type": "string"
+    },
+    {
+      "key": "base_url_cloudrun",
+      "value": "https://demo-cms-gateway.quickcode.net",
+      "type": "string"
+    },
+    {
+      "key": "active_env",
+      "value": "docker",
+      "type": "string"
+    },
+    {
+      "key": "projectName",
+      "value": "DemoCms",
+      "type": "string"
+    }
+  ]
+}

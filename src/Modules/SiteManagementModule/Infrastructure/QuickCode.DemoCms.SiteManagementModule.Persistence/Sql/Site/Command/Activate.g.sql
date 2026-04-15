@@ -1,0 +1,4 @@
+﻿UPDATE [SITES] 
+	SET [IS_ACTIVE] = 1 
+WHERE [IsDeleted] = 0 
+	AND [ID] = @PRM_SITE_ID

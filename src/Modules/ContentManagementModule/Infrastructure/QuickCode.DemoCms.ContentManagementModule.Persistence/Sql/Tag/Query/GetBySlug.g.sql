@@ -1,0 +1,5 @@
+﻿SELECT TOP 1 T.[ID], T.[NAME] 
+FROM [TAGS] T 
+WHERE T.[IsDeleted] = 0 
+	AND T.[SLUG] = @PRM_TAG_SLUG 
+ORDER BY T.[ID] 

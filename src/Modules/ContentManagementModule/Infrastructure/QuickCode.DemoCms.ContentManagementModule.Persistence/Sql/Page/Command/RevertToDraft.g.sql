@@ -1,0 +1,4 @@
+﻿UPDATE [PAGES] 
+	SET [STATUS] = 'DRAFT' 
+WHERE [IsDeleted] = 0 
+	AND [ID] = @PRM_PAGE_ID

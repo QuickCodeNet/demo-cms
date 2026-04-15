@@ -1,0 +1,4 @@
+﻿UPDATE [LANGUAGES] 
+	SET [IS_DEFAULT] = 1 
+WHERE [IsDeleted] = 0 
+	AND [ID] = @PRM_LANGUAGE_ID

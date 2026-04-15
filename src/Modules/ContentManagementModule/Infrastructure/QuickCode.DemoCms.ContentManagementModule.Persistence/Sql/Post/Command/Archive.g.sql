@@ -1,0 +1,4 @@
+﻿UPDATE [POSTS] 
+	SET [STATUS] = 'ARCHIVED' 
+WHERE [IsDeleted] = 0 
+	AND [ID] = @PRM_POST_ID

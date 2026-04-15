@@ -1,0 +1,4 @@
+﻿UPDATE [SITES] 
+	SET [THEME_ID] = @SITE_THEME_ID 
+WHERE [IsDeleted] = 0 
+	AND [ID] = @PRM_SITE_ID

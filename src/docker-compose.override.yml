@@ -1,0 +1,150 @@
+services:
+  demo-cms-pg-data:
+    ports:
+      - "${PGSQL_PORT:-5432}:5432"
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=dockerf
+    volumes:
+      - quickcode-demo-cms-pg-data:/var/lib/postgresql
+  
+  demo-cms-mysql-data:
+    ports:
+      - "${MYSQL_PORT:-3306}:3306"
+    volumes:
+      - quickcode-demo-cms-mysql-data:/var/lib/mysql
+      - "~/sql-scripts/setup.sql:/docker-entrypoint-initdb.d/1.sql"
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=RootDocker!
+      - MYSQL_USER=docker
+      - MYSQL_PASSWORD=dockerf
+
+  demo-cms-sql-data:
+    environment:
+      - MSSQL_SA_PASSWORD=Pass@word
+      - ACCEPT_EULA=Y
+    ports:
+      - "${SQL_PORT:-5433}:1433"
+    volumes:
+      - quickcode-demo-cms-sql-data:/var/opt/mssql
+
+  demo-cms-elasticsearch:
+    environment:
+      - xpack.security.enabled=false
+      - discovery.type=single-node
+    deploy:
+      resources:
+        limits:
+          memory: 1GB
+    ports:
+      - "${ELASTIC_PORT:-9200}:9200"
+    volumes:
+      - quickcode-demo-cms-elasticsearch-data:/usr/share/elasticsearch/data
+    restart: always
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    healthcheck:
+      test: curl -s http://demo-cms-elasticsearch:9200 >/dev/null || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  demo-cms-kibana:
+    environment:
+      - ELASTICSEARCH_HOSTS=http://demo-cms-elasticsearch:9200
+    ports:
+      - "${KIBANA_PORT:-5601}:5601"
+    volumes:
+      - quickcode-demo-cms-kibana-data:/usr/share/kibana/data
+    restart: always
+    depends_on:
+      - demo-cms-elasticsearch
+
+  quickcode-demo-cms-gateway-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Local
+      - ASPNETCORE_URLS=http://+
+    ports:
+      - "${GATEWAY_PORT:-6060}:80"
+
+  quickcode-demo-cms-identity-module-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Local
+      - ASPNETCORE_URLS=http://+
+      - QUICKCODE_JWT_SECRET_KEY=7hFLnK3PdNj4IUi4DsmwCfaVmUT9CfccvURBHQ7ylXtoZlJlO8xtyX5eZPlsE5Q5
+    ports:
+      - "6001:80"
+
+
+  quickcode-demo-cms-asset-management-module-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Local
+      - ASPNETCORE_URLS=http://+
+      
+    ports:
+      - "6002:80"
+
+
+  quickcode-demo-cms-content-management-module-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Local
+      - ASPNETCORE_URLS=http://+
+      
+    ports:
+      - "6003:80"
+
+
+  quickcode-demo-cms-localization-module-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Local
+      - ASPNETCORE_URLS=http://+
+      
+    ports:
+      - "6004:80"
+
+
+  quickcode-demo-cms-site-management-module-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Local
+      - ASPNETCORE_URLS=http://+
+      
+    ports:
+      - "6005:80"
+
+
+#[-WEB-]
+  quickcode-demo-cms-portal:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Local
+      - ASPNETCORE_URLS=http://+
+      - AZURE_ACCOUNT_NAME=quickcodeblobstorage
+      - AZURE_ACCOUNT_KEY=azureAccountKeySecret
+      - AZURE_BLOB_CONTAINER_NAME=images
+    ports:
+      - "${PORTAL_PORT:-6020}:80"
+      
+  quickcode-demo-cms-event-listener-service:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Local
+      - ASPNETCORE_URLS=http://+
+    ports:
+      - "${EVENT_LISTENER_PORT:-6100}:80"
+      
+volumes:
+  quickcode-demo-cms-pg-data:
+    external: false
+    
+  quickcode-demo-cms-mysql-data:
+    external: false
+    
+  quickcode-demo-cms-sql-data:
+    external: false
+    
+  quickcode-demo-cms-elasticsearch-data:
+    external: false
+    
+  quickcode-demo-cms-kibana-data:
+    external: false

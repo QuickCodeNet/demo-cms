@@ -1,0 +1,13 @@
+.vs
+bin
+obj
+QuickCode.DemoCmsCms.Api/bin
+QuickCode.DemoCmsCms.Api/obj
+QuickCode.DemoCmsCms.Portal/bin
+QuickCode.DemoCmsCms.Portal/obj
+QuickCode.DemoCmsCms.Web/bin
+QuickCode.DemoCmsCms.Web/obj
+QuickCode.DemoCmsCms.DataLayer/bin
+QuickCode.DemoCmsCms.DataLayer/obj
+.DS_Store
+/src/.idea

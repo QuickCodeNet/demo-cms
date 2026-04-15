@@ -1,0 +1,4 @@
+﻿UPDATE [DOMAINS] 
+	SET [IS_ACTIVE] = 0 
+WHERE [IsDeleted] = 0 
+	AND [ID] = @PRM_DOMAIN_ID

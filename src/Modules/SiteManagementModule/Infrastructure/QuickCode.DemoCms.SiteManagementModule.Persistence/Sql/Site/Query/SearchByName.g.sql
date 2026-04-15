@@ -1,0 +1,6 @@
+﻿SELECT S.[ID], S.[NAME], S.[IS_ACTIVE] 
+FROM [SITES] S 
+WHERE S.[IsDeleted] = 0 
+	AND S.[NAME] LIKE '%' + @PRM_SITE_NAME + '%' 
+ORDER BY S.[ID] 
+OFFSET @StartIndex ROWS FETCH NEXT @PageSize ROWS ONLY 

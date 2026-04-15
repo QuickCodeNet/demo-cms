@@ -1,0 +1,684 @@
+﻿{
+  "PortalMenus": [
+    {
+      "Key": "IdentityModule_IdentityModule",
+      "Name": "IdentityModule",
+      "Text": "IdentityModule",
+      "Tooltip": "IdentityModule",
+      "ActionName": "",
+      "OrderNo": 100,
+      "ParentName": "IdentityModule"
+    },
+    {
+      "Key": "IdentityModule_ApiMethodAccessGrants",
+      "Name": "ApiMethodAccessGrants",
+      "Text": "ApiMethodAccessGrants",
+      "Tooltip": "ApiMethodAccessGrants",
+      "ActionName": "/IdentityModuleApiMethodAccessGrants/List",
+      "OrderNo": 100,
+      "ParentName": "IdentityModule"
+    },
+    {
+      "Key": "IdentityModule_ApiMethodDefinitions",
+      "Name": "ApiMethodDefinitions",
+      "Text": "ApiMethodDefinitions",
+      "Tooltip": "ApiMethodDefinitions",
+      "ActionName": "/IdentityModuleApiMethodDefinitions/List",
+      "OrderNo": 101,
+      "ParentName": "IdentityModule"
+    },
+    {
+      "Key": "IdentityModule_AspNetRoles",
+      "Name": "AspNetRoles",
+      "Text": "AspNetRoles",
+      "Tooltip": "AspNetRoles",
+      "ActionName": "/IdentityModuleAspNetRoles/List",
+      "OrderNo": 102,
+      "ParentName": "IdentityModule"
+    },
+    {
+      "Key": "IdentityModule_AspNetRoleClaims",
+      "Name": "AspNetRoleClaims",
+      "Text": "AspNetRoleClaims",
+      "Tooltip": "AspNetRoleClaims",
+      "ActionName": "/IdentityModuleAspNetRoleClaims/List",
+      "OrderNo": 103,
+      "ParentName": "IdentityModule"
+    },
+    {
+      "Key": "IdentityModule_AspNetUsers",
+      "Name": "AspNetUsers",
+      "Text": "AspNetUsers",
+      "Tooltip": "AspNetUsers",
+      "ActionName": "/IdentityModuleAspNetUsers/List",
+      "OrderNo": 104,
+      "ParentName": "IdentityModule"
+    },
+    {
+      "Key": "IdentityModule_AspNetUserClaims",
+      "Name": "AspNetUserClaims",
+      "Text": "AspNetUserClaims",
+      "Tooltip": "AspNetUserClaims",
+      "ActionName": "/IdentityModuleAspNetUserClaims/List",
+      "OrderNo": 105,
+      "ParentName": "IdentityModule"
+    },
+    {
+      "Key": "IdentityModule_AspNetUserLogins",
+      "Name": "AspNetUserLogins",
+      "Text": "AspNetUserLogins",
+      "Tooltip": "AspNetUserLogins",
+      "ActionName": "/IdentityModuleAspNetUserLogins/List",
+      "OrderNo": 106,
+      "ParentName": "IdentityModule"
+    },
+    {
+      "Key": "IdentityModule_AspNetUserRoles",
+      "Name": "AspNetUserRoles",
+      "Text": "AspNetUserRoles",
+      "Tooltip": "AspNetUserRoles",
+      "ActionName": "/IdentityModuleAspNetUserRoles/List",
+      "OrderNo": 107,
+      "ParentName": "IdentityModule"
+    },
+    {
+      "Key": "IdentityModule_AspNetUserTokens",
+      "Name": "AspNetUserTokens",
+      "Text": "AspNetUserTokens",
+      "Tooltip": "AspNetUserTokens",
+      "ActionName": "/IdentityModuleAspNetUserTokens/List",
+      "OrderNo": 108,
+      "ParentName": "IdentityModule"
+    },
+    {
+      "Key": "IdentityModule_AuditLogs",
+      "Name": "AuditLogs",
+      "Text": "AuditLogs",
+      "Tooltip": "AuditLogs",
+      "ActionName": "/IdentityModuleAuditLogs/List",
+      "OrderNo": 109,
+      "ParentName": "IdentityModule"
+    },
+    {
+      "Key": "IdentityModule_ColumnTypes",
+      "Name": "ColumnTypes",
+      "Text": "ColumnTypes",
+      "Tooltip": "ColumnTypes",
+      "ActionName": "/IdentityModuleColumnTypes/List",
+      "OrderNo": 110,
+      "ParentName": "IdentityModule"
+    },
+    {
+      "Key": "IdentityModule_KafkaEvents",
+      "Name": "KafkaEvents",
+      "Text": "KafkaEvents",
+      "Tooltip": "KafkaEvents",
+      "ActionName": "/IdentityModuleKafkaEvents/List",
+      "OrderNo": 111,
+      "ParentName": "IdentityModule"
+    },
+    {
+      "Key": "IdentityModule_Models",
+      "Name": "Models",
+      "Text": "Models",
+      "Tooltip": "Models",
+      "ActionName": "/IdentityModuleModels/List",
+      "OrderNo": 112,
+      "ParentName": "IdentityModule"
+    },
+    {
+      "Key": "IdentityModule_Modules",
+      "Name": "Modules",
+      "Text": "Modules",
+      "Tooltip": "Modules",
+      "ActionName": "/IdentityModuleModules/List",
+      "OrderNo": 113,
+      "ParentName": "IdentityModule"
+    },
+    {
+      "Key": "IdentityModule_PermissionGroups",
+      "Name": "PermissionGroups",
+      "Text": "PermissionGroups",
+      "Tooltip": "PermissionGroups",
+      "ActionName": "/IdentityModulePermissionGroups/List",
+      "OrderNo": 114,
+      "ParentName": "IdentityModule"
+    },
+    {
+      "Key": "IdentityModule_PortalMenus",
+      "Name": "PortalMenus",
+      "Text": "PortalMenus",
+      "Tooltip": "PortalMenus",
+      "ActionName": "/IdentityModulePortalMenus/List",
+      "OrderNo": 115,
+      "ParentName": "IdentityModule"
+    },
+    {
+      "Key": "IdentityModule_PortalPageAccessGrants",
+      "Name": "PortalPageAccessGrants",
+      "Text": "PortalPageAccessGrants",
+      "Tooltip": "PortalPageAccessGrants",
+      "ActionName": "/IdentityModulePortalPageAccessGrants/List",
+      "OrderNo": 116,
+      "ParentName": "IdentityModule"
+    },
+    {
+      "Key": "IdentityModule_PortalPageDefinitions",
+      "Name": "PortalPageDefinitions",
+      "Text": "PortalPageDefinitions",
+      "Tooltip": "PortalPageDefinitions",
+      "ActionName": "/IdentityModulePortalPageDefinitions/List",
+      "OrderNo": 117,
+      "ParentName": "IdentityModule"
+    },
+    {
+      "Key": "IdentityModule_RefreshTokens",
+      "Name": "RefreshTokens",
+      "Text": "RefreshTokens",
+      "Tooltip": "RefreshTokens",
+      "ActionName": "/IdentityModuleRefreshTokens/List",
+      "OrderNo": 118,
+      "ParentName": "IdentityModule"
+    },
+    {
+      "Key": "IdentityModule_TableComboboxSettings",
+      "Name": "TableComboboxSettings",
+      "Text": "TableComboboxSettings",
+      "Tooltip": "TableComboboxSettings",
+      "ActionName": "/IdentityModuleTableComboboxSettings/List",
+      "OrderNo": 119,
+      "ParentName": "IdentityModule"
+    },
+    {
+      "Key": "IdentityModule_TopicWorkflows",
+      "Name": "TopicWorkflows",
+      "Text": "TopicWorkflows",
+      "Tooltip": "TopicWorkflows",
+      "ActionName": "/IdentityModuleTopicWorkflows/List",
+      "OrderNo": 120,
+      "ParentName": "IdentityModule"
+    },
+    {
+      "Key": "AssetManagementModule_AssetManagementModule",
+      "Name": "AssetManagementModule",
+      "Text": "AssetManagementModule",
+      "Tooltip": "AssetManagementModule",
+      "ActionName": "",
+      "OrderNo": 121,
+      "ParentName": "AssetManagementModule"
+    },
+    {
+      "Key": "AssetManagementModule_Assets",
+      "Name": "Assets",
+      "Text": "Assets",
+      "Tooltip": "Assets",
+      "ActionName": "/AssetManagementModuleAssets/List",
+      "OrderNo": 121,
+      "ParentName": "AssetManagementModule"
+    },
+    {
+      "Key": "AssetManagementModule_AssetFolders",
+      "Name": "AssetFolders",
+      "Text": "AssetFolders",
+      "Tooltip": "AssetFolders",
+      "ActionName": "/AssetManagementModuleAssetFolders/List",
+      "OrderNo": 122,
+      "ParentName": "AssetManagementModule"
+    },
+    {
+      "Key": "AssetManagementModule_AssetMetadata",
+      "Name": "AssetMetadata",
+      "Text": "AssetMetadata",
+      "Tooltip": "AssetMetadata",
+      "ActionName": "/AssetManagementModuleAssetMetadata/List",
+      "OrderNo": 123,
+      "ParentName": "AssetManagementModule"
+    },
+    {
+      "Key": "AssetManagementModule_AssetRenditions",
+      "Name": "AssetRenditions",
+      "Text": "AssetRenditions",
+      "Tooltip": "AssetRenditions",
+      "ActionName": "/AssetManagementModuleAssetRenditions/List",
+      "OrderNo": 124,
+      "ParentName": "AssetManagementModule"
+    },
+    {
+      "Key": "AssetManagementModule_AssetTranslations",
+      "Name": "AssetTranslations",
+      "Text": "AssetTranslations",
+      "Tooltip": "AssetTranslations",
+      "ActionName": "/AssetManagementModuleAssetTranslations/List",
+      "OrderNo": 125,
+      "ParentName": "AssetManagementModule"
+    },
+    {
+      "Key": "AssetManagementModule_AuditLogs",
+      "Name": "AuditLogs",
+      "Text": "AuditLogs",
+      "Tooltip": "AuditLogs",
+      "ActionName": "/AssetManagementModuleAuditLogs/List",
+      "OrderNo": 126,
+      "ParentName": "AssetManagementModule"
+    },
+    {
+      "Key": "AssetManagementModule_StorageProviders",
+      "Name": "StorageProviders",
+      "Text": "StorageProviders",
+      "Tooltip": "StorageProviders",
+      "ActionName": "/AssetManagementModuleStorageProviders/List",
+      "OrderNo": 127,
+      "ParentName": "AssetManagementModule"
+    },
+    {
+      "Key": "ContentManagementModule_ContentManagementModule",
+      "Name": "ContentManagementModule",
+      "Text": "ContentManagementModule",
+      "Tooltip": "ContentManagementModule",
+      "ActionName": "",
+      "OrderNo": 128,
+      "ParentName": "ContentManagementModule"
+    },
+    {
+      "Key": "ContentManagementModule_AuditLogs",
+      "Name": "AuditLogs",
+      "Text": "AuditLogs",
+      "Tooltip": "AuditLogs",
+      "ActionName": "/ContentManagementModuleAuditLogs/List",
+      "OrderNo": 128,
+      "ParentName": "ContentManagementModule"
+    },
+    {
+      "Key": "ContentManagementModule_BlockTranslations",
+      "Name": "BlockTranslations",
+      "Text": "BlockTranslations",
+      "Tooltip": "BlockTranslations",
+      "ActionName": "/ContentManagementModuleBlockTranslations/List",
+      "OrderNo": 129,
+      "ParentName": "ContentManagementModule"
+    },
+    {
+      "Key": "ContentManagementModule_ContentBlocks",
+      "Name": "ContentBlocks",
+      "Text": "ContentBlocks",
+      "Tooltip": "ContentBlocks",
+      "ActionName": "/ContentManagementModuleContentBlocks/List",
+      "OrderNo": 130,
+      "ParentName": "ContentManagementModule"
+    },
+    {
+      "Key": "ContentManagementModule_ContentTags",
+      "Name": "ContentTags",
+      "Text": "ContentTags",
+      "Tooltip": "ContentTags",
+      "ActionName": "/ContentManagementModuleContentTags/List",
+      "OrderNo": 131,
+      "ParentName": "ContentManagementModule"
+    },
+    {
+      "Key": "ContentManagementModule_ContentTypes",
+      "Name": "ContentTypes",
+      "Text": "ContentTypes",
+      "Tooltip": "ContentTypes",
+      "ActionName": "/ContentManagementModuleContentTypes/List",
+      "OrderNo": 132,
+      "ParentName": "ContentManagementModule"
+    },
+    {
+      "Key": "ContentManagementModule_ContentVersions",
+      "Name": "ContentVersions",
+      "Text": "ContentVersions",
+      "Tooltip": "ContentVersions",
+      "ActionName": "/ContentManagementModuleContentVersions/List",
+      "OrderNo": 133,
+      "ParentName": "ContentManagementModule"
+    },
+    {
+      "Key": "ContentManagementModule_Pages",
+      "Name": "Pages",
+      "Text": "Pages",
+      "Tooltip": "Pages",
+      "ActionName": "/ContentManagementModulePages/List",
+      "OrderNo": 134,
+      "ParentName": "ContentManagementModule"
+    },
+    {
+      "Key": "ContentManagementModule_PageTranslations",
+      "Name": "PageTranslations",
+      "Text": "PageTranslations",
+      "Tooltip": "PageTranslations",
+      "ActionName": "/ContentManagementModulePageTranslations/List",
+      "OrderNo": 135,
+      "ParentName": "ContentManagementModule"
+    },
+    {
+      "Key": "ContentManagementModule_Posts",
+      "Name": "Posts",
+      "Text": "Posts",
+      "Tooltip": "Posts",
+      "ActionName": "/ContentManagementModulePosts/List",
+      "OrderNo": 136,
+      "ParentName": "ContentManagementModule"
+    },
+    {
+      "Key": "ContentManagementModule_PostTranslations",
+      "Name": "PostTranslations",
+      "Text": "PostTranslations",
+      "Tooltip": "PostTranslations",
+      "ActionName": "/ContentManagementModulePostTranslations/List",
+      "OrderNo": 137,
+      "ParentName": "ContentManagementModule"
+    },
+    {
+      "Key": "ContentManagementModule_Tags",
+      "Name": "Tags",
+      "Text": "Tags",
+      "Tooltip": "Tags",
+      "ActionName": "/ContentManagementModuleTags/List",
+      "OrderNo": 138,
+      "ParentName": "ContentManagementModule"
+    },
+    {
+      "Key": "LocalizationModule_LocalizationModule",
+      "Name": "LocalizationModule",
+      "Text": "LocalizationModule",
+      "Tooltip": "LocalizationModule",
+      "ActionName": "",
+      "OrderNo": 139,
+      "ParentName": "LocalizationModule"
+    },
+    {
+      "Key": "LocalizationModule_AuditLogs",
+      "Name": "AuditLogs",
+      "Text": "AuditLogs",
+      "Tooltip": "AuditLogs",
+      "ActionName": "/LocalizationModuleAuditLogs/List",
+      "OrderNo": 139,
+      "ParentName": "LocalizationModule"
+    },
+    {
+      "Key": "LocalizationModule_Languages",
+      "Name": "Languages",
+      "Text": "Languages",
+      "Tooltip": "Languages",
+      "ActionName": "/LocalizationModuleLanguages/List",
+      "OrderNo": 140,
+      "ParentName": "LocalizationModule"
+    },
+    {
+      "Key": "LocalizationModule_LanguageFallbacks",
+      "Name": "LanguageFallbacks",
+      "Text": "LanguageFallbacks",
+      "Tooltip": "LanguageFallbacks",
+      "ActionName": "/LocalizationModuleLanguageFallbacks/List",
+      "OrderNo": 141,
+      "ParentName": "LocalizationModule"
+    },
+    {
+      "Key": "LocalizationModule_Namespaces",
+      "Name": "Namespaces",
+      "Text": "Namespaces",
+      "Tooltip": "Namespaces",
+      "ActionName": "/LocalizationModuleNamespaces/List",
+      "OrderNo": 142,
+      "ParentName": "LocalizationModule"
+    },
+    {
+      "Key": "LocalizationModule_ResourceFiles",
+      "Name": "ResourceFiles",
+      "Text": "ResourceFiles",
+      "Tooltip": "ResourceFiles",
+      "ActionName": "/LocalizationModuleResourceFiles/List",
+      "OrderNo": 143,
+      "ParentName": "LocalizationModule"
+    },
+    {
+      "Key": "LocalizationModule_TranslationKeys",
+      "Name": "TranslationKeys",
+      "Text": "TranslationKeys",
+      "Tooltip": "TranslationKeys",
+      "ActionName": "/LocalizationModuleTranslationKeys/List",
+      "OrderNo": 144,
+      "ParentName": "LocalizationModule"
+    },
+    {
+      "Key": "LocalizationModule_TranslationValues",
+      "Name": "TranslationValues",
+      "Text": "TranslationValues",
+      "Tooltip": "TranslationValues",
+      "ActionName": "/LocalizationModuleTranslationValues/List",
+      "OrderNo": 145,
+      "ParentName": "LocalizationModule"
+    },
+    {
+      "Key": "SiteManagementModule_SiteManagementModule",
+      "Name": "SiteManagementModule",
+      "Text": "SiteManagementModule",
+      "Tooltip": "SiteManagementModule",
+      "ActionName": "",
+      "OrderNo": 146,
+      "ParentName": "SiteManagementModule"
+    },
+    {
+      "Key": "SiteManagementModule_AuditLogs",
+      "Name": "AuditLogs",
+      "Text": "AuditLogs",
+      "Tooltip": "AuditLogs",
+      "ActionName": "/SiteManagementModuleAuditLogs/List",
+      "OrderNo": 146,
+      "ParentName": "SiteManagementModule"
+    },
+    {
+      "Key": "SiteManagementModule_Domains",
+      "Name": "Domains",
+      "Text": "Domains",
+      "Tooltip": "Domains",
+      "ActionName": "/SiteManagementModuleDomains/List",
+      "OrderNo": 147,
+      "ParentName": "SiteManagementModule"
+    },
+    {
+      "Key": "SiteManagementModule_NavigationItems",
+      "Name": "NavigationItems",
+      "Text": "NavigationItems",
+      "Tooltip": "NavigationItems",
+      "ActionName": "/SiteManagementModuleNavigationItems/List",
+      "OrderNo": 148,
+      "ParentName": "SiteManagementModule"
+    },
+    {
+      "Key": "SiteManagementModule_NavigationMenus",
+      "Name": "NavigationMenus",
+      "Text": "NavigationMenus",
+      "Tooltip": "NavigationMenus",
+      "ActionName": "/SiteManagementModuleNavigationMenus/List",
+      "OrderNo": 149,
+      "ParentName": "SiteManagementModule"
+    },
+    {
+      "Key": "SiteManagementModule_Sites",
+      "Name": "Sites",
+      "Text": "Sites",
+      "Tooltip": "Sites",
+      "ActionName": "/SiteManagementModuleSites/List",
+      "OrderNo": 150,
+      "ParentName": "SiteManagementModule"
+    },
+    {
+      "Key": "SiteManagementModule_SiteLanguages",
+      "Name": "SiteLanguages",
+      "Text": "SiteLanguages",
+      "Tooltip": "SiteLanguages",
+      "ActionName": "/SiteManagementModuleSiteLanguages/List",
+      "OrderNo": 151,
+      "ParentName": "SiteManagementModule"
+    },
+    {
+      "Key": "SiteManagementModule_SiteSettings",
+      "Name": "SiteSettings",
+      "Text": "SiteSettings",
+      "Tooltip": "SiteSettings",
+      "ActionName": "/SiteManagementModuleSiteSettings/List",
+      "OrderNo": 152,
+      "ParentName": "SiteManagementModule"
+    },
+    {
+      "Key": "SiteManagementModule_Templates",
+      "Name": "Templates",
+      "Text": "Templates",
+      "Tooltip": "Templates",
+      "ActionName": "/SiteManagementModuleTemplates/List",
+      "OrderNo": 153,
+      "ParentName": "SiteManagementModule"
+    },
+    {
+      "Key": "SiteManagementModule_Themes",
+      "Name": "Themes",
+      "Text": "Themes",
+      "Tooltip": "Themes",
+      "ActionName": "/SiteManagementModuleThemes/List",
+      "OrderNo": 154,
+      "ParentName": "SiteManagementModule"
+    }
+  ],
+  "TableComboboxSettings": [
+    {
+      "TableName": "ApiMethodDefinition",
+      "IdColumn": "Key",
+      "TextColumns": "HttpMethod, UrlPath",
+      "StringFormat": "{0} - {1}"
+    },
+    {
+      "TableName": "AspNetRole",
+      "IdColumn": "Id",
+      "TextColumns": "Name",
+      "StringFormat": "{0}"
+    },
+    {
+      "TableName": "AspNetUser",
+      "IdColumn": "Id",
+      "TextColumns": "Id, FirstName, LastName",
+      "StringFormat": "{0} - {1} {2}"
+    },
+    {
+      "TableName": "KafkaEvent",
+      "IdColumn": "TopicName",
+      "TextColumns": "TopicName",
+      "StringFormat": "{0}"
+    },
+    {
+      "TableName": "Module",
+      "IdColumn": "Name",
+      "TextColumns": "Name",
+      "StringFormat": "{0}"
+    },
+    {
+      "TableName": "Model",
+      "IdColumn": "Name",
+      "TextColumns": "Name, ModuleName",
+      "StringFormat": "{0} - {1}"
+    },
+    {
+      "TableName": "PermissionGroup",
+      "IdColumn": "Name",
+      "TextColumns": "Name",
+      "StringFormat": "{0}"
+    },
+    {
+      "TableName": "PortalPageDefinition",
+      "IdColumn": "Key",
+      "TextColumns": "Key",
+      "StringFormat": "{0}"
+    },
+    {
+      "TableName": "AssetFolder",
+      "IdColumn": "Id",
+      "TextColumns": "Name",
+      "StringFormat": "{0}"
+    },
+    {
+      "TableName": "StorageProvider",
+      "IdColumn": "Id",
+      "TextColumns": "Name",
+      "StringFormat": "{0}"
+    },
+    {
+      "TableName": "Asset",
+      "IdColumn": "Id",
+      "TextColumns": "Filename",
+      "StringFormat": "{0}"
+    },
+    {
+      "TableName": "ContentBlock",
+      "IdColumn": "Id",
+      "TextColumns": "Key",
+      "StringFormat": "{0}"
+    },
+    {
+      "TableName": "ContentType",
+      "IdColumn": "Id",
+      "TextColumns": "Name",
+      "StringFormat": "{0}"
+    },
+    {
+      "TableName": "Page",
+      "IdColumn": "Id",
+      "TextColumns": "Name",
+      "StringFormat": "{0}"
+    },
+    {
+      "TableName": "Post",
+      "IdColumn": "Id",
+      "TextColumns": "Name",
+      "StringFormat": "{0}"
+    },
+    {
+      "TableName": "Tag",
+      "IdColumn": "Id",
+      "TextColumns": "Name",
+      "StringFormat": "{0}"
+    },
+    {
+      "TableName": "Language",
+      "IdColumn": "Id",
+      "TextColumns": "Name",
+      "StringFormat": "{0}"
+    },
+    {
+      "TableName": "Namespace",
+      "IdColumn": "Id",
+      "TextColumns": "Name",
+      "StringFormat": "{0}"
+    },
+    {
+      "TableName": "TranslationKey",
+      "IdColumn": "Id",
+      "TextColumns": "Key",
+      "StringFormat": "{0}"
+    },
+    {
+      "TableName": "Site",
+      "IdColumn": "Id",
+      "TextColumns": "Name",
+      "StringFormat": "{0}"
+    },
+    {
+      "TableName": "NavigationMenu",
+      "IdColumn": "Id",
+      "TextColumns": "Name",
+      "StringFormat": "{0}"
+    },
+    {
+      "TableName": "NavigationItem",
+      "IdColumn": "Id",
+      "TextColumns": "Label",
+      "StringFormat": "{0}"
+    },
+    {
+      "TableName": "Theme",
+      "IdColumn": "Id",
+      "TextColumns": "Name",
+      "StringFormat": "{0}"
+    }
+  ]
+}
