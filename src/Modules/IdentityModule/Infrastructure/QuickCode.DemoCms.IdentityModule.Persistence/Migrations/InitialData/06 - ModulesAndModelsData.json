@@ -140,7 +140,7 @@
     {
       "Name": "AssetMetadata",
       "ModuleName": "AssetManagementModule",
-      "Description": "AssetManagementModule - AssetMetadatum"
+      "Description": "AssetManagementModule - AssetMetadata"
     },
     {
       "Name": "AssetRenditions",

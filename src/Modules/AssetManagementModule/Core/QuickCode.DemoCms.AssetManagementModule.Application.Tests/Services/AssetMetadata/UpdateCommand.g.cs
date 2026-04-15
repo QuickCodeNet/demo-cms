@@ -3,52 +3,52 @@ using System.Threading.Tasks;
 using Xunit;
 using Moq;
 using Microsoft.Extensions.Logging;
-using QuickCode.DemoCms.AssetManagementModule.Application.Services.AssetMetadatum;
-using QuickCode.DemoCms.AssetManagementModule.Application.Dtos.AssetMetadatum;
+using QuickCode.DemoCms.AssetManagementModule.Application.Services.AssetMetadata;
+using QuickCode.DemoCms.AssetManagementModule.Application.Dtos.AssetMetadata;
 using QuickCode.DemoCms.AssetManagementModule.Application.Interfaces.Repositories;
 using QuickCode.DemoCms.Common.Helpers;
 using QuickCode.DemoCms.Common.Models;
 
-namespace QuickCode.DemoCms.AssetManagementModule.Application.Tests.Services.AssetMetadatum
+namespace QuickCode.DemoCms.AssetManagementModule.Application.Tests.Services.AssetMetadata
 {
-    public class UpdateAssetMetadatumCommandTests : IDisposable
+    public class UpdateAssetMetadataCommandTests : IDisposable
     {
         private const int ResultCodeSuccess = 0;
         private const int ResultCodeNotFound = 404;
-        private readonly Mock<IAssetMetadatumRepository> _repositoryMock;
-        private readonly Mock<ILogger<AssetMetadatumService>> _loggerMock;
-        private readonly AssetMetadatumService _service;
-        public UpdateAssetMetadatumCommandTests()
+        private readonly Mock<IAssetMetadataRepository> _repositoryMock;
+        private readonly Mock<ILogger<AssetMetadataService>> _loggerMock;
+        private readonly AssetMetadataService _service;
+        public UpdateAssetMetadataCommandTests()
         {
-            _repositoryMock = new Mock<IAssetMetadatumRepository>();
-            _loggerMock = new Mock<ILogger<AssetMetadatumService>>();
-            _service = new AssetMetadatumService(_loggerMock.Object, _repositoryMock.Object);
+            _repositoryMock = new Mock<IAssetMetadataRepository>();
+            _loggerMock = new Mock<ILogger<AssetMetadataService>>();
+            _service = new AssetMetadataService(_loggerMock.Object, _repositoryMock.Object);
         }
 
         [Fact]
         public async Task UpdateAsync_Should_Return_Success_When_Item_Exists()
         {
             // Arrange
-            var fakeDto = TestDataGenerator.CreateFake<AssetMetadatumDto>("tr");
-            var fakeGetResponse = new RepoResponse<AssetMetadatumDto>(fakeDto, "Success");
+            var fakeDto = TestDataGenerator.CreateFake<AssetMetadataDto>("tr");
+            var fakeGetResponse = new RepoResponse<AssetMetadataDto>(fakeDto, "Success");
             var fakeUpdateResponse = new RepoResponse<bool>(true, "Success");
             _repositoryMock.Setup(r => r.GetByPkAsync(fakeDto.Id)).ReturnsAsync(fakeGetResponse);
-            _repositoryMock.Setup(r => r.UpdateAsync(It.IsAny<AssetMetadatumDto>())).ReturnsAsync(fakeUpdateResponse);
+            _repositoryMock.Setup(r => r.UpdateAsync(It.IsAny<AssetMetadataDto>())).ReturnsAsync(fakeUpdateResponse);
             // Act
             var result = await _service.UpdateAsync(fakeDto.Id, fakeDto);
             // Assert
             Assert.Equal(ResultCodeSuccess, result.Code);
             Assert.True(result.Value);
             _repositoryMock.Verify(r => r.GetByPkAsync(fakeDto.Id), Times.Once);
-            _repositoryMock.Verify(r => r.UpdateAsync(It.IsAny<AssetMetadatumDto>()), Times.Once);
+            _repositoryMock.Verify(r => r.UpdateAsync(It.IsAny<AssetMetadataDto>()), Times.Once);
         }
 
         [Fact]
         public async Task UpdateAsync_Should_Return_NotFound_When_Item_Does_Not_Exist()
         {
             // Arrange
-            var fakeDto = TestDataGenerator.CreateFake<AssetMetadatumDto>("tr");
-            var fakeGetResponse = new RepoResponse<AssetMetadatumDto>
+            var fakeDto = TestDataGenerator.CreateFake<AssetMetadataDto>("tr");
+            var fakeGetResponse = new RepoResponse<AssetMetadataDto>
             {
                 Code = ResultCodeNotFound,
                 Message = "Not found"
@@ -60,7 +60,7 @@ namespace QuickCode.DemoCms.AssetManagementModule.Application.Tests.Services.Ass
             Assert.Equal(ResultCodeNotFound, result.Code);
             Assert.False(result.Value);
             _repositoryMock.Verify(r => r.GetByPkAsync(fakeDto.Id), Times.Once);
-            _repositoryMock.Verify(r => r.UpdateAsync(It.IsAny<AssetMetadatumDto>()), Times.Never);
+            _repositoryMock.Verify(r => r.UpdateAsync(It.IsAny<AssetMetadataDto>()), Times.Never);
         }
 
         public void Dispose()

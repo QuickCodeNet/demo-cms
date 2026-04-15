@@ -1123,19 +1123,19 @@
     "IsActive": true
   },
   {
-    "ApiMethodDefinitionKey": "GetapiassetmanagementmoduleassetmetadatagetmetadataforassetassetmetadatumassetidintAssetMetadataController",
+    "ApiMethodDefinitionKey": "GetapiassetmanagementmoduleassetmetadatagetmetadataforassetassetmetadataassetidintAssetMetadataController",
     "PermissionGroupName": "Admin",
     "ModifiedBy": "System",
     "IsActive": true
   },
   {
-    "ApiMethodDefinitionKey": "GetapiassetmanagementmoduleassetmetadatagetassetsbymetadataassetmetadatumkeyassetmetadatumvalueAssetMetadataController",
+    "ApiMethodDefinitionKey": "GetapiassetmanagementmoduleassetmetadatagetassetsbymetadataassetmetadatakeyassetmetadatavalueAssetMetadataController",
     "PermissionGroupName": "Admin",
     "ModifiedBy": "System",
     "IsActive": true
   },
   {
-    "ApiMethodDefinitionKey": "PatchapiassetmanagementmoduleassetmetadataupdatemetadatavalueassetmetadatumassetidintassetmetadatumkeyAssetMetadataController",
+    "ApiMethodDefinitionKey": "PatchapiassetmanagementmoduleassetmetadataupdatemetadatavalueassetmetadataassetidintassetmetadatakeyAssetMetadataController",
     "PermissionGroupName": "Admin",
     "ModifiedBy": "System",
     "IsActive": true
@@ -3889,19 +3889,19 @@
     "IsActive": false
   },
   {
-    "ApiMethodDefinitionKey": "GetapiassetmanagementmoduleassetmetadatagetmetadataforassetassetmetadatumassetidintAssetMetadataController",
+    "ApiMethodDefinitionKey": "GetapiassetmanagementmoduleassetmetadatagetmetadataforassetassetmetadataassetidintAssetMetadataController",
     "PermissionGroupName": "Viewer",
     "ModifiedBy": "System",
     "IsActive": false
   },
   {
-    "ApiMethodDefinitionKey": "GetapiassetmanagementmoduleassetmetadatagetassetsbymetadataassetmetadatumkeyassetmetadatumvalueAssetMetadataController",
+    "ApiMethodDefinitionKey": "GetapiassetmanagementmoduleassetmetadatagetassetsbymetadataassetmetadatakeyassetmetadatavalueAssetMetadataController",
     "PermissionGroupName": "Viewer",
     "ModifiedBy": "System",
     "IsActive": false
   },
   {
-    "ApiMethodDefinitionKey": "PatchapiassetmanagementmoduleassetmetadataupdatemetadatavalueassetmetadatumassetidintassetmetadatumkeyAssetMetadataController",
+    "ApiMethodDefinitionKey": "PatchapiassetmanagementmoduleassetmetadataupdatemetadatavalueassetmetadataassetidintassetmetadatakeyAssetMetadataController",
     "PermissionGroupName": "Viewer",
     "ModifiedBy": "System",
     "IsActive": false

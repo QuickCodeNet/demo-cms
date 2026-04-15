@@ -7,20 +7,20 @@ using QuickCode.DemoCms.Portal.Helpers;
 
 namespace QuickCode.DemoCms.Portal.Models.AssetManagementModule
 {
-    public class AssetMetadatumData : BaseComboBoxModel
+    public class AssetMetadataData : BaseComboBoxModel
     {
         public int TotalPage { get; set; }
         public int CurrentPage { get; set; }
         public int PageSize { get; set; }
         public int NumberOfRecord { get; set; }
         public string SelectedKey { get; set; }
-        public AssetMetadatumDto SelectedItem { get; set; }
-        public List<AssetMetadatumDto> List { get; set; }
+        public AssetMetadataDto SelectedItem { get; set; }
+        public List<AssetMetadataDto> List { get; set; }
     }
 
-    public static partial class AssetMetadatumExtensions
+    public static partial class AssetMetadataExtensions
     {
-        public static string GetKey(this AssetMetadatumDto dto)
+        public static string GetKey(this AssetMetadataDto dto)
         {
             return $"{dto.Id}";
         }

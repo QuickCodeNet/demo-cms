@@ -13,17 +13,17 @@ using System.Linq;
 using Microsoft.Data.SqlClient;
 using QuickCode.DemoCms.Common.Models;
 using QuickCode.DemoCms.AssetManagementModule.Domain.Entities;
-using QuickCode.DemoCms.AssetManagementModule.Application.Dtos.AssetMetadatum;
+using QuickCode.DemoCms.AssetManagementModule.Application.Dtos.AssetMetadata;
 using System.Threading.Tasks;
 using QuickCode.DemoCms.AssetManagementModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.AssetManagementModule.Application.Interfaces.Repositories
 {
-    public partial interface IAssetMetadatumRepository : IBaseRepository<AssetMetadatumDto>
+    public partial interface IAssetMetadataRepository : IBaseRepository<AssetMetadataDto>
     {
-        Task<RepoResponse<AssetMetadatumDto>> GetByPkAsync(int id);
-        Task<RepoResponse<List<GetMetadataForAssetResponseDto>>> GetMetadataForAssetAsync(int assetMetadatumAssetId);
-        Task<RepoResponse<List<GetAssetsByMetadataResponseDto>>> GetAssetsByMetadataAsync(string assetMetadatumKey, string assetMetadatumValue, int? pageNumber = null, int? pageSize = null);
-        Task<RepoResponse<int>> UpdateMetadataValueAsync(int assetMetadatumAssetId, string assetMetadatumKey, UpdateMetadataValueRequestDto updateRequest);
+        Task<RepoResponse<AssetMetadataDto>> GetByPkAsync(int id);
+        Task<RepoResponse<List<GetMetadataForAssetResponseDto>>> GetMetadataForAssetAsync(int assetMetadataAssetId);
+        Task<RepoResponse<List<GetAssetsByMetadataResponseDto>>> GetAssetsByMetadataAsync(string assetMetadataKey, string assetMetadataValue, int? pageNumber = null, int? pageSize = null);
+        Task<RepoResponse<int>> UpdateMetadataValueAsync(int assetMetadataAssetId, string assetMetadataKey, UpdateMetadataValueRequestDto updateRequest);
     }
 }

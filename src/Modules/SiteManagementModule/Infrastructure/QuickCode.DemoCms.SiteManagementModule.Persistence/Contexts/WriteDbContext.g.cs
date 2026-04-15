@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QuickCode.DemoCms.SiteManagementModule.Domain.Entities;
+using DomainEntity = QuickCode.DemoCms.SiteManagementModule.Domain.Entities.Domain;
 using QuickCode.DemoCms.SiteManagementModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.SiteManagementModule.Persistence.Contexts;
@@ -17,7 +18,7 @@ public partial class WriteDbContext : DbContext
 
 	public virtual DbSet<Site> Site { get; set; }
 
-	public virtual DbSet<Domain> Domain { get; set; }
+	public virtual DbSet<DomainEntity> Domain { get; set; }
 
 	public virtual DbSet<SiteSetting> SiteSetting { get; set; }
 
@@ -41,12 +42,12 @@ public partial class WriteDbContext : DbContext
 		.IsRequired()
 		.HasDefaultValue(true);
 
-		modelBuilder.Entity<Domain>()
+		modelBuilder.Entity<DomainEntity>()
 		.Property(b => b.IsPrimary)
 		.IsRequired()
 		.HasDefaultValue(false);
 
-		modelBuilder.Entity<Domain>()
+		modelBuilder.Entity<DomainEntity>()
 		.Property(b => b.IsActive)
 		.IsRequired()
 		.HasDefaultValue(true);
@@ -98,8 +99,8 @@ public partial class WriteDbContext : DbContext
 		modelBuilder.Entity<Site>().Property(b => b.IsDeleted).IsRequired().HasDefaultValue(false);
 		modelBuilder.Entity<Site>().HasQueryFilter(r => !r.IsDeleted);
 
-		modelBuilder.Entity<Domain>().Property(b => b.IsDeleted).IsRequired().HasDefaultValue(false);
-		modelBuilder.Entity<Domain>().HasQueryFilter(r => !r.IsDeleted);
+		modelBuilder.Entity<DomainEntity>().Property(b => b.IsDeleted).IsRequired().HasDefaultValue(false);
+		modelBuilder.Entity<DomainEntity>().HasQueryFilter(r => !r.IsDeleted);
 
 		modelBuilder.Entity<SiteSetting>().Property(b => b.IsDeleted).IsRequired().HasDefaultValue(false);
 		modelBuilder.Entity<SiteSetting>().HasQueryFilter(r => !r.IsDeleted);
@@ -118,7 +119,7 @@ public partial class WriteDbContext : DbContext
 
 
 		modelBuilder.Entity<Site>().HasIndex(r => r.IsDeleted).HasFilter("IsDeleted = 0");
-		modelBuilder.Entity<Domain>().HasIndex(r => r.IsDeleted).HasFilter("IsDeleted = 0");
+		modelBuilder.Entity<DomainEntity>().HasIndex(r => r.IsDeleted).HasFilter("IsDeleted = 0");
 		modelBuilder.Entity<SiteSetting>().HasIndex(r => r.IsDeleted).HasFilter("IsDeleted = 0");
 		modelBuilder.Entity<Theme>().HasIndex(r => r.IsDeleted).HasFilter("IsDeleted = 0");
 		modelBuilder.Entity<Template>().HasIndex(r => r.IsDeleted).HasFilter("IsDeleted = 0");
@@ -132,7 +133,7 @@ public partial class WriteDbContext : DbContext
 			.HasForeignKey(e => e.ThemeId)
 			.OnDelete(DeleteBehavior.Restrict);
 
-		modelBuilder.Entity<Domain>()
+		modelBuilder.Entity<DomainEntity>()
 			.HasOne(e => e.Site)
 			.WithMany(p => p.Domains)
 			.HasForeignKey(e => e.SiteId)

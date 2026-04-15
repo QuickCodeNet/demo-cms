@@ -21,7 +21,7 @@ public partial class ReadDbContext : DbContext
 
 	public virtual DbSet<AssetTranslation> AssetTranslation { get; set; }
 
-	public virtual DbSet<AssetMetadatum> AssetMetadatum { get; set; }
+	public virtual DbSet<AssetMetadata> AssetMetadata { get; set; }
 
 	public virtual DbSet<AssetRendition> AssetRendition { get; set; }
 
@@ -79,8 +79,8 @@ public partial class ReadDbContext : DbContext
 		modelBuilder.Entity<AssetTranslation>().Property(b => b.IsDeleted).IsRequired().HasDefaultValue(false);
 		modelBuilder.Entity<AssetTranslation>().HasQueryFilter(r => !r.IsDeleted);
 
-		modelBuilder.Entity<AssetMetadatum>().Property(b => b.IsDeleted).IsRequired().HasDefaultValue(false);
-		modelBuilder.Entity<AssetMetadatum>().HasQueryFilter(r => !r.IsDeleted);
+		modelBuilder.Entity<AssetMetadata>().Property(b => b.IsDeleted).IsRequired().HasDefaultValue(false);
+		modelBuilder.Entity<AssetMetadata>().HasQueryFilter(r => !r.IsDeleted);
 
 		modelBuilder.Entity<AssetRendition>().Property(b => b.IsDeleted).IsRequired().HasDefaultValue(false);
 		modelBuilder.Entity<AssetRendition>().HasQueryFilter(r => !r.IsDeleted);
@@ -92,7 +92,7 @@ public partial class ReadDbContext : DbContext
 		modelBuilder.Entity<AssetFolder>().HasIndex(r => r.IsDeleted).HasFilter("IsDeleted = 0");
 		modelBuilder.Entity<Asset>().HasIndex(r => r.IsDeleted).HasFilter("IsDeleted = 0");
 		modelBuilder.Entity<AssetTranslation>().HasIndex(r => r.IsDeleted).HasFilter("IsDeleted = 0");
-		modelBuilder.Entity<AssetMetadatum>().HasIndex(r => r.IsDeleted).HasFilter("IsDeleted = 0");
+		modelBuilder.Entity<AssetMetadata>().HasIndex(r => r.IsDeleted).HasFilter("IsDeleted = 0");
 		modelBuilder.Entity<AssetRendition>().HasIndex(r => r.IsDeleted).HasFilter("IsDeleted = 0");
 		modelBuilder.Entity<StorageProvider>().HasIndex(r => r.IsDeleted).HasFilter("IsDeleted = 0");
 
@@ -121,7 +121,7 @@ public partial class ReadDbContext : DbContext
 			.HasForeignKey(e => e.AssetId)
 			.OnDelete(DeleteBehavior.Restrict);
 
-		modelBuilder.Entity<AssetMetadatum>()
+		modelBuilder.Entity<AssetMetadata>()
 			.HasOne(e => e.Asset)
 			.WithMany(p => p.AssetMetadata)
 			.HasForeignKey(e => e.AssetId)

@@ -6,31 +6,31 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using QuickCode.DemoCms.AssetManagementModule.Persistence.Repositories;
 using QuickCode.DemoCms.AssetManagementModule.Persistence.Contexts;
-using QuickCode.DemoCms.AssetManagementModule.Application.Dtos.AssetMetadatum;
+using QuickCode.DemoCms.AssetManagementModule.Application.Dtos.AssetMetadata;
 using QuickCode.DemoCms.Common.Helpers;
 using Xunit.Abstractions;
 
 namespace QuickCode.DemoCms.AssetManagementModule.Persistence.Tests.Repositories
 {
-    public class AssetMetadatumRepositoryTests : IDisposable
+    public class AssetMetadataRepositoryTests : IDisposable
     {
         private const int ResultCodeSuccess = 0;
         private const int ResultCodeNotFound = 404;
         private DbContextOptions<WriteDbContext> writeOptions = null;
         private DbContextOptions<ReadDbContext> readOptions = null;
-        private Mock<ILogger<AssetMetadatumRepository>> loggerMock = null;
+        private Mock<ILogger<AssetMetadataRepository>> loggerMock = null;
         private readonly ITestOutputHelper _output;
-        public AssetMetadatumRepositoryTests(ITestOutputHelper output)
+        public AssetMetadataRepositoryTests(ITestOutputHelper output)
         {
             _output = output;
             CreateDatabase();
         }
 
-        private AssetMetadatumRepository CreateRepository()
+        private AssetMetadataRepository CreateRepository()
         {
             var writeContext = new WriteDbContext(writeOptions);
             var readContext = new ReadDbContext(readOptions);
-            return new AssetMetadatumRepository(loggerMock.Object, writeContext, readContext);
+            return new AssetMetadataRepository(loggerMock.Object, writeContext, readContext);
         }
 
         private void CreateDatabase()
@@ -38,7 +38,7 @@ namespace QuickCode.DemoCms.AssetManagementModule.Persistence.Tests.Repositories
             var databaseName = $"TestDb_{Guid.NewGuid()}";
             writeOptions = new DbContextOptionsBuilder<WriteDbContext>().UseInMemoryDatabase(databaseName).Options;
             readOptions = new DbContextOptionsBuilder<ReadDbContext>().UseInMemoryDatabase(databaseName).Options;
-            loggerMock = new Mock<ILogger<AssetMetadatumRepository>>();
+            loggerMock = new Mock<ILogger<AssetMetadataRepository>>();
         }
 
         [Fact]
@@ -46,7 +46,7 @@ namespace QuickCode.DemoCms.AssetManagementModule.Persistence.Tests.Repositories
         {
             // Arrange
             var repository = CreateRepository();
-            var itemDto = TestDataGenerator.CreateFake<AssetMetadatumDto>("tr");
+            var itemDto = TestDataGenerator.CreateFake<AssetMetadataDto>("tr");
             // Act
             var result = await repository.InsertAsync(itemDto);
             // Assert
@@ -59,8 +59,8 @@ namespace QuickCode.DemoCms.AssetManagementModule.Persistence.Tests.Repositories
         {
             // Arrange
             var repository = CreateRepository();
-            var fakeItem1 = TestDataGenerator.CreateFake<AssetMetadatumDto>();
-            var fakeItem2 = TestDataGenerator.CreateFake<AssetMetadatumDto>("tr");
+            var fakeItem1 = TestDataGenerator.CreateFake<AssetMetadataDto>();
+            var fakeItem2 = TestDataGenerator.CreateFake<AssetMetadataDto>("tr");
             // Act
             var result1 = await repository.InsertAsync(fakeItem1);
             var result2 = await repository.InsertAsync(fakeItem2);
@@ -75,7 +75,7 @@ namespace QuickCode.DemoCms.AssetManagementModule.Persistence.Tests.Repositories
         {
             // Arrange
             var repository = CreateRepository();
-            var itemDto = TestDataGenerator.CreateFake<AssetMetadatumDto>();
+            var itemDto = TestDataGenerator.CreateFake<AssetMetadataDto>();
             var insertedItem = await repository.InsertAsync(itemDto);
             Assert.Equal(ResultCodeSuccess, insertedItem.Code);
             // Act
@@ -90,12 +90,12 @@ namespace QuickCode.DemoCms.AssetManagementModule.Persistence.Tests.Repositories
         {
             // Arrange
             var repository = CreateRepository();
-            var notExistsItem = TestDataGenerator.CreateFake<AssetMetadatumDto>("tr");
+            var notExistsItem = TestDataGenerator.CreateFake<AssetMetadataDto>("tr");
             // Act
             var result = await repository.GetByPkAsync(notExistsItem.Id);
             // Assert
             Assert.Equal(ResultCodeNotFound, result.Code);
-            Assert.Equal("Not found in AssetMetadatum", result.Message);
+            Assert.Equal("Not found in AssetMetadata", result.Message);
         }
 
         [Fact]
@@ -103,7 +103,7 @@ namespace QuickCode.DemoCms.AssetManagementModule.Persistence.Tests.Repositories
         {
             // Arrange
             var repository = CreateRepository();
-            var itemDto = TestDataGenerator.CreateFake<AssetMetadatumDto>("tr");
+            var itemDto = TestDataGenerator.CreateFake<AssetMetadataDto>("tr");
             var insertResult = await repository.InsertAsync(itemDto);
             Assert.Equal(ResultCodeSuccess, insertResult.Code);
             var insertedItem = insertResult.Value;
@@ -132,7 +132,7 @@ namespace QuickCode.DemoCms.AssetManagementModule.Persistence.Tests.Repositories
         {
             // Arrange
             var repository = CreateRepository();
-            var itemDto = TestDataGenerator.CreateFake<AssetMetadatumDto>();
+            var itemDto = TestDataGenerator.CreateFake<AssetMetadataDto>();
             var insertedItem = await repository.InsertAsync(itemDto);
             Assert.Equal(ResultCodeSuccess, insertedItem.Code);
             repository = CreateRepository();
@@ -147,12 +147,12 @@ namespace QuickCode.DemoCms.AssetManagementModule.Persistence.Tests.Repositories
         }
 
         [Fact]
-        public async Task ListAsync_Should_Return_All_AssetMetadatum()
+        public async Task ListAsync_Should_Return_All_AssetMetadata()
         {
             // Arrange
             CreateDatabase();
             var repository = CreateRepository();
-            var fakeItems = TestDataGenerator.CreateFakes<AssetMetadatumDto>("tr");
+            var fakeItems = TestDataGenerator.CreateFakes<AssetMetadataDto>("tr");
             foreach (var fakeItem in fakeItems)
             {
                 var insertResponse = await repository.InsertAsync(fakeItem);
@@ -176,7 +176,7 @@ namespace QuickCode.DemoCms.AssetManagementModule.Persistence.Tests.Repositories
         {
             // Arrange
             var repository = CreateRepository();
-            var fakeItems = TestDataGenerator.CreateFakes<AssetMetadatumDto>("en", 5);
+            var fakeItems = TestDataGenerator.CreateFakes<AssetMetadataDto>("en", 5);
             foreach (var fakeItem in fakeItems)
             {
                 var insertResponse = await repository.InsertAsync(fakeItem);
@@ -213,7 +213,7 @@ namespace QuickCode.DemoCms.AssetManagementModule.Persistence.Tests.Repositories
             // Arrange
             CreateDatabase();
             var repository = CreateRepository();
-            var fakeItems = TestDataGenerator.CreateFakes<AssetMetadatumDto>("tr");
+            var fakeItems = TestDataGenerator.CreateFakes<AssetMetadataDto>("tr");
             foreach (var fakeItem in fakeItems)
             {
                 var insertResponse = await repository.InsertAsync(fakeItem);
@@ -238,7 +238,7 @@ namespace QuickCode.DemoCms.AssetManagementModule.Persistence.Tests.Repositories
             // Arrange
             CreateDatabase();
             var repository = CreateRepository();
-            var fakeItems = TestDataGenerator.CreateFakes<AssetMetadatumDto>("tr");
+            var fakeItems = TestDataGenerator.CreateFakes<AssetMetadataDto>("tr");
             foreach (var fakeItem in fakeItems)
             {
                 var insertResponse = await repository.InsertAsync(fakeItem);
@@ -274,7 +274,7 @@ namespace QuickCode.DemoCms.AssetManagementModule.Persistence.Tests.Repositories
         {
             // Arrange
             var repository = CreateRepository();
-            var notExistsItem = TestDataGenerator.CreateFake<AssetMetadatumDto>("tr");
+            var notExistsItem = TestDataGenerator.CreateFake<AssetMetadataDto>("tr");
             // Act
             var result = await repository.UpdateAsync(notExistsItem);
             // Assert
@@ -287,7 +287,7 @@ namespace QuickCode.DemoCms.AssetManagementModule.Persistence.Tests.Repositories
         {
             // Arrange
             var repository = CreateRepository();
-            var notExistsItem = TestDataGenerator.CreateFake<AssetMetadatumDto>("tr");
+            var notExistsItem = TestDataGenerator.CreateFake<AssetMetadataDto>("tr");
             // Act
             var result = await repository.DeleteAsync(notExistsItem);
             // Assert
@@ -300,7 +300,7 @@ namespace QuickCode.DemoCms.AssetManagementModule.Persistence.Tests.Repositories
         {
             // Arrange
             var repository = CreateRepository();
-            var fakeItems = TestDataGenerator.CreateFakes<AssetMetadatumDto>();
+            var fakeItems = TestDataGenerator.CreateFakes<AssetMetadataDto>();
             foreach (var fakeItem in fakeItems)
             {
                 var insertResponse = await repository.InsertAsync(fakeItem);

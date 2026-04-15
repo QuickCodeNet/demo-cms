@@ -58,7 +58,7 @@ namespace QuickCode.DemoCms.Portal.Controllers.AssetManagementModule
 
         [Route("List")]
         [HttpPost]
-        public async Task<IActionResult> List(AssetMetadatumData model)
+        public async Task<IActionResult> List(AssetMetadataData model)
         {
             ModelBinder(ref model);
             model = await PrepareModel(model);
@@ -69,7 +69,7 @@ namespace QuickCode.DemoCms.Portal.Controllers.AssetManagementModule
 
         [Route("Insert")]
         [HttpPost]
-        public async Task<IActionResult> Insert(AssetMetadatumData model)
+        public async Task<IActionResult> Insert(AssetMetadataData model)
         {
             ModelBinder(ref model);
             var result = await pageClient.AssetMetadataInsertAsync(model.SelectedItem);
@@ -80,7 +80,7 @@ namespace QuickCode.DemoCms.Portal.Controllers.AssetManagementModule
 
         [Route("Update")]
         [HttpPost]
-        public async Task<IActionResult> Update(AssetMetadatumData model)
+        public async Task<IActionResult> Update(AssetMetadataData model)
         {
             ModelBinder(ref model);
             var request = model.SelectedItem;
@@ -92,7 +92,7 @@ namespace QuickCode.DemoCms.Portal.Controllers.AssetManagementModule
 
         [Route("Delete")]
         [HttpPost]
-        public async Task<IActionResult> Delete(AssetMetadatumData model)
+        public async Task<IActionResult> Delete(AssetMetadataData model)
         {
             ModelBinder(ref model);
             var request = model.SelectedItem;
@@ -103,7 +103,7 @@ namespace QuickCode.DemoCms.Portal.Controllers.AssetManagementModule
         }
 
         [Route("InsertItem")]
-        public IActionResult InsertItem(AssetMetadatumData model)
+        public IActionResult InsertItem(AssetMetadataData model)
         {
             ModelState.Clear();
             ModelBinder(ref model);
@@ -113,7 +113,7 @@ namespace QuickCode.DemoCms.Portal.Controllers.AssetManagementModule
         }
 
         [Route("DetailItem")]
-        public async Task<IActionResult> DetailItem(AssetMetadatumData model)
+        public async Task<IActionResult> DetailItem(AssetMetadataData model)
         {
             ModelBinder(ref model);
             model = await PrepareModel(model);
@@ -124,7 +124,7 @@ namespace QuickCode.DemoCms.Portal.Controllers.AssetManagementModule
 
         [Route("UpdateItem")]
         [HttpPost]
-        public async Task<IActionResult> UpdateItem(AssetMetadatumData model)
+        public async Task<IActionResult> UpdateItem(AssetMetadataData model)
         {
             ModelState.Clear();
             ModelBinder(ref model);
@@ -136,7 +136,7 @@ namespace QuickCode.DemoCms.Portal.Controllers.AssetManagementModule
 
         [Route("DeleteItem")]
         [HttpPost]
-        public async Task<IActionResult> DeleteItem(AssetMetadatumData model)
+        public async Task<IActionResult> DeleteItem(AssetMetadataData model)
         {
             ModelBinder(ref model);
             model = await PrepareModel(model);
@@ -145,15 +145,15 @@ namespace QuickCode.DemoCms.Portal.Controllers.AssetManagementModule
             return PartialView("Delete", model);
         }
 
-        private async Task<AssetMetadatumData> PrepareModel()
+        private async Task<AssetMetadataData> PrepareModel()
         {
-            var model = GetModel<AssetMetadatumData>();
+            var model = GetModel<AssetMetadataData>();
             model.CurrentPage = 1;
             model.PageSize = PageSize;
             return await PrepareModel(model);
         }
 
-        private async Task<AssetMetadatumData> PrepareModel(AssetMetadatumData model)
+        private async Task<AssetMetadataData> PrepareModel(AssetMetadataData model)
         {
             model.NumberOfRecord = await pageClient.AssetMetadataCountAsync();
             model.TotalPage = (model.NumberOfRecord + PageSize - 1) / PageSize;

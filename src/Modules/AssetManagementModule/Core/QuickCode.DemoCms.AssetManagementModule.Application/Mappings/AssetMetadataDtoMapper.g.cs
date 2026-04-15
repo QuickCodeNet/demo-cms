@@ -11,22 +11,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
-using QuickCode.DemoCms.AssetManagementModule.Application.Dtos.AssetMetadatum;
-using AssetMetadatumEntity = QuickCode.DemoCms.AssetManagementModule.Domain.Entities.AssetMetadatum;
+using QuickCode.DemoCms.AssetManagementModule.Application.Dtos.AssetMetadata;
+using AssetMetadataEntity = QuickCode.DemoCms.AssetManagementModule.Domain.Entities.AssetMetadata;
 using QuickCode.DemoCms.AssetManagementModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.AssetManagementModule.Application.Mappings
 {
-    public static class AssetMetadatumMappings
+    public static class AssetMetadataMappings
     {
-        public static List<AssetMetadatumDto> ToDto(this IEnumerable<AssetMetadatumEntity> model)
+        public static List<AssetMetadataDto> ToDto(this IEnumerable<AssetMetadataEntity> model)
         {
             return model.Select(u => u.ToDto()).ToList();
         }
 
-        public static AssetMetadatumDto ToDto(this AssetMetadatumEntity model)
+        public static AssetMetadataDto ToDto(this AssetMetadataEntity model)
         {
-            return new AssetMetadatumDto
+            return new AssetMetadataDto
             {
                 Id = model.Id,
                 AssetId = model.AssetId,
@@ -35,9 +35,9 @@ namespace QuickCode.DemoCms.AssetManagementModule.Application.Mappings
             };
         }
 
-        public static AssetMetadatumEntity ToEntity(this AssetMetadatumDto model)
+        public static AssetMetadataEntity ToEntity(this AssetMetadataDto model)
         {
-            return new AssetMetadatumEntity
+            return new AssetMetadataEntity
             {
                 Id = model.Id,
                 AssetId = model.AssetId,

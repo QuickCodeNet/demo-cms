@@ -23,25 +23,25 @@ using QuickCode.DemoCms.Common;
 using QuickCode.DemoCms.Common.Extensions;
 using QuickCode.DemoCms.Common.Helpers;
 using QuickCode.DemoCms.AssetManagementModule.Persistence.Contexts;
-using QuickCode.DemoCms.AssetManagementModule.Application.Dtos.AssetMetadatum;
+using QuickCode.DemoCms.AssetManagementModule.Application.Dtos.AssetMetadata;
 using QuickCode.DemoCms.AssetManagementModule.Application.Mappings;
 using QuickCode.DemoCms.AssetManagementModule.Persistence.Sql;
 using QuickCode.DemoCms.AssetManagementModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.AssetManagementModule.Persistence.Repositories
 {
-    public partial class AssetMetadatumRepository : BaseRepository, IAssetMetadatumRepository
+    public partial class AssetMetadataRepository : BaseRepository, IAssetMetadataRepository
     {
-        public async Task<RepoResponse<int>> UpdateMetadataValueAsync(int assetMetadatumAssetId, string assetMetadatumKey, UpdateMetadataValueRequestDto updateRequest)
+        public async Task<RepoResponse<int>> UpdateMetadataValueAsync(int assetMetadataAssetId, string assetMetadataKey, UpdateMetadataValueRequestDto updateRequest)
         {
-            return await ExecuteWithExceptionHandling("AssetMetadatum", async () =>
+            return await ExecuteWithExceptionHandling("AssetMetadata", async () =>
             {
-                var sql = SqlLoader.Load(SqlScripts.AssetMetadatum.Command.UpdateMetadataValue);
+                var sql = SqlLoader.Load(SqlScripts.AssetMetadata.Command.UpdateMetadataValue);
                 var parameters = new
                 {
                     ASSET_METADATA_VALUE = updateRequest.AssetMetadataValue,
-                    PRM_ASSET_METADATA_ASSET_ID = assetMetadatumAssetId,
-                    PRM_ASSET_METADATA_KEY = assetMetadatumKey
+                    PRM_ASSET_METADATA_ASSET_ID = assetMetadataAssetId,
+                    PRM_ASSET_METADATA_KEY = assetMetadataKey
                 };
                 using var connection = await GetOpenConnectionAsync(_writeContext);
                 var result = await connection.ExecuteAsync(sql, parameters);

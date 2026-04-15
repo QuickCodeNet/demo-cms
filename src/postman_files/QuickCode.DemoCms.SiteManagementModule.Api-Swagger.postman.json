@@ -1,0 +1,3405 @@
+{
+  "info": {
+    "name": "QuickCode - DemoCms - SiteManagementModule Api (1.0.0.0)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "v1"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/auth/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"demo@quickcode.net\",\r\n  \"password\": \"String1!\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var json = pm.response.json();",
+                  "var token = json.accessToken;",
+                  "var refreshToken = json.refreshToken;",
+                  "const isEnvSelected = pm.environment.name && pm.environment.name !== \"no_env\";",
+                  "if (isEnvSelected) {",
+                  "    pm.environment.set(\"access_token\", token);",
+                  "    pm.environment.set(\"refresh_token\", refreshToken);",
+                  "} else {",
+                  "    pm.collectionVariables.set(\"access_token\", token);",
+                  "    pm.collectionVariables.set(\"refresh_token\", refreshToken);",
+                  "}",
+                  "console.log(`Selected Environment: ${pm.environment.name || \"none\"}`);"
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const fallback_env = \"local\";",
+              "const default_base_url = \"http://localhost:6060\";",
+              "",
+              "const isEnvSelected = pm.environment.name && pm.environment.name !== \"no_env\";",
+              "",
+              "let env;",
+              "let base_url;",
+              "",
+              "env = pm.variables.get(\"active_env\") || fallback_env;",
+              "",
+              "if (isEnvSelected) {",
+              "    env = pm.environment.get(\"active_env\");",
+              "",
+              "    if (!env) {",
+              "        env = pm.variables.get(\"active_env\") || fallback_env;",
+              "        pm.environment.set(\"active_env\", env);",
+              "    }",
+              "}",
+              "",
+              "base_url = pm.variables.get(`base_url_${env}`) || default_base_url;",
+              "pm.variables.set(\"base_url\", base_url);",
+              "",
+              "console.log(`Selected Environment: ${pm.environment.name || \"none\"}`);",
+              "console.log(`Resolved active_env: ${env}`);",
+              "console.log(`Resolved base_url: ${base_url}`);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "AuditLogs",
+      "item": [
+        {
+          "name": "AuditLogsList",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/audit-logs",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "audit-logs"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "AuditLogsInsert",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/audit-logs",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "audit-logs"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":\"string\",\"entityName\":\"string\",\"entityId\":\"string\",\"action\":\"string\",\"userId\":\"string\",\"userName\":\"string\",\"userGroup\":\"string\",\"timestamp\":\"string\",\"oldValues\":\"string\",\"newValues\":\"string\",\"changedColumns\":\"string\",\"isChanged\":true,\"changeSummary\":\"string\",\"ipAddress\":\"string\",\"userAgent\":\"string\",\"correlationId\":\"string\",\"isSuccess\":true,\"errorMessage\":\"string\",\"hash\":\"string\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "AuditLogsCount",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/audit-logs/count",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "audit-logs",
+                "count"
+              ]
+            }
+          }
+        },
+        {
+          "name": "AuditLogsGetItem",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/audit-logs/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "audit-logs",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "AuditLogsUpdate",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/audit-logs/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "audit-logs",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":\"string\",\"entityName\":\"string\",\"entityId\":\"string\",\"action\":\"string\",\"userId\":\"string\",\"userName\":\"string\",\"userGroup\":\"string\",\"timestamp\":\"string\",\"oldValues\":\"string\",\"newValues\":\"string\",\"changedColumns\":\"string\",\"isChanged\":true,\"changeSummary\":\"string\",\"ipAddress\":\"string\",\"userAgent\":\"string\",\"correlationId\":\"string\",\"isSuccess\":true,\"errorMessage\":\"string\",\"hash\":\"string\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "AuditLogsDelete",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/audit-logs/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "audit-logs",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const fallback_env = \"local\";",
+              "const default_base_url = \"http://localhost:6060\";",
+              "",
+              "const isEnvSelected = pm.environment.name && pm.environment.name !== \"no_env\";",
+              "",
+              "let env;",
+              "let base_url;",
+              "",
+              "env = pm.variables.get(\"active_env\") || fallback_env;",
+              "",
+              "if (isEnvSelected) {",
+              "    env = pm.environment.get(\"active_env\");",
+              "",
+              "    if (!env) {",
+              "        env = pm.variables.get(\"active_env\") || fallback_env;",
+              "        pm.environment.set(\"active_env\", env);",
+              "    }",
+              "}",
+              "",
+              "base_url = pm.variables.get(`base_url_${env}`) || default_base_url;",
+              "pm.variables.set(\"base_url\", base_url);",
+              "",
+              "console.log(`Selected Environment: ${pm.environment.name || \"none\"}`);",
+              "console.log(`Resolved active_env: ${env}`);",
+              "console.log(`Resolved base_url: ${base_url}`);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Domains",
+      "item": [
+        {
+          "name": "DomainsList",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/domains",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "domains"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "DomainsInsert",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/domains",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "domains"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"siteId\":123,\"hostname\":\"string\",\"isPrimary\":true,\"isActive\":true}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DomainsCount",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/domains/count",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "domains",
+                "count"
+              ]
+            }
+          }
+        },
+        {
+          "name": "DomainsGetItem",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/domains/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "domains",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "DomainsUpdate",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/domains/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "domains",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"siteId\":123,\"hostname\":\"string\",\"isPrimary\":true,\"isActive\":true}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DomainsDelete",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/domains/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "domains",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "DomainsGetBySiteId",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/domains/get-by-site-id/:domainSiteId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "domains",
+                "get-by-site-id",
+                ":domainSiteId"
+              ],
+              "variable": [
+                {
+                  "key": "domainSiteId",
+                  "value": ""
+                }
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "DomainsGetSiteByHostname",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/domains/get-site-by-hostname/:domainHostname/:domainIsActive",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "domains",
+                "get-site-by-hostname",
+                ":domainHostname",
+                ":domainIsActive"
+              ],
+              "variable": [
+                {
+                  "key": "domainHostname",
+                  "value": ""
+                },
+                {
+                  "key": "domainIsActive",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "DomainsSetAsPrimary",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/domains/set-as-primary/:domainId/:domainSiteId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "domains",
+                "set-as-primary",
+                ":domainId",
+                ":domainSiteId"
+              ],
+              "variable": [
+                {
+                  "key": "domainId",
+                  "value": ""
+                },
+                {
+                  "key": "domainSiteId",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DomainsDeactivate",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/domains/deactivate/:domainId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "domains",
+                "deactivate",
+                ":domainId"
+              ],
+              "variable": [
+                {
+                  "key": "domainId",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const fallback_env = \"local\";",
+              "const default_base_url = \"http://localhost:6060\";",
+              "",
+              "const isEnvSelected = pm.environment.name && pm.environment.name !== \"no_env\";",
+              "",
+              "let env;",
+              "let base_url;",
+              "",
+              "env = pm.variables.get(\"active_env\") || fallback_env;",
+              "",
+              "if (isEnvSelected) {",
+              "    env = pm.environment.get(\"active_env\");",
+              "",
+              "    if (!env) {",
+              "        env = pm.variables.get(\"active_env\") || fallback_env;",
+              "        pm.environment.set(\"active_env\", env);",
+              "    }",
+              "}",
+              "",
+              "base_url = pm.variables.get(`base_url_${env}`) || default_base_url;",
+              "pm.variables.set(\"base_url\", base_url);",
+              "",
+              "console.log(`Selected Environment: ${pm.environment.name || \"none\"}`);",
+              "console.log(`Resolved active_env: ${env}`);",
+              "console.log(`Resolved base_url: ${base_url}`);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "NavigationItems",
+      "item": [
+        {
+          "name": "NavigationItemsList",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/navigation-items",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "navigation-items"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "NavigationItemsInsert",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/navigation-items",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "navigation-items"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"menuId\":123,\"parentItemId\":123,\"type\":\"string\",\"label\":\"string\",\"url\":\"string\",\"pageId\":123,\"sortOrder\":123,\"isVisible\":true}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "NavigationItemsCount",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/navigation-items/count",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "navigation-items",
+                "count"
+              ]
+            }
+          }
+        },
+        {
+          "name": "NavigationItemsGetItem",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/navigation-items/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "navigation-items",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "NavigationItemsUpdate",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/navigation-items/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "navigation-items",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"menuId\":123,\"parentItemId\":123,\"type\":\"string\",\"label\":\"string\",\"url\":\"string\",\"pageId\":123,\"sortOrder\":123,\"isVisible\":true}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "NavigationItemsDelete",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/navigation-items/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "navigation-items",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "NavigationItemsGetByMenuId",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/navigation-items/get-by-menu-id/:navigationItemMenuId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "navigation-items",
+                "get-by-menu-id",
+                ":navigationItemMenuId"
+              ],
+              "variable": [
+                {
+                  "key": "navigationItemMenuId",
+                  "value": ""
+                }
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "NavigationItemsGetRootItems",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/navigation-items/get-root-items/:navigationItemMenuId/:navigationItemParentItemId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "navigation-items",
+                "get-root-items",
+                ":navigationItemMenuId",
+                ":navigationItemParentItemId"
+              ],
+              "variable": [
+                {
+                  "key": "navigationItemMenuId",
+                  "value": ""
+                },
+                {
+                  "key": "navigationItemParentItemId",
+                  "value": ""
+                }
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "NavigationItemsGetChildItems",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/navigation-items/get-child-items/:navigationItemParentItemId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "navigation-items",
+                "get-child-items",
+                ":navigationItemParentItemId"
+              ],
+              "variable": [
+                {
+                  "key": "navigationItemParentItemId",
+                  "value": ""
+                }
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "NavigationItemsUpdateSortOrder",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/navigation-items/update-sort-order/:navigationItemId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "navigation-items",
+                "update-sort-order",
+                ":navigationItemId"
+              ],
+              "variable": [
+                {
+                  "key": "navigationItemId",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"navigationItemSortOrder\":123}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const fallback_env = \"local\";",
+              "const default_base_url = \"http://localhost:6060\";",
+              "",
+              "const isEnvSelected = pm.environment.name && pm.environment.name !== \"no_env\";",
+              "",
+              "let env;",
+              "let base_url;",
+              "",
+              "env = pm.variables.get(\"active_env\") || fallback_env;",
+              "",
+              "if (isEnvSelected) {",
+              "    env = pm.environment.get(\"active_env\");",
+              "",
+              "    if (!env) {",
+              "        env = pm.variables.get(\"active_env\") || fallback_env;",
+              "        pm.environment.set(\"active_env\", env);",
+              "    }",
+              "}",
+              "",
+              "base_url = pm.variables.get(`base_url_${env}`) || default_base_url;",
+              "pm.variables.set(\"base_url\", base_url);",
+              "",
+              "console.log(`Selected Environment: ${pm.environment.name || \"none\"}`);",
+              "console.log(`Resolved active_env: ${env}`);",
+              "console.log(`Resolved base_url: ${base_url}`);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "NavigationMenus",
+      "item": [
+        {
+          "name": "NavigationMenusList",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/navigation-menus",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "navigation-menus"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "NavigationMenusInsert",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/navigation-menus",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "navigation-menus"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"siteId\":123,\"name\":\"string\",\"locationKey\":\"string\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "NavigationMenusCount",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/navigation-menus/count",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "navigation-menus",
+                "count"
+              ]
+            }
+          }
+        },
+        {
+          "name": "NavigationMenusGetItem",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/navigation-menus/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "navigation-menus",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "NavigationMenusUpdate",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/navigation-menus/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "navigation-menus",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"siteId\":123,\"name\":\"string\",\"locationKey\":\"string\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "NavigationMenusDelete",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/navigation-menus/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "navigation-menus",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "NavigationMenusGetBySiteId",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/navigation-menus/get-by-site-id/:navigationMenuSiteId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "navigation-menus",
+                "get-by-site-id",
+                ":navigationMenuSiteId"
+              ],
+              "variable": [
+                {
+                  "key": "navigationMenuSiteId",
+                  "value": ""
+                }
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "NavigationMenusGetByLocation",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/navigation-menus/get-by-location/:navigationMenuSiteId/:navigationMenuLocationKey",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "navigation-menus",
+                "get-by-location",
+                ":navigationMenuSiteId",
+                ":navigationMenuLocationKey"
+              ],
+              "variable": [
+                {
+                  "key": "navigationMenuSiteId",
+                  "value": ""
+                },
+                {
+                  "key": "navigationMenuLocationKey",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const fallback_env = \"local\";",
+              "const default_base_url = \"http://localhost:6060\";",
+              "",
+              "const isEnvSelected = pm.environment.name && pm.environment.name !== \"no_env\";",
+              "",
+              "let env;",
+              "let base_url;",
+              "",
+              "env = pm.variables.get(\"active_env\") || fallback_env;",
+              "",
+              "if (isEnvSelected) {",
+              "    env = pm.environment.get(\"active_env\");",
+              "",
+              "    if (!env) {",
+              "        env = pm.variables.get(\"active_env\") || fallback_env;",
+              "        pm.environment.set(\"active_env\", env);",
+              "    }",
+              "}",
+              "",
+              "base_url = pm.variables.get(`base_url_${env}`) || default_base_url;",
+              "pm.variables.set(\"base_url\", base_url);",
+              "",
+              "console.log(`Selected Environment: ${pm.environment.name || \"none\"}`);",
+              "console.log(`Resolved active_env: ${env}`);",
+              "console.log(`Resolved base_url: ${base_url}`);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "SiteLanguages",
+      "item": [
+        {
+          "name": "SiteLanguagesList",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/site-languages",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "site-languages"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "SiteLanguagesInsert",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/site-languages",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "site-languages"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"siteId\":123,\"languageId\":123,\"isEnabled\":true}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "SiteLanguagesCount",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/site-languages/count",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "site-languages",
+                "count"
+              ]
+            }
+          }
+        },
+        {
+          "name": "SiteLanguagesGetItem",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/site-languages/:siteId/:languageId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "site-languages",
+                ":siteId",
+                ":languageId"
+              ],
+              "variable": [
+                {
+                  "key": "siteId",
+                  "value": ""
+                },
+                {
+                  "key": "languageId",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "SiteLanguagesUpdate",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/site-languages/:siteId/:languageId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "site-languages",
+                ":siteId",
+                ":languageId"
+              ],
+              "variable": [
+                {
+                  "key": "siteId",
+                  "value": ""
+                },
+                {
+                  "key": "languageId",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"siteId\":123,\"languageId\":123,\"isEnabled\":true}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "SiteLanguagesDelete",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/site-languages/:siteId/:languageId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "site-languages",
+                ":siteId",
+                ":languageId"
+              ],
+              "variable": [
+                {
+                  "key": "siteId",
+                  "value": ""
+                },
+                {
+                  "key": "languageId",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "SiteLanguagesGetLanguagesForSite",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/site-languages/get-languages-for-site/:siteLanguageSiteId/:siteLanguageIsEnabled",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "site-languages",
+                "get-languages-for-site",
+                ":siteLanguageSiteId",
+                ":siteLanguageIsEnabled"
+              ],
+              "variable": [
+                {
+                  "key": "siteLanguageSiteId",
+                  "value": ""
+                },
+                {
+                  "key": "siteLanguageIsEnabled",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "SiteLanguagesEnableLanguage",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/site-languages/enable-language/:siteLanguageSiteId/:siteLanguageLanguageId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "site-languages",
+                "enable-language",
+                ":siteLanguageSiteId",
+                ":siteLanguageLanguageId"
+              ],
+              "variable": [
+                {
+                  "key": "siteLanguageSiteId",
+                  "value": ""
+                },
+                {
+                  "key": "siteLanguageLanguageId",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "SiteLanguagesDisableLanguage",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/site-languages/disable-language/:siteLanguageSiteId/:siteLanguageLanguageId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "site-languages",
+                "disable-language",
+                ":siteLanguageSiteId",
+                ":siteLanguageLanguageId"
+              ],
+              "variable": [
+                {
+                  "key": "siteLanguageSiteId",
+                  "value": ""
+                },
+                {
+                  "key": "siteLanguageLanguageId",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const fallback_env = \"local\";",
+              "const default_base_url = \"http://localhost:6060\";",
+              "",
+              "const isEnvSelected = pm.environment.name && pm.environment.name !== \"no_env\";",
+              "",
+              "let env;",
+              "let base_url;",
+              "",
+              "env = pm.variables.get(\"active_env\") || fallback_env;",
+              "",
+              "if (isEnvSelected) {",
+              "    env = pm.environment.get(\"active_env\");",
+              "",
+              "    if (!env) {",
+              "        env = pm.variables.get(\"active_env\") || fallback_env;",
+              "        pm.environment.set(\"active_env\", env);",
+              "    }",
+              "}",
+              "",
+              "base_url = pm.variables.get(`base_url_${env}`) || default_base_url;",
+              "pm.variables.set(\"base_url\", base_url);",
+              "",
+              "console.log(`Selected Environment: ${pm.environment.name || \"none\"}`);",
+              "console.log(`Resolved active_env: ${env}`);",
+              "console.log(`Resolved base_url: ${base_url}`);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sites",
+      "item": [
+        {
+          "name": "SitesList",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/sites",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "sites"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "SitesInsert",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/sites",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "sites"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"name\":\"string\",\"defaultLanguageId\":123,\"themeId\":123,\"isActive\":true,\"createdDate\":\"string\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "SitesCount",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/sites/count",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "sites",
+                "count"
+              ]
+            }
+          }
+        },
+        {
+          "name": "SitesGetItem",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/sites/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "sites",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "SitesUpdate",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/sites/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "sites",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"name\":\"string\",\"defaultLanguageId\":123,\"themeId\":123,\"isActive\":true,\"createdDate\":\"string\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "SitesDelete",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/sites/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "sites",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "SitesGetActive",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/sites/get-active/:siteIsActive",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "sites",
+                "get-active",
+                ":siteIsActive"
+              ],
+              "variable": [
+                {
+                  "key": "siteIsActive",
+                  "value": ""
+                }
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "SitesSearchByName",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/sites/search-by-name/:siteName",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "sites",
+                "search-by-name",
+                ":siteName"
+              ],
+              "variable": [
+                {
+                  "key": "siteName",
+                  "value": ""
+                }
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "SitesDeactivate",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/sites/deactivate/:siteId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "sites",
+                "deactivate",
+                ":siteId"
+              ],
+              "variable": [
+                {
+                  "key": "siteId",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "SitesActivate",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/sites/activate/:siteId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "sites",
+                "activate",
+                ":siteId"
+              ],
+              "variable": [
+                {
+                  "key": "siteId",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "SitesChangeTheme",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/sites/change-theme/:siteId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "sites",
+                "change-theme",
+                ":siteId"
+              ],
+              "variable": [
+                {
+                  "key": "siteId",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"siteThemeId\":123}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const fallback_env = \"local\";",
+              "const default_base_url = \"http://localhost:6060\";",
+              "",
+              "const isEnvSelected = pm.environment.name && pm.environment.name !== \"no_env\";",
+              "",
+              "let env;",
+              "let base_url;",
+              "",
+              "env = pm.variables.get(\"active_env\") || fallback_env;",
+              "",
+              "if (isEnvSelected) {",
+              "    env = pm.environment.get(\"active_env\");",
+              "",
+              "    if (!env) {",
+              "        env = pm.variables.get(\"active_env\") || fallback_env;",
+              "        pm.environment.set(\"active_env\", env);",
+              "    }",
+              "}",
+              "",
+              "base_url = pm.variables.get(`base_url_${env}`) || default_base_url;",
+              "pm.variables.set(\"base_url\", base_url);",
+              "",
+              "console.log(`Selected Environment: ${pm.environment.name || \"none\"}`);",
+              "console.log(`Resolved active_env: ${env}`);",
+              "console.log(`Resolved base_url: ${base_url}`);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "SiteSettings",
+      "item": [
+        {
+          "name": "SiteSettingsList",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/site-settings",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "site-settings"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "SiteSettingsInsert",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/site-settings",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "site-settings"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"siteId\":123,\"key\":\"string\",\"value\":\"string\",\"isSecret\":true}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "SiteSettingsCount",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/site-settings/count",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "site-settings",
+                "count"
+              ]
+            }
+          }
+        },
+        {
+          "name": "SiteSettingsGetItem",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/site-settings/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "site-settings",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "SiteSettingsUpdate",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/site-settings/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "site-settings",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"siteId\":123,\"key\":\"string\",\"value\":\"string\",\"isSecret\":true}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "SiteSettingsDelete",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/site-settings/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "site-settings",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "SiteSettingsGetSettingsForSite",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/site-settings/get-settings-for-site/:siteSettingSiteId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "site-settings",
+                "get-settings-for-site",
+                ":siteSettingSiteId"
+              ],
+              "variable": [
+                {
+                  "key": "siteSettingSiteId",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "SiteSettingsGetSettingByKey",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/site-settings/get-setting-by-key/:siteSettingSiteId/:siteSettingKey",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "site-settings",
+                "get-setting-by-key",
+                ":siteSettingSiteId",
+                ":siteSettingKey"
+              ],
+              "variable": [
+                {
+                  "key": "siteSettingSiteId",
+                  "value": ""
+                },
+                {
+                  "key": "siteSettingKey",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "SiteSettingsUpdateValue",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/site-settings/update-value/:siteSettingSiteId/:siteSettingKey",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "site-settings",
+                "update-value",
+                ":siteSettingSiteId",
+                ":siteSettingKey"
+              ],
+              "variable": [
+                {
+                  "key": "siteSettingSiteId",
+                  "value": ""
+                },
+                {
+                  "key": "siteSettingKey",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"siteSettingValue\":\"string\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const fallback_env = \"local\";",
+              "const default_base_url = \"http://localhost:6060\";",
+              "",
+              "const isEnvSelected = pm.environment.name && pm.environment.name !== \"no_env\";",
+              "",
+              "let env;",
+              "let base_url;",
+              "",
+              "env = pm.variables.get(\"active_env\") || fallback_env;",
+              "",
+              "if (isEnvSelected) {",
+              "    env = pm.environment.get(\"active_env\");",
+              "",
+              "    if (!env) {",
+              "        env = pm.variables.get(\"active_env\") || fallback_env;",
+              "        pm.environment.set(\"active_env\", env);",
+              "    }",
+              "}",
+              "",
+              "base_url = pm.variables.get(`base_url_${env}`) || default_base_url;",
+              "pm.variables.set(\"base_url\", base_url);",
+              "",
+              "console.log(`Selected Environment: ${pm.environment.name || \"none\"}`);",
+              "console.log(`Resolved active_env: ${env}`);",
+              "console.log(`Resolved base_url: ${base_url}`);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Templates",
+      "item": [
+        {
+          "name": "TemplatesList",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/templates",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "templates"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "TemplatesInsert",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/templates",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "templates"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"themeId\":123,\"name\":\"string\",\"key\":\"string\",\"description\":\"string\",\"filePath\":\"string\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "TemplatesCount",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/templates/count",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "templates",
+                "count"
+              ]
+            }
+          }
+        },
+        {
+          "name": "TemplatesGetItem",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/templates/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "templates",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "TemplatesUpdate",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/templates/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "templates",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"themeId\":123,\"name\":\"string\",\"key\":\"string\",\"description\":\"string\",\"filePath\":\"string\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "TemplatesDelete",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/templates/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "templates",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "TemplatesGetByThemeId",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/templates/get-by-theme-id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "templates",
+                "get-by-theme-id"
+              ],
+              "query": [
+                {
+                  "key": "templateThemeId",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "TemplatesGetByKey",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/templates/get-by-key",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "templates",
+                "get-by-key"
+              ],
+              "query": [
+                {
+                  "key": "templateThemeId",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "templateKey",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const fallback_env = \"local\";",
+              "const default_base_url = \"http://localhost:6060\";",
+              "",
+              "const isEnvSelected = pm.environment.name && pm.environment.name !== \"no_env\";",
+              "",
+              "let env;",
+              "let base_url;",
+              "",
+              "env = pm.variables.get(\"active_env\") || fallback_env;",
+              "",
+              "if (isEnvSelected) {",
+              "    env = pm.environment.get(\"active_env\");",
+              "",
+              "    if (!env) {",
+              "        env = pm.variables.get(\"active_env\") || fallback_env;",
+              "        pm.environment.set(\"active_env\", env);",
+              "    }",
+              "}",
+              "",
+              "base_url = pm.variables.get(`base_url_${env}`) || default_base_url;",
+              "pm.variables.set(\"base_url\", base_url);",
+              "",
+              "console.log(`Selected Environment: ${pm.environment.name || \"none\"}`);",
+              "console.log(`Resolved active_env: ${env}`);",
+              "console.log(`Resolved base_url: ${base_url}`);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Themes",
+      "item": [
+        {
+          "name": "ThemesList",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/themes",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "themes"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ThemesInsert",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/themes",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "themes"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"name\":\"string\",\"version\":\"string\",\"developer\":\"string\",\"repositoryUrl\":\"string\",\"isActive\":true}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "ThemesCount",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/themes/count",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "themes",
+                "count"
+              ]
+            }
+          }
+        },
+        {
+          "name": "ThemesGetItem",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/themes/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "themes",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ThemesUpdate",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/themes/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "themes",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":123,\"name\":\"string\",\"version\":\"string\",\"developer\":\"string\",\"repositoryUrl\":\"string\",\"isActive\":true}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "ThemesDelete",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/themes/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "themes",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ThemesGetActive",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/themes/get-active/:themeIsActive",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "themes",
+                "get-active",
+                ":themeIsActive"
+              ],
+              "variable": [
+                {
+                  "key": "themeIsActive",
+                  "value": ""
+                }
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ThemesSearchByName",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/themes/search-by-name/:themeName",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "themes",
+                "search-by-name",
+                ":themeName"
+              ],
+              "variable": [
+                {
+                  "key": "themeName",
+                  "value": ""
+                }
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "sample",
+                  "description": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ThemesDeactivate",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/site-management-module/themes/deactivate/:themeId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "site-management-module",
+                "themes",
+                "deactivate",
+                ":themeId"
+              ],
+              "variable": [
+                {
+                  "key": "themeId",
+                  "value": ""
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const fallback_env = \"local\";",
+              "const default_base_url = \"http://localhost:6060\";",
+              "",
+              "const isEnvSelected = pm.environment.name && pm.environment.name !== \"no_env\";",
+              "",
+              "let env;",
+              "let base_url;",
+              "",
+              "env = pm.variables.get(\"active_env\") || fallback_env;",
+              "",
+              "if (isEnvSelected) {",
+              "    env = pm.environment.get(\"active_env\");",
+              "",
+              "    if (!env) {",
+              "        env = pm.variables.get(\"active_env\") || fallback_env;",
+              "        pm.environment.set(\"active_env\", env);",
+              "    }",
+              "}",
+              "",
+              "base_url = pm.variables.get(`base_url_${env}`) || default_base_url;",
+              "pm.variables.set(\"base_url\", base_url);",
+              "",
+              "console.log(`Selected Environment: ${pm.environment.name || \"none\"}`);",
+              "console.log(`Resolved active_env: ${env}`);",
+              "console.log(`Resolved base_url: ${base_url}`);"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:6060",
+      "type": "string"
+    },
+    {
+      "key": "base_url_docker",
+      "value": "http://localhost:6060",
+      "type": "string"
+    },
+    {
+      "key": "base_url_test",
+      "value": "http://localhost:6060",
+      "type": "string"
+    },
+    {
+      "key": "base_url_prod",
+      "value": "https://demo-cms-gateway-821209474183.europe-west1.run.app",
+      "type": "string"
+    },
+    {
+      "key": "base_url_cloudrun",
+      "value": "https://demo-cms-gateway.quickcode.net",
+      "type": "string"
+    },
+    {
+      "key": "active_env",
+      "value": "docker",
+      "type": "string"
+    },
+    {
+      "key": "projectName",
+      "value": "DemoCms",
+      "type": "string"
+    }
+  ]
+}

@@ -50,8 +50,8 @@ public partial class Asset : BaseSoftDeletable, IAuditableEntity
 	public virtual ICollection<AssetTranslation> AssetTranslations { get; } = new List<AssetTranslation>();
 
 
-	[InverseProperty(nameof(AssetMetadatum.Asset))]
-	public virtual ICollection<AssetMetadatum> AssetMetadata { get; } = new List<AssetMetadatum>();
+	[InverseProperty(nameof(AssetMetadata.Asset))]
+	public virtual ICollection<AssetMetadata> AssetMetadata { get; } = new List<AssetMetadata>();
 
 
 	[InverseProperty(nameof(AssetRendition.Asset))]

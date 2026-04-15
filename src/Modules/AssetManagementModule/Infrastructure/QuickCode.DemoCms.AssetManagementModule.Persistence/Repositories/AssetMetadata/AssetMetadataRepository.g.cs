@@ -22,93 +22,93 @@ using Microsoft.Extensions.Logging;
 using QuickCode.DemoCms.Common;
 using QuickCode.DemoCms.Common.Extensions;
 using QuickCode.DemoCms.AssetManagementModule.Persistence.Contexts;
-using QuickCode.DemoCms.AssetManagementModule.Application.Dtos.AssetMetadatum;
+using QuickCode.DemoCms.AssetManagementModule.Application.Dtos.AssetMetadata;
 using QuickCode.DemoCms.AssetManagementModule.Application.Mappings;
 using QuickCode.DemoCms.AssetManagementModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.AssetManagementModule.Persistence.Repositories
 {
-    public partial class AssetMetadatumRepository : BaseRepository, IAssetMetadatumRepository
+    public partial class AssetMetadataRepository : BaseRepository, IAssetMetadataRepository
     {
         private readonly WriteDbContext _writeContext;
         private readonly ReadDbContext _readContext;
-        public AssetMetadatumRepository(ILogger<AssetMetadatumRepository> logger, WriteDbContext writeContext, ReadDbContext readContext) : base(logger, "AssetMetadatum")
+        public AssetMetadataRepository(ILogger<AssetMetadataRepository> logger, WriteDbContext writeContext, ReadDbContext readContext) : base(logger, "AssetMetadata")
         {
             _writeContext = writeContext;
             _readContext = readContext;
         }
 
-        public async Task<RepoResponse<AssetMetadatumDto>> InsertAsync(AssetMetadatumDto value)
+        public async Task<RepoResponse<AssetMetadataDto>> InsertAsync(AssetMetadataDto value)
         {
             return await ExecuteWithExceptionHandling("Insert", async () =>
             {
                 var entity = value.ToEntity();
-                await _writeContext.AssetMetadatum.AddAsync(entity);
+                await _writeContext.AssetMetadata.AddAsync(entity);
                 await _writeContext.SaveChangesAsync();
                 var resultDto = entity.ToDto();
-                return new RepoResponse<AssetMetadatumDto>(resultDto, "Success");
+                return new RepoResponse<AssetMetadataDto>(resultDto, "Success");
             });
         }
 
-        public async Task<RepoResponse<bool>> UpdateAsync(AssetMetadatumDto value)
+        public async Task<RepoResponse<bool>> UpdateAsync(AssetMetadataDto value)
         {
             return await ExecuteWithExceptionHandling("Update", async () =>
             {
-                _writeContext.Set<Domain.Entities.AssetMetadatum>().Update(value.ToEntity());
+                _writeContext.Set<Domain.Entities.AssetMetadata>().Update(value.ToEntity());
                 await _writeContext.SaveChangesAsync();
                 return new RepoResponse<bool>(true, "Success");
             });
         }
 
-        public async Task<RepoResponse<bool>> DeleteAsync(AssetMetadatumDto value)
+        public async Task<RepoResponse<bool>> DeleteAsync(AssetMetadataDto value)
         {
             return await ExecuteWithExceptionHandling("Delete", async () =>
             {
-                _writeContext.AssetMetadatum.Remove(value.ToEntity());
+                _writeContext.AssetMetadata.Remove(value.ToEntity());
                 await _writeContext.SaveChangesAsync();
                 return new RepoResponse<bool>(true, "Success");
             });
         }
 
-        public async Task<RepoResponse<AssetMetadatumDto>> GetByPkAsync(int id)
+        public async Task<RepoResponse<AssetMetadataDto>> GetByPkAsync(int id)
         {
             return await ExecuteWithExceptionHandling("GetByPk", async () =>
             {
                 var result =
-                    from AM in _readContext.AssetMetadatum
+                    from AM in _readContext.AssetMetadata
                     where AM.Id.Equals(id)
                     select AM;
                 var response = await result.FirstOrDefaultAsync();
-                return response == null ? new RepoResponse<AssetMetadatumDto>
+                return response == null ? new RepoResponse<AssetMetadataDto>
                 {
                     Code = 404,
-                    Message = "Not found in AssetMetadatum"
+                    Message = "Not found in AssetMetadata"
                 }
 
-                : new RepoResponse<AssetMetadatumDto>(response.ToDto(), "Success");
+                : new RepoResponse<AssetMetadataDto>(response.ToDto(), "Success");
             });
         }
 
-        public async Task<RepoResponse<List<AssetMetadatumDto>>> ListAsync(int? pageNumber = null, int? pageSize = null)
+        public async Task<RepoResponse<List<AssetMetadataDto>>> ListAsync(int? pageNumber = null, int? pageSize = null)
         {
             return await ExecuteWithExceptionHandling("Select", async () =>
             {
                 if (pageNumber.HasValue && pageNumber < ConfigurationConstants.MinPageNumber)
                 {
-                    return new RepoResponse<List<AssetMetadatumDto>>
+                    return new RepoResponse<List<AssetMetadataDto>>
                     {
                         Code = 404,
                         Message = $"Page Number must be greater than {ConfigurationConstants.MinPageNumber}"};
                 }
 
-                var query = _readContext.AssetMetadatum.OrderBy(o => o.Id).AsQueryable();
+                var query = _readContext.AssetMetadata.OrderBy(o => o.Id).AsQueryable();
                 if (pageNumber.HasValue && pageSize.HasValue)
                 {
                     query = ApplyPagination(query, pageNumber.Value, pageSize.Value);
                 }
 
                 var result = await query.ToListAsync();
-                return new RepoResponse<List<AssetMetadatumDto>>(result.ToDto(), "Success");
+                return new RepoResponse<List<AssetMetadataDto>>(result.ToDto(), "Success");
             });
         }
 
@@ -116,7 +116,7 @@ namespace QuickCode.DemoCms.AssetManagementModule.Persistence.Repositories
         {
             return await ExecuteWithExceptionHandling("Count", async () =>
             {
-                return new RepoResponse<int>(await _readContext.AssetMetadatum.CountAsync(), "Success");
+                return new RepoResponse<int>(await _readContext.AssetMetadata.CountAsync(), "Success");
             });
         }
     }

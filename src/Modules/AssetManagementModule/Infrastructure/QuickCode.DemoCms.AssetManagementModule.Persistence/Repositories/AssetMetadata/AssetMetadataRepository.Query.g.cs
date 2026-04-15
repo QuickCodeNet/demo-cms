@@ -23,31 +23,31 @@ using QuickCode.DemoCms.Common;
 using QuickCode.DemoCms.Common.Extensions;
 using QuickCode.DemoCms.Common.Helpers;
 using QuickCode.DemoCms.AssetManagementModule.Persistence.Contexts;
-using QuickCode.DemoCms.AssetManagementModule.Application.Dtos.AssetMetadatum;
+using QuickCode.DemoCms.AssetManagementModule.Application.Dtos.AssetMetadata;
 using QuickCode.DemoCms.AssetManagementModule.Application.Mappings;
 using QuickCode.DemoCms.AssetManagementModule.Persistence.Sql;
 using QuickCode.DemoCms.AssetManagementModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.AssetManagementModule.Persistence.Repositories
 {
-    public partial class AssetMetadatumRepository : BaseRepository, IAssetMetadatumRepository
+    public partial class AssetMetadataRepository : BaseRepository, IAssetMetadataRepository
     {
-        public async Task<RepoResponse<List<GetMetadataForAssetResponseDto>>> GetMetadataForAssetAsync(int assetMetadatumAssetId)
+        public async Task<RepoResponse<List<GetMetadataForAssetResponseDto>>> GetMetadataForAssetAsync(int assetMetadataAssetId)
         {
             return await ExecuteWithExceptionHandling("GetMetadataForAsset", async () =>
             {
-                var sql = SqlLoader.Load(SqlScripts.AssetMetadatum.Query.GetMetadataForAsset);
+                var sql = SqlLoader.Load(SqlScripts.AssetMetadata.Query.GetMetadataForAsset);
                 var parameters = new
                 {
-                    PRM_ASSET_METADATA_ASSET_ID = assetMetadatumAssetId
+                    PRM_ASSET_METADATA_ASSET_ID = assetMetadataAssetId
                 };
                 using var connection = await GetOpenConnectionAsync(_readContext);
                 var values = await connection.QueryAsync<GetMetadataForAssetResponseDto>(sql, parameters);
-                return BuildListResponse(values, "Not found in AssetMetadatum");
+                return BuildListResponse(values, "Not found in AssetMetadata");
             });
         }
 
-        public async Task<RepoResponse<List<GetAssetsByMetadataResponseDto>>> GetAssetsByMetadataAsync(string assetMetadatumKey, string assetMetadatumValue, int? pageNumber = null, int? pageSize = null)
+        public async Task<RepoResponse<List<GetAssetsByMetadataResponseDto>>> GetAssetsByMetadataAsync(string assetMetadataKey, string assetMetadataValue, int? pageNumber = null, int? pageSize = null)
         {
             pageNumber ??= ConfigurationConstants.MinPageNumber;
             pageSize ??= ConfigurationConstants.DefaultPageSize;
@@ -62,18 +62,18 @@ namespace QuickCode.DemoCms.AssetManagementModule.Persistence.Repositories
                 }
                 else
                 {
-                    var sql = SqlLoader.Load(SqlScripts.AssetMetadatum.Query.GetAssetsByMetadata);
+                    var sql = SqlLoader.Load(SqlScripts.AssetMetadata.Query.GetAssetsByMetadata);
                     var startIndex = (pageNumber - 1) * pageSize;
                     var parameters = new
                     {
-                        PRM_ASSET_METADATA_KEY = assetMetadatumKey,
-                        PRM_ASSET_METADATA_VALUE = assetMetadatumValue,
+                        PRM_ASSET_METADATA_KEY = assetMetadataKey,
+                        PRM_ASSET_METADATA_VALUE = assetMetadataValue,
                         StartIndex = startIndex,
                         PageSize = pageSize
                     };
                     using var connection = await GetOpenConnectionAsync(_readContext);
                     var values = await connection.QueryAsync<GetAssetsByMetadataResponseDto>(sql, parameters);
-                    return BuildListResponse(values, "Not found in AssetMetadatum");
+                    return BuildListResponse(values, "Not found in AssetMetadata");
                 }
             });
         }

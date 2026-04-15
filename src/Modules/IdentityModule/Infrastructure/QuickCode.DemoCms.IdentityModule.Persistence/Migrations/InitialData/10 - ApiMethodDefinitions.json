@@ -1711,31 +1711,31 @@
     "UrlPath": "/api/asset-management-module/asset-translations/{id:int}"
   },
   {
-    "Key": "GetapiassetmanagementmoduleassetmetadatagetmetadataforassetassetmetadatumassetidintAssetMetadataController",
+    "Key": "GetapiassetmanagementmoduleassetmetadatagetmetadataforassetassetmetadataassetidintAssetMetadataController",
     "ModuleName": "AssetManagementModule",
     "ModelName": "AssetMetadata",
     "HttpMethod": "Get",
     "ControllerName": "AssetMetadataController",
-    "MethodName": "get-metadata-for-asset/{assetMetadatumAssetId:int}",
-    "UrlPath": "/api/asset-management-module/asset-metadata/get-metadata-for-asset/{assetMetadatumAssetId:int}"
+    "MethodName": "get-metadata-for-asset/{assetMetadataAssetId:int}",
+    "UrlPath": "/api/asset-management-module/asset-metadata/get-metadata-for-asset/{assetMetadataAssetId:int}"
   },
   {
-    "Key": "GetapiassetmanagementmoduleassetmetadatagetassetsbymetadataassetmetadatumkeyassetmetadatumvalueAssetMetadataController",
+    "Key": "GetapiassetmanagementmoduleassetmetadatagetassetsbymetadataassetmetadatakeyassetmetadatavalueAssetMetadataController",
     "ModuleName": "AssetManagementModule",
     "ModelName": "AssetMetadata",
     "HttpMethod": "Get",
     "ControllerName": "AssetMetadataController",
-    "MethodName": "get-assets-by-metadata/{assetMetadatumKey}/{assetMetadatumValue}",
-    "UrlPath": "/api/asset-management-module/asset-metadata/get-assets-by-metadata/{assetMetadatumKey}/{assetMetadatumValue}"
+    "MethodName": "get-assets-by-metadata/{assetMetadataKey}/{assetMetadataValue}",
+    "UrlPath": "/api/asset-management-module/asset-metadata/get-assets-by-metadata/{assetMetadataKey}/{assetMetadataValue}"
   },
   {
-    "Key": "PatchapiassetmanagementmoduleassetmetadataupdatemetadatavalueassetmetadatumassetidintassetmetadatumkeyAssetMetadataController",
+    "Key": "PatchapiassetmanagementmoduleassetmetadataupdatemetadatavalueassetmetadataassetidintassetmetadatakeyAssetMetadataController",
     "ModuleName": "AssetManagementModule",
     "ModelName": "AssetMetadata",
     "HttpMethod": "Patch",
     "ControllerName": "AssetMetadataController",
     "MethodName": "Patch",
-    "UrlPath": "/api/asset-management-module/asset-metadata/update-metadata-value/{assetMetadatumAssetId:int}/{assetMetadatumKey}"
+    "UrlPath": "/api/asset-management-module/asset-metadata/update-metadata-value/{assetMetadataAssetId:int}/{assetMetadataKey}"
   },
   {
     "Key": "GetapiassetmanagementmoduleassetmetadataAssetMetadataController",

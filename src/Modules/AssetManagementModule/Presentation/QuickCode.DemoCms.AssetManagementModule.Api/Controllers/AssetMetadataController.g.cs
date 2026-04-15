@@ -6,18 +6,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using QuickCode.DemoCms.Common.Controllers;
-using QuickCode.DemoCms.AssetManagementModule.Application.Dtos.AssetMetadatum;
-using QuickCode.DemoCms.AssetManagementModule.Application.Services.AssetMetadatum;
+using QuickCode.DemoCms.AssetManagementModule.Application.Dtos.AssetMetadata;
+using QuickCode.DemoCms.AssetManagementModule.Application.Services.AssetMetadata;
 using QuickCode.DemoCms.AssetManagementModule.Domain.Enums;
 
 namespace QuickCode.DemoCms.AssetManagementModule.Api.Controllers
 {
     public partial class AssetMetadataController : QuickCodeBaseApiController
     {
-        private readonly IAssetMetadatumService service;
+        private readonly IAssetMetadataService service;
         private readonly ILogger<AssetMetadataController> logger;
         private readonly IServiceProvider serviceProvider;
-        public AssetMetadataController(IAssetMetadatumService service, IServiceProvider serviceProvider, ILogger<AssetMetadataController> logger)
+        public AssetMetadataController(IAssetMetadataService service, IServiceProvider serviceProvider, ILogger<AssetMetadataController> logger)
         {
             this.service = service;
             this.logger = logger;
@@ -25,14 +25,14 @@ namespace QuickCode.DemoCms.AssetManagementModule.Api.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<AssetMetadatumDto>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<AssetMetadataDto>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         public async Task<IActionResult> ListAsync([FromQuery] int? page, int? size)
         {
             if (ValidatePagination(page, size) is {} error)
                 return error;
             var response = await service.ListAsync(page, size);
-            if (HandleResponseError(response, logger, "AssetMetadatum", "List") is {} responseError)
+            if (HandleResponseError(response, logger, "AssetMetadata", "List") is {} responseError)
                 return responseError;
             return Ok(response.Value);
         }
@@ -43,30 +43,30 @@ namespace QuickCode.DemoCms.AssetManagementModule.Api.Controllers
         public async Task<IActionResult> CountAsync()
         {
             var response = await service.TotalItemCountAsync();
-            if (HandleResponseError(response, logger, "AssetMetadatum") is {} responseError)
+            if (HandleResponseError(response, logger, "AssetMetadata") is {} responseError)
                 return responseError;
             return Ok(response.Value);
         }
 
         [HttpGet("{id:int}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AssetMetadatumDto))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AssetMetadataDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         public async Task<IActionResult> GetItemAsync(int id)
         {
             var response = await service.GetItemAsync(id);
-            if (HandleResponseError(response, logger, "AssetMetadatum", $"Id: '{id}'") is {} responseError)
+            if (HandleResponseError(response, logger, "AssetMetadata", $"Id: '{id}'") is {} responseError)
                 return responseError;
             return Ok(response.Value);
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(AssetMetadatumDto))]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(AssetMetadataDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
-        public async Task<IActionResult> InsertAsync(AssetMetadatumDto model)
+        public async Task<IActionResult> InsertAsync(AssetMetadataDto model)
         {
             var response = await service.InsertAsync(model);
-            if (HandleResponseError(response, logger, "AssetMetadatum") is {} responseError)
+            if (HandleResponseError(response, logger, "AssetMetadata") is {} responseError)
                 return responseError;
             return CreatedAtRoute(new { id = response.Value.Id }, response.Value);
         }
@@ -75,7 +75,7 @@ namespace QuickCode.DemoCms.AssetManagementModule.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
-        public async Task<IActionResult> UpdateAsync(int id, AssetMetadatumDto model)
+        public async Task<IActionResult> UpdateAsync(int id, AssetMetadataDto model)
         {
             if (!(model.Id == id))
             {
@@ -83,7 +83,7 @@ namespace QuickCode.DemoCms.AssetManagementModule.Api.Controllers
             }
 
             var response = await service.UpdateAsync(id, model);
-            if (HandleResponseError(response, logger, "AssetMetadatum", $"Id: '{id}'") is {} responseError)
+            if (HandleResponseError(response, logger, "AssetMetadata", $"Id: '{id}'") is {} responseError)
                 return responseError;
             return Ok(response.Value);
         }
@@ -95,28 +95,28 @@ namespace QuickCode.DemoCms.AssetManagementModule.Api.Controllers
         public async Task<IActionResult> DeleteAsync(int id)
         {
             var response = await service.DeleteItemAsync(id);
-            if (HandleResponseError(response, logger, "AssetMetadatum", $"Id: '{id}'") is {} responseError)
+            if (HandleResponseError(response, logger, "AssetMetadata", $"Id: '{id}'") is {} responseError)
                 return responseError;
             return Ok(response.Value);
         }
 
-        [HttpGet("get-metadata-for-asset/{assetMetadatumAssetId:int}")]
+        [HttpGet("get-metadata-for-asset/{assetMetadataAssetId:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<GetMetadataForAssetResponseDto>))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
-        public async Task<IActionResult> GetMetadataForAssetAsync(int assetMetadatumAssetId)
+        public async Task<IActionResult> GetMetadataForAssetAsync(int assetMetadataAssetId)
         {
-            var response = await service.GetMetadataForAssetAsync(assetMetadatumAssetId);
-            if (HandleResponseError(response, logger, "AssetMetadatum", $"AssetMetadatumAssetId: '{assetMetadatumAssetId}'") is {} responseError)
+            var response = await service.GetMetadataForAssetAsync(assetMetadataAssetId);
+            if (HandleResponseError(response, logger, "AssetMetadata", $"AssetMetadataAssetId: '{assetMetadataAssetId}'") is {} responseError)
                 return responseError;
             return Ok(response.Value);
         }
 
-        [HttpGet("get-assets-by-metadata/{assetMetadatumKey}/{assetMetadatumValue}")]
+        [HttpGet("get-assets-by-metadata/{assetMetadataKey}/{assetMetadataValue}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<GetAssetsByMetadataResponseDto>))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
-        public async Task<IActionResult> GetAssetsByMetadataAsync(string assetMetadatumKey, string assetMetadatumValue, int? page, int? size)
+        public async Task<IActionResult> GetAssetsByMetadataAsync(string assetMetadataKey, string assetMetadataValue, int? page, int? size)
         {
             if (page < 1)
             {
@@ -125,19 +125,19 @@ namespace QuickCode.DemoCms.AssetManagementModule.Api.Controllers
                 return NotFound(pageNumberError);
             }
 
-            var response = await service.GetAssetsByMetadataAsync(assetMetadatumKey, assetMetadatumValue, page, size);
-            if (HandleResponseError(response, logger, "AssetMetadatum", $"AssetMetadatumKey: '{assetMetadatumKey}', AssetMetadatumValue: '{assetMetadatumValue}'") is {} responseError)
+            var response = await service.GetAssetsByMetadataAsync(assetMetadataKey, assetMetadataValue, page, size);
+            if (HandleResponseError(response, logger, "AssetMetadata", $"AssetMetadataKey: '{assetMetadataKey}', AssetMetadataValue: '{assetMetadataValue}'") is {} responseError)
                 return responseError;
             return Ok(response.Value);
         }
 
-        [HttpPatch("update-metadata-value/{assetMetadatumAssetId:int}/{assetMetadatumKey}")]
+        [HttpPatch("update-metadata-value/{assetMetadataAssetId:int}/{assetMetadataKey}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
-        public async Task<IActionResult> UpdateMetadataValueAsync(int assetMetadatumAssetId, string assetMetadatumKey, [FromBody] UpdateMetadataValueRequestDto updateRequest)
+        public async Task<IActionResult> UpdateMetadataValueAsync(int assetMetadataAssetId, string assetMetadataKey, [FromBody] UpdateMetadataValueRequestDto updateRequest)
         {
-            var response = await service.UpdateMetadataValueAsync(assetMetadatumAssetId, assetMetadatumKey, updateRequest);
-            if (HandleResponseError(response, logger, "AssetMetadatum", $"AssetMetadatumAssetId: '{assetMetadatumAssetId}', AssetMetadatumKey: '{assetMetadatumKey}'") is {} responseError)
+            var response = await service.UpdateMetadataValueAsync(assetMetadataAssetId, assetMetadataKey, updateRequest);
+            if (HandleResponseError(response, logger, "AssetMetadata", $"AssetMetadataAssetId: '{assetMetadataAssetId}', AssetMetadataKey: '{assetMetadataKey}'") is {} responseError)
                 return responseError;
             return Ok(response.Value);
         }

@@ -421,7 +421,7 @@
     "IsActive": false
   },
   {
-    "ApiMethodDefinitionKey": "PatchapiassetmanagementmoduleassetmetadataupdatemetadatavalueassetmetadatumassetidintassetmetadatumkeyAssetMetadataController",
+    "ApiMethodDefinitionKey": "PatchapiassetmanagementmoduleassetmetadataupdatemetadatavalueassetmetadataassetidintassetmetadatakeyAssetMetadataController",
     "TopicName": "demo-cms.asset_management_module.asset_metadata.update_metadata_value_patch",
     "IsActive": false
   },

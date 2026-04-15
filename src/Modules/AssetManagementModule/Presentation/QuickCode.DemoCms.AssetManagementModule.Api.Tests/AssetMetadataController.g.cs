@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using QuickCode.DemoCms.AssetManagementModule.Api.Controllers;
-using QuickCode.DemoCms.AssetManagementModule.Application.Dtos.AssetMetadatum;
-using QuickCode.DemoCms.AssetManagementModule.Application.Services.AssetMetadatum;
+using QuickCode.DemoCms.AssetManagementModule.Application.Dtos.AssetMetadata;
+using QuickCode.DemoCms.AssetManagementModule.Application.Services.AssetMetadata;
 using System.Collections.Generic;
 using QuickCode.DemoCms.Common.Models;
 using QuickCode.DemoCms.Common.Helpers;
@@ -15,7 +15,7 @@ namespace QuickCode.DemoCms.AssetManagementModule.Api.Tests
 {
     public class AssetMetadataControllerTests
     {
-        private readonly Mock<IAssetMetadatumService> _serviceMock = new();
+        private readonly Mock<IAssetMetadataService> _serviceMock = new();
         private readonly Mock<ILogger<AssetMetadataController>> _loggerMock = new();
         private readonly AssetMetadataController _controller;
         public AssetMetadataControllerTests()
@@ -27,8 +27,8 @@ namespace QuickCode.DemoCms.AssetManagementModule.Api.Tests
         public async Task ListAsync_Should_Return_Ok_When_Success()
         {
             // Arrange
-            var fakeList = TestDataGenerator.CreateFakes<AssetMetadatumDto>("tr");
-            _serviceMock.Setup(s => s.ListAsync(It.IsAny<int?>(), It.IsAny<int?>())).ReturnsAsync(new Response<List<AssetMetadatumDto>> { Code = 0, Value = fakeList });
+            var fakeList = TestDataGenerator.CreateFakes<AssetMetadataDto>("tr");
+            _serviceMock.Setup(s => s.ListAsync(It.IsAny<int?>(), It.IsAny<int?>())).ReturnsAsync(new Response<List<AssetMetadataDto>> { Code = 0, Value = fakeList });
             // Act
             var result = await _controller.ListAsync(1, 10);
             // Assert
@@ -40,7 +40,7 @@ namespace QuickCode.DemoCms.AssetManagementModule.Api.Tests
         public async Task ListAsync_Should_Return_BadRequest_When_Fail()
         {
             // Arrange
-            _serviceMock.Setup(s => s.ListAsync(It.IsAny<int?>(), It.IsAny<int?>())).ReturnsAsync(new Response<List<AssetMetadatumDto>> { Code = 1, Message = "Error" });
+            _serviceMock.Setup(s => s.ListAsync(It.IsAny<int?>(), It.IsAny<int?>())).ReturnsAsync(new Response<List<AssetMetadataDto>> { Code = 1, Message = "Error" });
             // Act
             var result = await _controller.ListAsync(1, 10);
             // Assert
@@ -85,8 +85,8 @@ namespace QuickCode.DemoCms.AssetManagementModule.Api.Tests
         public async Task GetItemAsync_Should_Return_Ok_When_Found()
         {
             // Arrange 
-            var fakeDto = TestDataGenerator.CreateFake<AssetMetadatumDto>("tr");
-            _serviceMock.Setup(s => s.GetItemAsync(It.IsAny<int>())).ReturnsAsync(new Response<AssetMetadatumDto> { Code = 0, Value = fakeDto });
+            var fakeDto = TestDataGenerator.CreateFake<AssetMetadataDto>("tr");
+            _serviceMock.Setup(s => s.GetItemAsync(It.IsAny<int>())).ReturnsAsync(new Response<AssetMetadataDto> { Code = 0, Value = fakeDto });
             // Act
             var result = await _controller.GetItemAsync(fakeDto.Id);
             // Assert
@@ -98,8 +98,8 @@ namespace QuickCode.DemoCms.AssetManagementModule.Api.Tests
         public async Task GetItemAsync_Should_Return_NotFound_When_404()
         {
             // Arrange
-            var fakeDto = TestDataGenerator.CreateFake<AssetMetadatumDto>("tr");
-            _serviceMock.Setup(s => s.GetItemAsync(It.IsAny<int>())).ReturnsAsync(new Response<AssetMetadatumDto> { Code = 404, Message = "Not found" });
+            var fakeDto = TestDataGenerator.CreateFake<AssetMetadataDto>("tr");
+            _serviceMock.Setup(s => s.GetItemAsync(It.IsAny<int>())).ReturnsAsync(new Response<AssetMetadataDto> { Code = 404, Message = "Not found" });
             // Act
             var result = await _controller.GetItemAsync(fakeDto.Id);
             // Assert
@@ -110,8 +110,8 @@ namespace QuickCode.DemoCms.AssetManagementModule.Api.Tests
         public async Task GetItemAsync_Should_Return_BadRequest_When_Fail()
         {
             // Arrange
-            var fakeDto = TestDataGenerator.CreateFake<AssetMetadatumDto>("tr");
-            _serviceMock.Setup(s => s.GetItemAsync(It.IsAny<int>())).ReturnsAsync(new Response<AssetMetadatumDto> { Code = 1, Message = "Error" });
+            var fakeDto = TestDataGenerator.CreateFake<AssetMetadataDto>("tr");
+            _serviceMock.Setup(s => s.GetItemAsync(It.IsAny<int>())).ReturnsAsync(new Response<AssetMetadataDto> { Code = 1, Message = "Error" });
             // Act
             var result = await _controller.GetItemAsync(fakeDto.Id);
             // Assert
@@ -122,8 +122,8 @@ namespace QuickCode.DemoCms.AssetManagementModule.Api.Tests
         public async Task InsertAsync_Should_Return_Created_When_Success()
         {
             // Arrange
-            var fakeDto = TestDataGenerator.CreateFake<AssetMetadatumDto>("tr");
-            _serviceMock.Setup(s => s.InsertAsync(It.IsAny<AssetMetadatumDto>())).ReturnsAsync(new Response<AssetMetadatumDto> { Code = 0, Value = fakeDto });
+            var fakeDto = TestDataGenerator.CreateFake<AssetMetadataDto>("tr");
+            _serviceMock.Setup(s => s.InsertAsync(It.IsAny<AssetMetadataDto>())).ReturnsAsync(new Response<AssetMetadataDto> { Code = 0, Value = fakeDto });
             // Act
             var result = await _controller.InsertAsync(fakeDto);
             // Assert
@@ -135,8 +135,8 @@ namespace QuickCode.DemoCms.AssetManagementModule.Api.Tests
         public async Task InsertAsync_Should_Return_BadRequest_When_Fail()
         {
             // Arrange
-            var fakeDto = TestDataGenerator.CreateFake<AssetMetadatumDto>("tr");
-            _serviceMock.Setup(s => s.InsertAsync(It.IsAny<AssetMetadatumDto>())).ReturnsAsync(new Response<AssetMetadatumDto> { Code = 1, Message = "Insert failed" });
+            var fakeDto = TestDataGenerator.CreateFake<AssetMetadataDto>("tr");
+            _serviceMock.Setup(s => s.InsertAsync(It.IsAny<AssetMetadataDto>())).ReturnsAsync(new Response<AssetMetadataDto> { Code = 1, Message = "Insert failed" });
             // Act
             var result = await _controller.InsertAsync(fakeDto);
             // Assert
@@ -147,8 +147,8 @@ namespace QuickCode.DemoCms.AssetManagementModule.Api.Tests
         public async Task UpdateAsync_Should_Return_Ok_When_Success()
         {
             // Arrange
-            var fakeDto = TestDataGenerator.CreateFake<AssetMetadatumDto>("tr");
-            _serviceMock.Setup(s => s.UpdateAsync(It.IsAny<int>(), It.IsAny<AssetMetadatumDto>())).ReturnsAsync(new Response<bool> { Code = 0, Value = true });
+            var fakeDto = TestDataGenerator.CreateFake<AssetMetadataDto>("tr");
+            _serviceMock.Setup(s => s.UpdateAsync(It.IsAny<int>(), It.IsAny<AssetMetadataDto>())).ReturnsAsync(new Response<bool> { Code = 0, Value = true });
             // Act
             var result = await _controller.UpdateAsync(fakeDto.Id, fakeDto);
             // Assert
@@ -160,8 +160,8 @@ namespace QuickCode.DemoCms.AssetManagementModule.Api.Tests
         public async Task UpdateAsync_Should_Return_NotFound_When_404()
         {
             // Arrange
-            var fakeDto = TestDataGenerator.CreateFake<AssetMetadatumDto>("tr");
-            _serviceMock.Setup(s => s.UpdateAsync(It.IsAny<int>(), It.IsAny<AssetMetadatumDto>())).ReturnsAsync(new Response<bool> { Code = 404, Message = "Not found" });
+            var fakeDto = TestDataGenerator.CreateFake<AssetMetadataDto>("tr");
+            _serviceMock.Setup(s => s.UpdateAsync(It.IsAny<int>(), It.IsAny<AssetMetadataDto>())).ReturnsAsync(new Response<bool> { Code = 404, Message = "Not found" });
             // Act
             var result = await _controller.UpdateAsync(fakeDto.Id, fakeDto);
             // Assert
@@ -172,8 +172,8 @@ namespace QuickCode.DemoCms.AssetManagementModule.Api.Tests
         public async Task UpdateAsync_Should_Return_BadRequest_When_Fail()
         {
             // Arrange
-            var fakeDto = TestDataGenerator.CreateFake<AssetMetadatumDto>("tr");
-            _serviceMock.Setup(s => s.UpdateAsync(It.IsAny<int>(), It.IsAny<AssetMetadatumDto>())).ReturnsAsync(new Response<bool> { Code = 1, Message = "Update failed" });
+            var fakeDto = TestDataGenerator.CreateFake<AssetMetadataDto>("tr");
+            _serviceMock.Setup(s => s.UpdateAsync(It.IsAny<int>(), It.IsAny<AssetMetadataDto>())).ReturnsAsync(new Response<bool> { Code = 1, Message = "Update failed" });
             // Act
             var result = await _controller.UpdateAsync(fakeDto.Id, fakeDto);
             // Assert
@@ -184,7 +184,7 @@ namespace QuickCode.DemoCms.AssetManagementModule.Api.Tests
         public async Task DeleteAsync_Should_Return_Ok_When_Success()
         {
             // Arrange
-            var fakeDto = TestDataGenerator.CreateFake<AssetMetadatumDto>("tr");
+            var fakeDto = TestDataGenerator.CreateFake<AssetMetadataDto>("tr");
             _serviceMock.Setup(s => s.DeleteItemAsync(It.IsAny<int>())).ReturnsAsync(new Response<bool> { Code = 0, Value = true });
             // Act
             var result = await _controller.DeleteAsync(fakeDto.Id);
@@ -197,7 +197,7 @@ namespace QuickCode.DemoCms.AssetManagementModule.Api.Tests
         public async Task DeleteAsync_Should_Return_NotFound_When_404()
         {
             // Arrange
-            var fakeDto = TestDataGenerator.CreateFake<AssetMetadatumDto>("tr");
+            var fakeDto = TestDataGenerator.CreateFake<AssetMetadataDto>("tr");
             _serviceMock.Setup(s => s.DeleteItemAsync(It.IsAny<int>())).ReturnsAsync(new Response<bool> { Code = 404, Message = "Not found" });
             // Act
             var result = await _controller.DeleteAsync(fakeDto.Id);
@@ -209,7 +209,7 @@ namespace QuickCode.DemoCms.AssetManagementModule.Api.Tests
         public async Task DeleteAsync_Should_Return_BadRequest_When_Fail()
         {
             // Arrange
-            var fakeDto = TestDataGenerator.CreateFake<AssetMetadatumDto>("tr");
+            var fakeDto = TestDataGenerator.CreateFake<AssetMetadataDto>("tr");
             _serviceMock.Setup(s => s.DeleteItemAsync(It.IsAny<int>())).ReturnsAsync(new Response<bool> { Code = 1, Message = "Delete failed" });
             // Act
             var result = await _controller.DeleteAsync(fakeDto.Id);

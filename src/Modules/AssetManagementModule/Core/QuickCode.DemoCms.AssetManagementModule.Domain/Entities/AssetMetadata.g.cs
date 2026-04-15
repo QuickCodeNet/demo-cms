@@ -10,8 +10,8 @@ using QuickCode.DemoCms.Common.Auditing;
 
 namespace QuickCode.DemoCms.AssetManagementModule.Domain.Entities;
 
-[Table("ASSET_METADATA")]
-public partial class AssetMetadatum : BaseSoftDeletable, IAuditableEntity 
+[Table("ASSET_METADATAS")]
+public partial class AssetMetadata : BaseSoftDeletable, IAuditableEntity 
 {
 	[Key]
 	[DatabaseGenerated(DatabaseGeneratedOption.Identity)]

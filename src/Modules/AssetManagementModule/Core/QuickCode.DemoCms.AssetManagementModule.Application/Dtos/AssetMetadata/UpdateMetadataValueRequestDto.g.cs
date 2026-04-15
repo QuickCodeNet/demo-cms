@@ -13,10 +13,10 @@ using System.Linq;
 using System.ComponentModel;
 using QuickCode.DemoCms.AssetManagementModule.Domain.Enums;
 
-namespace QuickCode.DemoCms.AssetManagementModule.Application.Dtos.AssetMetadatum
+namespace QuickCode.DemoCms.AssetManagementModule.Application.Dtos.AssetMetadata
 {
     public record UpdateMetadataValueRequestDto
     {
-        public string AssetMetadatumValue { get; init; }
+        public string AssetMetadataValue { get; init; }
     }
 }
