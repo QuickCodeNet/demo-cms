@@ -30,7 +30,7 @@ public partial class AssetMetadata : BaseSoftDeletable, IAuditableEntity
 	public string Value { get; set; }
 	
 	[ForeignKey("AssetId")]
-	[InverseProperty(nameof(Asset.AssetMetadata))]
+	[InverseProperty(nameof(Asset.AssetMetadataItems))]
 	public virtual Asset Asset { get; set; } = null!;
 
 }

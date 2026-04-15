@@ -123,7 +123,7 @@ public partial class ReadDbContext : DbContext
 
 		modelBuilder.Entity<AssetMetadata>()
 			.HasOne(e => e.Asset)
-			.WithMany(p => p.AssetMetadata)
+			.WithMany(p => p.AssetMetadataItems)
 			.HasForeignKey(e => e.AssetId)
 			.OnDelete(DeleteBehavior.Restrict);
 
