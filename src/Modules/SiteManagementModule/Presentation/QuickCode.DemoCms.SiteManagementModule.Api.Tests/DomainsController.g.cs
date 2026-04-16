@@ -10,6 +10,7 @@ using QuickCode.DemoCms.SiteManagementModule.Application.Services.Domain;
 using System.Collections.Generic;
 using QuickCode.DemoCms.Common.Models;
 using QuickCode.DemoCms.Common.Helpers;
+using NavigationItemType = QuickCode.DemoCms.SiteManagementModule.Domain.Enums.NavigationItemType;
 
 namespace QuickCode.DemoCms.SiteManagementModule.Api.Tests
 {

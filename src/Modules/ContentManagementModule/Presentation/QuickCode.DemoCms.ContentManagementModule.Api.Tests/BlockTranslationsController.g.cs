@@ -10,6 +10,8 @@ using QuickCode.DemoCms.ContentManagementModule.Application.Services.BlockTransl
 using System.Collections.Generic;
 using QuickCode.DemoCms.Common.Models;
 using QuickCode.DemoCms.Common.Helpers;
+using ContentStatus = QuickCode.DemoCms.ContentManagementModule.Domain.Enums.ContentStatus;
+using ContentKind = QuickCode.DemoCms.ContentManagementModule.Domain.Enums.ContentKind;
 
 namespace QuickCode.DemoCms.ContentManagementModule.Api.Tests
 {

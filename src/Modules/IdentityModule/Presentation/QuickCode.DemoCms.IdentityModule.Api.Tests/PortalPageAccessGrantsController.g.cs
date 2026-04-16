@@ -11,6 +11,9 @@ using QuickCode.DemoCms.IdentityModule.Application.Features.PortalPageAccessGran
 using System.Collections.Generic;
 using QuickCode.DemoCms.Common.Models;
 using QuickCode.DemoCms.Common.Helpers;
+using HttpMethodType = QuickCode.DemoCms.IdentityModule.Domain.Enums.HttpMethodType;
+using PageActionType = QuickCode.DemoCms.IdentityModule.Domain.Enums.PageActionType;
+using ModificationType = QuickCode.DemoCms.IdentityModule.Domain.Enums.ModificationType;
 
 namespace QuickCode.DemoCms.IdentityModule.Api.Tests
 {

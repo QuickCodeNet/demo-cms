@@ -10,6 +10,7 @@ using QuickCode.DemoCms.LocalizationModule.Application.Services.AuditLog;
 using System.Collections.Generic;
 using QuickCode.DemoCms.Common.Models;
 using QuickCode.DemoCms.Common.Helpers;
+using ResourceFileFormat = QuickCode.DemoCms.LocalizationModule.Domain.Enums.ResourceFileFormat;
 
 namespace QuickCode.DemoCms.LocalizationModule.Api.Tests
 {

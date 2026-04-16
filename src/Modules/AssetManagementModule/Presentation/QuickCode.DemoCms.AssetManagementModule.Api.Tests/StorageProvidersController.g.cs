@@ -10,6 +10,8 @@ using QuickCode.DemoCms.AssetManagementModule.Application.Services.StorageProvid
 using System.Collections.Generic;
 using QuickCode.DemoCms.Common.Models;
 using QuickCode.DemoCms.Common.Helpers;
+using AssetKind = QuickCode.DemoCms.AssetManagementModule.Domain.Enums.AssetKind;
+using StorageProviderType = QuickCode.DemoCms.AssetManagementModule.Domain.Enums.StorageProviderType;
 
 namespace QuickCode.DemoCms.AssetManagementModule.Api.Tests
 {
